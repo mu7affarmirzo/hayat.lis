@@ -55,7 +55,7 @@ export const RoutingData: MyGroupType = {
       component: <Directories />,
     },
     {
-      path: '/container',
+      path: '/containers',
       component: <Container />,
     },
     {
