@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Button, Menu, MenuItem, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -28,12 +29,19 @@ const RightSection = styled.div`
   height: 100%;
 `
 
+type Props = {
+  role: 'NoAuth' | 'Admin' | 'Manager'
+}
+
 const Header = () => {
   const navigate = useNavigate()
+
+  const [role, setRole] = useState<Props['role']>('Admin')
 
   const isActiveNav = useCallback((path: string) => {
     return location.pathname.includes(path)
   }, [])
+
   const [profileOpen, setProfileOpen] = React.useState<null | HTMLElement>(null)
 
   const handleLogOut = useCallback(() => {
@@ -42,14 +50,13 @@ const Header = () => {
 
   return (
     <div className="">
-      <HeaderContainer className=" border-b border-gray-300 h-[80px] bg-red-500">
+      <HeaderContainer className=" border-b border-gray-300 h-[80px]">
         <LeftSection>
           <div className=" mr-10 ">
             <LogoSanatarumIcon />
           </div>
-
           <nav className="h-[100%]">
-            {NavBarDropdowns.map((item: any) => {
+            {NavBarDropdowns[role].map((item: any) => {
               return (
                 <React.Fragment key={item.path}>
                   <Button
@@ -58,13 +65,16 @@ const Header = () => {
                     onClick={() => {
                       navigate(item.path)
                     }}
-                    className={` rounded-none  px-[20px] h-[100%] text-sm   font-semibold  align-middle   cursor-pointer  normal-case ${
+                    className={`rounded-none  px-[20px] h-[100%] text-sm   font-semibold  align-middle   cursor-pointer  normal-case ${
                       isActiveNav(item.mainPath)
                         ? 'bg-blue-400 text-gray-100'
                         : 'bg-white  text-gray-700'
                     } `}
                   >
-                    <Typography className="text-sm  font-medium ">
+                    <Typography
+                      className="text-sm  font-medium  normal-case "
+                      sx={{ color: 'rgba(0, 0, 0, 0.36)' }}
+                    >
                       {item.title}
                     </Typography>
                   </Button>

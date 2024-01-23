@@ -12,7 +12,7 @@ export const MainContainer = styled.div`
 `
 
 type Props = {
-  role: 'NoAuth' | 'Admin'
+  role: 'NoAuth' | 'Admin' | 'Manager'
 }
 
 const AppRouting = () => {
