@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { RoutingData } from './router'
 
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Header from '../components/header/header'
 
 export const MainContainer = styled.div`
@@ -12,17 +12,23 @@ export const MainContainer = styled.div`
 `
 
 type Props = {
-  role: 'NoAuth' | 'Admin'
+  role: 'NoAuth' | 'Admin' | 'Manager'
 }
 
 const AppRouting = () => {
+  const [changeTopTab, setChangeTopTab] = React.useState<number>(0)
+
   const [role, setRole] = useState<Props['role']>('Admin')
+
+  const changeHeaderTab = useCallback((index: number) => {
+    setChangeTopTab(index)
+  }, [])
 
   return (
     <>
       {role !== 'NoAuth' ? (
         <>
-          <Header />
+          <Header setChangeTopTab={changeHeaderTab} activeTab={changeTopTab} />
           <MainContainer className=" overflow-hidden relative min-h-[calc(100vh-76px)] ">
             {/* <SideBar changeHeaerTab={changeTopTab} /> */}
             <div className="w-[calc(100vw-280px)] h-full ">

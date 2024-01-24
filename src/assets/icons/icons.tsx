@@ -1580,3 +1580,127 @@ export const FileNewIcon = () => {
     </svg>
   )
 }
+
+export const Clipboard = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.87"
+        strokeWidth="1.5"
+        d="M8 5c-.988 0-1.506.013-1.908.218a2 2 0 00-.874.874C5 6.52 5 7.08 5 8.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 00.874.874C6.52 21 7.08 21 8.2 21h7.6c1.12 0 1.68 0 2.108-.218a2 2 0 00.874-.874C19 19.48 19 18.92 19 17.8V8.2c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874c-.402-.205-.92-.217-1.908-.218M8 5v2h8V5M8 5v-.293A1.707 1.707 0 019.707 3h4.586A1.707 1.707 0 0116 4.707V5m-1 7h-3m3 4h-3m-3-4h.01M9 16h.01"
+      ></path>
+    </svg>
+  )
+}
+
+export const ListCheckIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.87"
+        strokeWidth="1.5"
+        d="M11 6h10m-10 6h10m-10 6h10M3 11.945L4.538 13.5 8 10M3 5.944L4.538 7.5 8 4M4.5 18h.01M5 18a.5.5 0 11-1 0 .5.5 0 011 0z"
+      ></path>
+    </svg>
+  )
+}
+
+export const BoxArchiveIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.87"
+        strokeWidth="1.5"
+        d="M9 14h6M4.6 10h14.8c.56 0 .84 0 1.054-.109a1 1 0 00.437-.437C21 9.24 21 8.96 21 8.4V5.6c0-.56 0-.84-.109-1.054a1 1 0 00-.437-.437C20.24 4 19.96 4 19.4 4H4.6c-.56 0-.84 0-1.054.109a1 1 0 00-.437.437C3 4.76 3 5.04 3 5.6v2.8c0 .56 0 .84.109 1.054a1 1 0 00.437.437C3.76 10 4.04 10 4.6 10zm.4 0h14v6.8c0 1.12 0 1.68-.218 2.108a2 2 0 01-.874.874C17.48 20 16.92 20 15.8 20H8.2c-1.12 0-1.68 0-2.108-.218a2 2 0 01-.874-.874C5 18.48 5 17.92 5 16.8V10z"
+      ></path>
+    </svg>
+  )
+}
+
+export const SortDataIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <g>
+        <g
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeOpacity="0.87"
+          strokeWidth="1.5"
+        >
+          <path d="M20 14a2 2 0 100-4 2 2 0 000 4z"></path>
+          <path d="M20 6a2 2 0 100-4 2 2 0 000 4z"></path>
+          <path d="M20 22a2 2 0 100-4 2 2 0 000 4z"></path>
+          <path d="M4 14a2 2 0 100-4 2 2 0 000 4z"></path>
+          <path d="M6 12h12"></path>
+          <path d="M18 4h-4c-2 0-3 1-3 3v10c0 2 1 3 3 3h4"></path>
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+export const ClipBoardTick = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <g>
+        <g
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeOpacity="0.87"
+          strokeWidth="1.5"
+        >
+          <path d="M9.31 14.7l1.5 1.5 4-4"></path>
+          <path
+            strokeMiterlimit="10"
+            d="M10 6h4c2 0 2-1 2-2 0-2-1-2-2-2h-4C9 2 8 2 8 4s1 2 2 2z"
+          ></path>
+          <path
+            strokeMiterlimit="10"
+            d="M16 4.02c3.33.18 5 1.41 5 5.98v6c0 4-1 6-6 6H9c-5 0-6-2-6-6v-6c0-4.56 1.67-5.8 5-5.98"
+          ></path>
+        </g>
+      </g>
+    </svg>
+  )
+}

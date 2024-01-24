@@ -1,7 +1,14 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import RegistrationView from '../views/home/registration/registrationView'
 import LoginView from '../views/auth/loginView'
+import RegistrationManager from '../views/manager/registrManager/registerationM'
+import Utilities from '../views/home/utilities'
+import Sorting from '../views/home/sorting'
+import Container from '../views/home/container'
+import Directories from '../views/home/directories'
+import Results from '../views/home/results'
+import Staging from '../views/home/staging'
+import Registration from '../views/home/registration'
 
 type IRouting = {
   path: string
@@ -29,7 +36,42 @@ export const RoutingData: MyGroupType = {
     },
     {
       path: '/registration',
-      component: <RegistrationView />,
+      component: <Registration />,
+    },
+    {
+      path: '/sorting',
+      component: <Sorting />,
+    },
+    {
+      path: '/staging',
+      component: <Staging />,
+    },
+    {
+      path: '/results',
+      component: <Results />,
+    },
+    {
+      path: '/directories',
+      component: <Directories />,
+    },
+    {
+      path: '/containers',
+      component: <Container />,
+    },
+    {
+      path: '/utilities',
+      component: <Utilities />,
+    },
+  ],
+  Manager: [
+    {
+      path: '/',
+      component: <Navigate to="/registration_manager" replace />,
+      global: true,
+    },
+    {
+      path: '/registration_manager',
+      component: <RegistrationManager />,
     },
   ],
 }
