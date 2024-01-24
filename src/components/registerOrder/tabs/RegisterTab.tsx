@@ -13,16 +13,32 @@ function RegisterTab() {
   }
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box
+      sx={{
+        width: '100%',
+        padding: '10px',
+        typography: 'body1',
+        bgcolor: '#F5F5F5',
+        height: '100%',
+      }}
+    >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ paddingLeft: '5px' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
+            <Tab
+              style={{
+                background: `${handleChange} ? '#3397FF ' : '#fff'`,
+              }}
+              label="Исследования"
+              value="1"
+            />
+            <Tab label="По раб. местам" value="2" />
           </TabList>
         </Box>
-        <GroupResearch value="1" />
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel style={{ padding: '0px' }} value="1">
+          <GroupResearch />
+        </TabPanel>
+        <TabPanel value="2">Something</TabPanel>
       </TabContext>
     </Box>
   )

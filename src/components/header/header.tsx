@@ -56,7 +56,7 @@ const Header: FC<HeaderProps> = ({ activeTab, setChangeTopTab }) => {
   const [activeData, setActiveData] = useState<any>()
   const [itemStyle, setItemStyle] = useState(false)
 
-  const [role, setRole] = useState<Props['role']>('Manager')
+  const [role, setRole] = useState<Props['role']>('Admin')
   const SelectedNavbarDropDown = NavBarDropdowns[role]
 
   const changeHeaderTab = useCallback(() => {

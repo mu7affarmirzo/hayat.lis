@@ -18,7 +18,7 @@ type Props = {
 const AppRouting = () => {
   const [changeTopTab, setChangeTopTab] = React.useState<number>(0)
 
-  const [role, setRole] = useState<Props['role']>('Manager')
+  const [role, setRole] = useState<Props['role']>('Admin')
 
   const changeHeaderTab = useCallback((index: number) => {
     setChangeTopTab(index)

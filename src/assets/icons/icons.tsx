@@ -1704,3 +1704,92 @@ export const ClipBoardTick = () => {
     </svg>
   )
 }
+
+export const TableArrow = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <g clip-path="url(#clip0_7033_14410)">
+        <path d="M10 17L15 12L10 7V17Z" fill="black" fill-opacity="0.54" />
+      </g>
+      <defs>
+        <clipPath id="clip0_7033_14410">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export const TableSaveIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <path
+        d="M6.38885 1.59717V3.993"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12.7778 1.59717V3.993"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.7708 6.78822V10.8851C16.0601 10.3181 15.1576 9.98267 14.1753 9.98267C13.193 9.98267 12.2746 10.326 11.5559 10.909C10.5896 11.6677 9.98262 12.8577 9.98262 14.1754C9.98262 14.958 10.2062 15.7087 10.5896 16.3316C10.8851 16.8188 11.2684 17.242 11.7236 17.5695H6.38887C3.59373 17.5695 2.39581 15.9723 2.39581 13.5764V6.78822C2.39581 4.39239 3.59373 2.79517 6.38887 2.79517H12.7778C15.5729 2.79517 16.7708 4.39239 16.7708 6.78822Z"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.59027 8.78467H10.3819"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.59027 12.7778H7.68263"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M18.368 14.1754C18.368 14.958 18.1444 15.7087 17.7611 16.3316C17.5375 16.715 17.258 17.0504 16.9305 17.3219C16.1958 17.9768 15.2375 18.3681 14.1753 18.3681C13.2569 18.3681 12.4104 18.0726 11.7236 17.5695C11.2684 17.242 10.885 16.8188 10.5896 16.3316C10.2062 15.7087 9.9826 14.958 9.9826 14.1754C9.9826 12.8577 10.5896 11.6677 11.5559 10.909C12.2746 10.326 13.193 9.98267 14.1753 9.98267C15.1576 9.98267 16.06 10.3181 16.7708 10.8851C17.7451 11.6518 18.368 12.8417 18.368 14.1754Z"
+        stroke="#4CAF50"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M14.1754 16.172V14.1755M16.1719 14.1755H14.1754M14.1754 12.179V14.1755M12.1788 14.1755H14.1754"
+        stroke="#4CAF50"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  )
+}
