@@ -680,7 +680,7 @@
 
 "@mui/x-date-pickers@^6.19.0":
   version "6.19.0"
-  resolved "https://registry.npmjs.org/@mui/x-date-pickers/-/x-date-pickers-6.19.0.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-6.19.0.tgz#198b6c3b396adc1d75fab25a5a13fe21ff9ee71b"
   integrity sha512-/GccT+iFJTKjI6b9b0MWojyRKnizL/VYYAfPnR1q0wSVVXjYv7a1NK0uQlan4JbnovqoQCNVeTOCy/0bUJyD2Q==
   dependencies:
     "@babel/runtime" "^7.23.2"
@@ -1024,12 +1024,19 @@ acorn@^8.9.0:
 
 ag-grid-community@^31.0.2, ag-grid-community@~31.0.2:
   version "31.0.2"
-  resolved "https://registry.npmjs.org/ag-grid-community/-/ag-grid-community-31.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-31.0.2.tgz#8421c4e23e29205628281c1258808e83dccdada2"
   integrity sha512-gxUdHeAZUV2TDHqnDax5QSQgUxIvJ1zaFxUuPzcfiiPwbN6btz6kxg/KNrDfEjQi70JBfJV46BMR9KTG6iAVmQ==
+
+ag-grid-enterprise@^31.0.2:
+  version "31.0.2"
+  resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-31.0.2.tgz#c5bca244e088a87ed568aaa54a5475e9348f5dc1"
+  integrity sha512-KVtlvc8kcZVs4nRozUM0Ir7sd1W8I0JqSRSRhScob5lEE5aQnuYfy7LF8ZSic/HYLqZMBMDDsVfX8EfjkWfLlw==
+  dependencies:
+    ag-grid-community "~31.0.2"
 
 ag-grid-react@^31.0.2:
   version "31.0.2"
-  resolved "https://registry.npmjs.org/ag-grid-react/-/ag-grid-react-31.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/ag-grid-react/-/ag-grid-react-31.0.2.tgz#3675cdbd123e3c0e1e648cf0b68d3a482254b210"
   integrity sha512-QAC5Rsr4AaE+vCafyrnEJa7JWcmoXNzJyzZmln0T6QCLG43IuT2hZ3ULmce/IqwP2Kxf+B4hVJOVitVT9SdXkg==
   dependencies:
     ag-grid-community "~31.0.2"

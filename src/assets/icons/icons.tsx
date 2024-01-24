@@ -1212,7 +1212,7 @@ export const FilePlusAltIcon = () => {
   )
 }
 
-export const FileAltIcon = () => {
+export const FileAltIcon = (props: SvgProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1223,7 +1223,7 @@ export const FileAltIcon = () => {
     >
       <path
         d="M7.83333 5.83333H7.16667C6.23325 5.83333 5.76654 5.83333 5.41002 6.01499C5.09641 6.17478 4.84144 6.42975 4.68166 6.74335C4.5 7.09987 4.5 7.56658 4.5 8.5V14.8333C4.5 15.7668 4.5 16.2335 4.68166 16.59C4.84144 16.9036 5.09641 17.1586 5.41002 17.3183C5.76654 17.5 6.23325 17.5 7.16667 17.5H10.1667C11.1001 17.5 11.5668 17.5 11.9233 17.3183C12.2369 17.1586 12.4919 16.9036 12.6517 16.59C12.8333 16.2335 12.8333 15.7668 12.8333 14.8333V14.1667M16.1667 6.66667V11.5C16.1667 12.4334 16.1667 12.9001 15.985 13.2567C15.8252 13.5703 15.5703 13.8252 15.2567 13.985C14.9001 14.1667 14.4334 14.1667 13.5 14.1667H10.5C9.56658 14.1667 9.09987 14.1667 8.74335 13.985C8.42975 13.8252 8.17478 13.5703 8.01499 13.2567C7.83333 12.9001 7.83333 12.4334 7.83333 11.5V5.16667C7.83333 4.23325 7.83333 3.76654 8.01499 3.41002C8.17478 3.09641 8.42975 2.84144 8.74335 2.68166C9.09987 2.5 9.56658 2.5 10.5 2.5H12M16.1667 6.66667L12 2.5M16.1667 6.66667H13.3333C12.8666 6.66667 12.6333 6.66667 12.455 6.57584C12.2982 6.49594 12.1707 6.36846 12.0908 6.21166C12 6.0334 12 5.80004 12 5.33333V2.5"
-        stroke="white"
+        stroke={props.stroke}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -1701,6 +1701,95 @@ export const ClipBoardTick = () => {
           ></path>
         </g>
       </g>
+    </svg>
+  )
+}
+
+export const TableArrow = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <g clip-path="url(#clip0_7033_14410)">
+        <path d="M10 17L15 12L10 7V17Z" fill="black" fill-opacity="0.54" />
+      </g>
+      <defs>
+        <clipPath id="clip0_7033_14410">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export const TableSaveIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <path
+        d="M6.38885 1.59717V3.993"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12.7778 1.59717V3.993"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.7708 6.78822V10.8851C16.0601 10.3181 15.1576 9.98267 14.1753 9.98267C13.193 9.98267 12.2746 10.326 11.5559 10.909C10.5896 11.6677 9.98262 12.8577 9.98262 14.1754C9.98262 14.958 10.2062 15.7087 10.5896 16.3316C10.8851 16.8188 11.2684 17.242 11.7236 17.5695H6.38887C3.59373 17.5695 2.39581 15.9723 2.39581 13.5764V6.78822C2.39581 4.39239 3.59373 2.79517 6.38887 2.79517H12.7778C15.5729 2.79517 16.7708 4.39239 16.7708 6.78822Z"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.59027 8.78467H10.3819"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5.59027 12.7778H7.68263"
+        stroke="#616161"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M18.368 14.1754C18.368 14.958 18.1444 15.7087 17.7611 16.3316C17.5375 16.715 17.258 17.0504 16.9305 17.3219C16.1958 17.9768 15.2375 18.3681 14.1753 18.3681C13.2569 18.3681 12.4104 18.0726 11.7236 17.5695C11.2684 17.242 10.885 16.8188 10.5896 16.3316C10.2062 15.7087 9.9826 14.958 9.9826 14.1754C9.9826 12.8577 10.5896 11.6677 11.5559 10.909C12.2746 10.326 13.193 9.98267 14.1753 9.98267C15.1576 9.98267 16.06 10.3181 16.7708 10.8851C17.7451 11.6518 18.368 12.8417 18.368 14.1754Z"
+        stroke="#4CAF50"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M14.1754 16.172V14.1755M16.1719 14.1755H14.1754M14.1754 12.179V14.1755M12.1788 14.1755H14.1754"
+        stroke="#4CAF50"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
   )
 }

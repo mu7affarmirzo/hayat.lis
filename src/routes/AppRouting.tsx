@@ -30,7 +30,6 @@ const AppRouting = () => {
         <>
           <Header setChangeTopTab={changeHeaderTab} activeTab={changeTopTab} />
           <MainContainer className=" overflow-hidden relative min-h-[calc(100vh-76px)] ">
-            {/* <SideBar changeHeaerTab={changeTopTab} /> */}
             <div className="w-[calc(100vw-280px)] h-full ">
               <Routes>
                 {RoutingData[role].map((item, i) => {

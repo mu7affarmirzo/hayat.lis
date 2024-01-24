@@ -9,6 +9,8 @@ import { ArrowDropDownIcon } from '@mui/x-date-pickers'
 import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone'
 import { NavBarDropdowns } from '../../constant/narDropDown'
 import HeaderItemTabs from './headerItemTabs'
+import { useReduxDispatch } from '../../hooks/useReduxHook'
+import { logout } from '../../feature/slices/authSlice'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -47,6 +49,7 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ activeTab, setChangeTopTab }) => {
+  const dispatch = useReduxDispatch()
   const navigate = useNavigate()
   const [activeTabHeader, setActiveTabHeader] = useState<number>(0)
   const [anchorEl, setAnchorEl] = React.useState<number>(0)
@@ -55,8 +58,6 @@ const Header: FC<HeaderProps> = ({ activeTab, setChangeTopTab }) => {
 
   const [role, setRole] = useState<Props['role']>('Admin')
   const SelectedNavbarDropDown = NavBarDropdowns[role]
-
-  console.log(SelectedNavbarDropDown[activeTab])
 
   const changeHeaderTab = useCallback(() => {
     // navigate(SelectedNavbarDropDown[activeTab]?.dropdown[0]?.path)
@@ -79,15 +80,11 @@ const Header: FC<HeaderProps> = ({ activeTab, setChangeTopTab }) => {
     navigate(item.path as never)
   }
 
-  // const isActiveNav = useCallback((path: string) => {
-  //   return location.pathname.includes(path)
-  // }, [])
-
   const [profileOpen, setProfileOpen] = React.useState<null | HTMLElement>(null)
 
   const handleLogOut = useCallback(() => {
-    console.log('log out')
-  }, [])
+    dispatch(logout())
+  }, [dispatch])
 
   return (
     <div className=" flex flex-col ">
@@ -108,14 +105,11 @@ const Header: FC<HeaderProps> = ({ activeTab, setChangeTopTab }) => {
                     onClick={() => handleClick(i, item)}
                     className={`rounded-none  px-[20px] h-[100%] text-sm   font-semibold  align-middle   cursor-pointer  normal-case ${
                       activeTab === i
-                        ? 'bg-red-400 text-gray-100'
-                        : 'bg-white  text-gray-700'
+                        ? 'bg-blue-400 text-gray-100'
+                        : 'bg-white  text-gray-400'
                     } `}
                   >
-                    <Typography
-                      className="text-sm  font-medium  normal-case "
-                      sx={{ color: 'rgba(0, 0, 0, 0.36)' }}
-                    >
+                    <Typography className="text-sm  font-medium  normal-case ">
                       {item.title}
                     </Typography>
                   </Button>
