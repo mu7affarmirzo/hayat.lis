@@ -18,7 +18,7 @@ type Props = {
 const AppRouting = () => {
   const [changeTopTab, setChangeTopTab] = React.useState<number>(0)
 
-  const [role, setRole] = useState<Props['role']>('Admin')
+  const [role, setRole] = useState<Props['role']>('Manager')
 
   const changeHeaderTab = useCallback((index: number) => {
     setChangeTopTab(index)
@@ -30,7 +30,6 @@ const AppRouting = () => {
         <>
           <Header setChangeTopTab={changeHeaderTab} activeTab={changeTopTab} />
           <MainContainer className=" overflow-hidden relative min-h-[calc(100vh-76px)] ">
-            {/* <SideBar changeHeaerTab={changeTopTab} /> */}
             <div className="w-[calc(100vw-280px)] h-full ">
               <Routes>
                 {RoutingData[role].map((item, i) => {
