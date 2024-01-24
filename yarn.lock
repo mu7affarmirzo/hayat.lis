@@ -589,7 +589,7 @@
 
 "@mui/core-downloads-tracker@^5.15.6":
   version "5.15.6"
-  resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.15.6.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.15.6.tgz#9b82ba86d5a0fe55e9479b68dd5068943cc3835b"
   integrity sha512-0aoWS4qvk1uzm9JBs83oQmIMIQeTBUeqqu8u+3uo2tMznrB5fIKqQVCbCgq+4Tm4jG+5F7dIvnjvQ2aV7UKtdw==
 
 "@mui/icons-material@^5.15.6":
@@ -599,9 +599,22 @@
   dependencies:
     "@babel/runtime" "^7.23.8"
 
-"@mui/material@^5.15.5":
+"@mui/lab@^5.0.0-alpha.162":
+  version "5.0.0-alpha.162"
+  resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-5.0.0-alpha.162.tgz#f7b4ddef46f796760a1f667f444060b3984fb3ab"
+  integrity sha512-nSdlhq1YVozKXn6mtItWmnU9b/gQ708RSWG6C+M/Y096MlQ7Mz1gdNWOEwcGw2HaNoNgDvuG0+0HKARAMIMaLg==
+  dependencies:
+    "@babel/runtime" "^7.23.8"
+    "@mui/base" "5.0.0-beta.33"
+    "@mui/system" "^5.15.6"
+    "@mui/types" "^7.2.13"
+    "@mui/utils" "^5.15.6"
+    clsx "^2.1.0"
+    prop-types "^15.8.1"
+
+"@mui/material@^5.15.6":
   version "5.15.6"
-  resolved "https://registry.npmjs.org/@mui/material/-/material-5.15.6.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.15.6.tgz#e32944ae4e01f85b314bc26e4cbbb700d598f30c"
   integrity sha512-rw7bDdpi2kzfmcDN78lHp8swArJ5sBCKsn+4G3IpGfu44ycyWAWX0VdlvkjcR9Yrws2KIm7c+8niXpWHUDbWoA==
   dependencies:
     "@babel/runtime" "^7.23.8"
@@ -619,7 +632,7 @@
 
 "@mui/private-theming@^5.15.6":
   version "5.15.6"
-  resolved "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.15.6.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.15.6.tgz#224819694ed76df041b1257256152a45d1fd733d"
   integrity sha512-ZBX9E6VNUSscUOtU8uU462VvpvBS7eFl5VfxAzTRVQBHflzL+5KtnGrebgf6Nd6cdvxa1o0OomiaxSKoN2XDmg==
   dependencies:
     "@babel/runtime" "^7.23.8"
@@ -628,7 +641,7 @@
 
 "@mui/styled-engine@^5.15.6":
   version "5.15.6"
-  resolved "https://registry.npmjs.org/@mui/styled-engine/-/styled-engine-5.15.6.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/styled-engine/-/styled-engine-5.15.6.tgz#3f4a8804de6ddeee17cb52ec92225686f423398a"
   integrity sha512-KAn8P8xP/WigFKMlEYUpU9z2o7jJnv0BG28Qu1dhNQVutsLVIFdRf5Nb+0ijp2qgtcmygQ0FtfRuXv5LYetZTg==
   dependencies:
     "@babel/runtime" "^7.23.8"
@@ -638,7 +651,7 @@
 
 "@mui/system@^5.15.6":
   version "5.15.6"
-  resolved "https://registry.npmjs.org/@mui/system/-/system-5.15.6.tgz"
+  resolved "https://registry.yarnpkg.com/@mui/system/-/system-5.15.6.tgz#d278adb09d57ee21f4eef2f6bc335bf9bd062fca"
   integrity sha512-J01D//u8IfXvaEHMBQX5aO2l7Q+P15nt96c4NskX7yp5/+UuZP8XCQJhtBtLuj+M2LLyXHYGmCPeblsmmscP2Q==
   dependencies:
     "@babel/runtime" "^7.23.8"

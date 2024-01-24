@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css'
-import AppRouting from './routes/AppRouting'
-import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { persistor, store } from './feature/store'
 import { PersistGate } from 'redux-persist/integration/react'
+import { BrowserRouter } from 'react-router-dom'
+import AppRouting from './routes/AppRouting'
 
 function App() {
   return (
