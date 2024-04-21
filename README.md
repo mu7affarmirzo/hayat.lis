@@ -1,11 +1,17 @@
+# First of all please learn Feature-Sliced Design then edit the code
+ [Link for docs](https://feature-sliced.design/)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+- React, Redux Toolkit, React Hook Form, Zod
+- Vite, TypeScript, Postcss
+- Architecture based on Feature-Sliced Design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About project
+
+Right now, I'm using this project as an experiment polygon to try modern technologies and see how a can see frontend application in 2024. This project structure combines two methodology: Clean Architecture and Feature-Sliced Design.
 
 ## Expanding the ESLint configuration
 

@@ -1,3 +1,0 @@
-{
-  "*.{js,jsx,ts,tsx,css,scss,json,md}": ["npm run format", "git add" ]
-}
