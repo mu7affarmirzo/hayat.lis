@@ -15,7 +15,7 @@ type Rows = Array<{
   branch: string
 }>
 
-export const useOrdersTable = (rows: Rows) => {
+export const useContainerTable = (rows: Rows) => {
   const [selected, setSelected] = useState<readonly number[]>([])
   const [activeRow, setActiveRow] = useState<number | undefined>()
 

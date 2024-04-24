@@ -11,11 +11,11 @@ import { TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './table.css'
 import { rows } from '../model/rows'
-import { useOrdersTable } from '../model/useOrdersTable'
+import { useInfoOrdersTable } from '../model/useInfoOrdersTable'
 
 export const InfoOrdersTable = () => {
   const { isSelected, handleClick, activeRow, handleClickRow } =
-    useOrdersTable(rows)
+    useInfoOrdersTable(rows)
 
   return (
     <Stack
@@ -31,8 +31,10 @@ export const InfoOrdersTable = () => {
         p={'4px 10px'}
         sx={{ background: colors.bgLightGray }}
       >
-        <Typography fontWeight={500}>Информация о заказе</Typography>
-        <Typography sx={{ color: colors.mainWarning }}>9383</Typography>
+        <Typography variant={'subtitle2'}>Информация о заказе</Typography>
+        <Typography variant={'subtitle2'} sx={{ color: colors.mainWarning }}>
+          9383
+        </Typography>
       </Stack>
       <Box style={{ overflowX: 'auto' }}>
         <TableContainer
@@ -133,27 +135,3 @@ export const InfoOrdersTable = () => {
     </Stack>
   )
 }
-/* <table>
-          <tr>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell>Дата</TableCell>
-            <TableCell>Ф И О</TableCell>
-            <TableCell>Дата рождения</TableCell>
-            <TableCell>Лаб. №</TableCell>
-            <TableCell>Пол</TableCell>
-            <TableCell>Заказ №</TableCell>
-            <TableCell>Регистратор</TableCell>
-            <TableCell>Направитель</TableCell>
-            <TableCell>Пункт</TableCell>
-            <TableCell>Долг</TableCell>
-            <TableCell>Плательщик</TableCell>
-            <TableCell>Отделение</TableCell>
-            <TableCell>Патология</TableCell>
-            <TableCell>Арх.Штат.AutoMate</TableCell>
-            <TableCell>Дата принятия</TableCell>
-            <TableCell></TableCell>
-          </tr>
-          <tr>
-          </tr>
-        </table> */

@@ -2,7 +2,7 @@ import cn from 'classnames'
 import React from 'react'
 import css from './Icon.module.css'
 
-export type IconType = 'logo' | 'x' | 'loader' | 'arrow-right'
+export type IconType = 'logo' | 'x' | 'loader' | 'arrow-right' | 'close-circle'
 
 export type Props = {
   className?: string

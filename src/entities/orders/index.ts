@@ -1,1 +1,1 @@
-export { OrdersTable } from './ui/OrdersTable'
+export { OrdersTable } from './ui/OrdersTable/OrdersTable'

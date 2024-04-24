@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useOrderContainerModal } from './useOrderContainerModal'
-import { useOrderMenuModal } from './useOrderMenuModal'
 
 type Rows = Array<{
   id: number
@@ -17,22 +15,10 @@ type Rows = Array<{
   branch: string
 }>
 
-export const useOrdersTable = (rows: Rows) => {
-  const {
-    handleOpenMenuModal,
-    openMenuModal: isOpenMenuModal,
-    handleCloseMenuModal,
-  } = useOrderMenuModal()
-
-  const {
-    handleCloseContainerModal,
-    handleOpenContainerModal,
-    isOpenContainerModal,
-  } = useOrderContainerModal()
-
+export const useInfoOrdersTable = (rows: Rows) => {
   const [selected, setSelected] = useState<readonly number[]>([])
   const [activeRow, setActiveRow] = useState<number | undefined>()
-  const [currentOrderId, setCurrentOrderId] = useState<number | undefined>()
+
   const isSelected = (id: number) => selected.includes(id)
 
   const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,11 +57,6 @@ export const useOrdersTable = (rows: Rows) => {
     setActiveRow(id)
   }
 
-  const handleDoubleClick = (id: number) => {
-    setCurrentOrderId(id)
-    handleOpenMenuModal()
-  }
-
   return {
     numSelected: selected.length,
     rowCount: rows.length,
@@ -84,12 +65,5 @@ export const useOrdersTable = (rows: Rows) => {
     handleClick,
     handleClickRow,
     activeRow,
-    handleDoubleClick,
-    currentOrderId,
-    openMenuModal: isOpenMenuModal,
-    handleCloseMenuModal,
-    handleCloseContainerModal,
-    handleOpenContainerModal,
-    isOpenContainerModal,
   }
 }
