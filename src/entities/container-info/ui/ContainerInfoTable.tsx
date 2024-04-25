@@ -1,5 +1,5 @@
 import { ArrowRight } from '@mui/icons-material'
-import { Box, IconButton, Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -14,7 +14,12 @@ import './table.css'
 import { rows } from '../model/rows'
 import { useContainerTable } from '../model/useContainerTable'
 
-export const ContainerInfoTable = () => {
+interface TableProps {
+  editQrSlot: (props: { containerId: number }) => JSX.Element
+}
+
+export const ContainerInfoTable = (props: TableProps) => {
+  const { editQrSlot: EditQrSlot } = props
   const { activeRow, handleClickRow } = useContainerTable(rows)
   const [open, setOpen] = useState(false)
   return (
@@ -84,9 +89,7 @@ export const ContainerInfoTable = () => {
                   <TableCell>{row.labNumber}</TableCell>
                   <TableCell>{row.gender}</TableCell>
                   <TableCell>
-                    <Stack>
-                      <IconButton onClick={() => setOpen(true)}>cl</IconButton>
-                    </Stack>
+                    <EditQrSlot containerId={row.id} />
                   </TableCell>
                 </TableRow>
               ))}

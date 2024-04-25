@@ -56,6 +56,13 @@ export const muiTheme: ThemeOptions = {
       letterSpacing: '0.4px',
       color: colors.regDarkText,
     },
+    subtitle1: {
+      fontSize: '16px',
+      lineHeight: '28px',
+      fontWeight: 400,
+      color: colors.regDarkText,
+      letterSpacing: '0.15px',
+    },
     subtitle2: {
       fontSize: '14px',
       lineHeight: '22px',

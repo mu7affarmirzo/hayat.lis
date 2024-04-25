@@ -10,4 +10,5 @@ export const colors = {
   darkGray: '#9E9E9E',
   borderGray: '#0000003B',
   mainWarning: '#F49C1C',
+  successMain: '#4CAF50',
 }
