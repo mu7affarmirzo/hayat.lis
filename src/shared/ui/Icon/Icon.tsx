@@ -10,6 +10,12 @@ export type IconType =
   | 'close-circle'
   | 'refresh'
   | 'qr-code'
+  | 'note-plus'
+  | 'xmark'
+  | 'search-normal'
+  | 'file-contract'
+  | 'circle-check'
+  | 'check'
 
 export type Props = {
   className?: string

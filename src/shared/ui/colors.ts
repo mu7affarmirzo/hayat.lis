@@ -11,4 +11,7 @@ export const colors = {
   borderGray: '#0000003B',
   mainWarning: '#F49C1C',
   successMain: '#4CAF50',
+  lighterBlue: '#3397FF',
+  borderLightGray: '#C4C4C4',
+  borderLighterGray: '#DDDDDD',
 }

@@ -1,0 +1,15 @@
+export const researchGroup = [
+  { id: 1, title: 'Все исследования' },
+  { id: 2, title: '02 CLIA' },
+  { id: 3, title: '03 ТОРЧ' },
+  { id: 4, title: '04 Микроскопия' },
+  { id: 5, title: '05 ПЦР' },
+  { id: 6, title: '06 Биохимия' },
+  { id: 7, title: '07 Бак. посев' },
+  { id: 8, title: '08 Экспресс-тест' },
+  { id: 9, title: '12 Другие' },
+  { id: 10, title: 'Аллергия' },
+  { id: 11, title: 'Гемостаз' },
+  { id: 12, title: '13 CLIA' },
+  { id: 13, title: '14 CLIA' },
+]

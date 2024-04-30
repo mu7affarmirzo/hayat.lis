@@ -4,9 +4,9 @@ import { colors } from '../colors'
 type Props = TextFieldProps
 
 export const TextInput = (props: Props) => {
-  const { label, ...rest } = props
+  const { sx, label, ...rest } = props
   return (
-    <Stack spacing={'5px'}>
+    <Stack sx={{ width: '100%' }} spacing={'5px'}>
       {label && (
         <label htmlFor={rest.id} style={{ color: colors.regDarkText }}>
           {label}
@@ -29,6 +29,7 @@ export const TextInput = (props: Props) => {
             outline: 'none',
             border: 'none',
           },
+          ...sx,
         }}
         {...rest}
       />

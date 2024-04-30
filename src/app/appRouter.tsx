@@ -1,16 +1,11 @@
 import { type ReactElement } from 'react'
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-// import { featureToggleLoader } from '@/entities/featureToggle'
 import { selectIsAuthorized } from '@/entities/session'
-// import { CartPage } from '@/pages/cart'
-// import { CategoryPage } from '@/pages/category'
+import { HandbookResearchPage } from '@/pages/handbook/ui/Services/Research/Page'
 import { LoginPage } from '@/pages/login'
-// import { MainPage } from '@/pages/main'
-// import { ProductPage } from '@/pages/product'
-// import { WishlistPage } from '@/pages/wishlist'
 import { RegisterOrdersPage } from '@/pages/register-orders'
+import { ResearchPage } from '@/pages/research/ui/Page/Page'
 import { useAppSelector } from '@/shared/model'
-// import { appStore } from './appStore'
 import { baseLayout } from './layouts/baseLayout'
 
 type GuestGuardProps = {
@@ -53,21 +48,29 @@ export const appRouter = () =>
     {
       element: <GuestGuard>{baseLayout}</GuestGuard>,
       errorElement: <div>error</div>,
-      //   loader: async () => {
-      //     return await featureToggleLoader(appStore.dispatch)
-      //   },
       children: [
         {
           path: '/*',
           element: <Navigate to={'/register-orders'} />,
         },
         {
-          path: '/register-orders',
+          path: 'register-orders',
           element: <RegisterOrdersPage />,
         },
         {
-          path: '/sorting',
-          element: <RegisterOrdersPage />,
+          path: 'sorting',
+          element: <ResearchPage />,
+        },
+        {
+          path: 'handbook',
+          children: [
+            {
+              path: 'services',
+              children: [
+                { path: 'research', element: <HandbookResearchPage /> },
+              ],
+            },
+          ],
         },
       ],
     },

@@ -31,6 +31,7 @@
     "ag-grid-react": "^31.0.2",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
+    "mui-nested-menu": "^3.3.0",
     "react": "^18.2.0",
     "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",

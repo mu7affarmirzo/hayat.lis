@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 import { FilterOrders } from '@/features/filter-orders/filter'
-import { AnalysisOrders } from '@/widgets/AnalysisOrders/AnalysisOrders'
+import { AnalysisOrders } from '@/widgets/AnalysisOrders'
 
 export function RegisterOrdersPage() {
   return (

@@ -1,5 +1,5 @@
 import { Layout } from '@/shared/ui'
-import { LayoutHeader } from '@/widgets/LayoutHeader/LayoutHeader'
+import { LayoutHeader } from '@/widgets/LayoutHeader/ui/LayoutHeader'
 // import { Announcement, Layout } from '@/shared/ui'
 
 /**

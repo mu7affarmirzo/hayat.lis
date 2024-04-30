@@ -44,7 +44,7 @@ export const ConfirmEditQrModal = (props: ConfirmModalProps) => {
           p={'20px 24px'}
           width="100%"
         >
-          <Button variant="contained" color="success">
+          <Button onClick={handleClose} variant="contained" color="success">
             Да
           </Button>
           <Button onClick={handleClose} variant="contained" color="inherit">
