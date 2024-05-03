@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import { useState, type ReactNode } from 'react'
+import cls from './styles.module.css'
 
 interface TabPanelProps {
   children?: ReactNode
@@ -52,8 +53,7 @@ export const BasicTabs = (props: BasicTabsProps) => {
       <Box>
         <Tabs
           value={value}
-          className=""
-          classes={{ root: 'min-h-0' }}
+          classes={{ root: cls.tabsRoot }}
           sx={{
             '& .MuiTabs-indicator': {
               display: 'none',
@@ -66,10 +66,9 @@ export const BasicTabs = (props: BasicTabsProps) => {
             return (
               <Tab
                 classes={{
-                  root: 'p-0 min-h-0 text-3 leading-5 py-[5px] px-[10px] font-normal text-3 tracking-[0.4px] capitalize bg-white ml-1 rounded-t-[5px] text-regDarkText',
-                  selected: '!bg-lighterBlue !text-white',
+                  root: cls.tabRoot,
+                  selected: cls.selectedTab,
                 }}
-                sx={{}}
                 label={p.label}
                 key={p.label}
                 {...a11yProps(index)}

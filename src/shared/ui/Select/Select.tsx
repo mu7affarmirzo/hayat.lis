@@ -3,20 +3,26 @@ import {
   MenuItem,
   Select as SelectInput,
   Stack,
+  type SxProps,
   type SelectProps,
 } from '@mui/material'
 import { colors } from '../colors'
 
 type Props = SelectProps & {
   data: Array<{ value: string; label: string }>
+  containerSx?: SxProps
+  labelSx?: SxProps
 }
 
 export const Select = (props: Props) => {
-  const { data, label, ...rest } = props
+  const { containerSx, labelSx, sx, data, label, ...rest } = props
   return (
-    <Stack spacing={'5px'}>
+    <Stack sx={containerSx} spacing={'5px'}>
       {label && (
-        <InputLabel sx={{ color: colors.regDarkText }} id={rest?.labelId}>
+        <InputLabel
+          sx={{ color: colors.regDarkText, ...labelSx }}
+          id={rest?.labelId}
+        >
           {label}
         </InputLabel>
       )}
@@ -37,6 +43,7 @@ export const Select = (props: Props) => {
             outline: 'none',
             border: 'none',
           },
+          ...sx,
         }}
         {...rest}
       >

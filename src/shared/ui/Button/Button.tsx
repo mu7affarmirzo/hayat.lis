@@ -9,11 +9,12 @@ export const Button = (props: Props) => {
     <CustomButton
       {...props}
       variant="outlined"
-      color="inherit"
+      color={props.color ?? 'inherit'}
       sx={{
         height: '36px',
-        background: colors.borderLighterGray,
+        background: colors.bgLightGray,
         border: `1px solid ${colors.borderLighterGray}`,
+        textTransform: 'capitalize',
         ...props.sx,
       }}
     />

@@ -1,14 +1,40 @@
-import { TextField as Input, Stack, type TextFieldProps } from '@mui/material'
+import {
+  type GridDirection,
+  TextField as Input,
+  Stack,
+  type SxProps,
+  type TextFieldProps,
+} from '@mui/material'
 import { colors } from '../colors'
 
-type Props = TextFieldProps
+type Props = TextFieldProps & {
+  containerSx?: SxProps
+  labelStyle?: React.CSSProperties
+  spacing?: string
+  direction?: GridDirection
+}
 
 export const TextInput = (props: Props) => {
-  const { sx, label, ...rest } = props
+  const {
+    labelStyle,
+    containerSx,
+    sx,
+    label,
+    direction,
+    spacing = '5px',
+    ...rest
+  } = props
   return (
-    <Stack sx={{ width: '100%' }} spacing={'5px'}>
+    <Stack
+      sx={{ width: '100%', ...containerSx }}
+      direction={direction}
+      spacing={spacing}
+    >
       {label && (
-        <label htmlFor={rest.id} style={{ color: colors.regDarkText }}>
+        <label
+          htmlFor={rest.id}
+          style={labelStyle ?? { color: colors.regDarkText }}
+        >
           {label}
         </label>
       )}
@@ -16,6 +42,7 @@ export const TextInput = (props: Props) => {
         size="small"
         sx={{
           backgroundColor: 'white',
+          textTransform: 'initial',
           '& .MuiOutlinedInput-input': {
             height: '20px',
             minHeight: '20px',

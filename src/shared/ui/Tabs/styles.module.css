@@ -1,0 +1,23 @@
+.tabRoot {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    min-height: 10px !important;
+    line-height: 20px !important;
+    font-variant: normal !important;
+    letter-spacing: 0.4px !important;
+    text-transform: capitalize !important;
+    background: white !important;
+    margin-left: 4px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    color: #000000DE !important;
+}
+
+.tabsRoot {
+    min-height: 0 !important;
+}
+
+.selectedTab {
+    background-color: #3397FF !important;
+    color: white !important;
+}

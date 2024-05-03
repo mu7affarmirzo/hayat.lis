@@ -16,6 +16,11 @@ export type IconType =
   | 'file-contract'
   | 'circle-check'
   | 'check'
+  | 'plus'
+  | 'minus'
+  | 'pen'
+  | 'files'
+  | 'dots-horizontal'
 
 export type Props = {
   className?: string

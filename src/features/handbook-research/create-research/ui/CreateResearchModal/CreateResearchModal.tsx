@@ -1,6 +1,7 @@
 import { Button, Stack } from '@mui/material'
-import { CustomModal, Select, TextInput } from '@/shared/ui'
-import { colors } from '@/shared/ui/colors'
+import { CustomModal, BasicTabs } from '@/shared/ui'
+import { DescriptionTab } from '../DescriptionTab/DescriptionTab'
+import { MainSettingsTab } from '../MainSettingsTab/MainSettingsTab'
 
 interface CreateModalProps {
   isOpen: boolean
@@ -9,46 +10,32 @@ interface CreateModalProps {
 }
 
 export const CreateResearchModal = (props: CreateModalProps) => {
-  const { handleClose, isOpen, handleSubmit } = props
+  const { handleClose, isOpen } = props
 
   return (
     <CustomModal
-      title="Изменение штрих-кода контейнера"
+      title="Редактирование исследования"
       onClose={handleClose}
-      maxWidth={'500px'}
+      maxWidth={'1900px'}
+      disablePortal
       open={isOpen}
     >
-      <Stack width={'100%'} spacing={'10px'}>
-        <TextInput
-          label="Текущий штрих-код"
-          id="curQrCode"
-          disabled
-          type="number"
-          sx={{ background: colors.bgLightGray }}
-        />
-        <TextInput type="number" label="Новый штрих-код" id="newQrCode" />
-        <Select
-          labelId="Причина"
-          label="Причина"
-          data={[
-            { value: 'Хилез', label: 'Хилез' },
-            { value: 'Гемолиз', label: 'Гемолиз' },
-            { value: 'Сгусток', label: 'Сгусток' },
-            { value: 'Недостаток БМ', label: 'Недостаток БМ' },
-            { value: 'Грязная посуда', label: 'Грязная посуда' },
-            { value: 'Не доставлен БМ', label: 'Не доставлен БМ' },
+      <Stack spacing={'10px'} width={'100%'}>
+        <BasicTabs
+          panels={[
+            { item: <MainSettingsTab />, label: 'Основные параметры' },
+            { item: <DescriptionTab />, label: 'Описание/Примечания' },
           ]}
         />
         <Stack
           direction="row"
-          spacing={'16px'}
+          spacing={'8px'}
           justifyContent={'flex-end'}
           py={'8px'}
         >
           <Button
             onClick={() => {
               handleClose()
-              handleSubmit()
             }}
             variant="contained"
             sx={{

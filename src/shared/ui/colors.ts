@@ -14,4 +14,5 @@ export const colors = {
   lighterBlue: '#3397FF',
   borderLightGray: '#C4C4C4',
   borderLighterGray: '#DDDDDD',
+  grayTableBorder: '#D9D9D9',
 }

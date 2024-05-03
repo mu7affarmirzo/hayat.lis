@@ -1,1 +1,1 @@
-export {} from './ui/CreateResearch/CreateResearch'
+export { CreateResearch as HandbookCreateResearch } from './ui/CreateResearch/CreateResearch'

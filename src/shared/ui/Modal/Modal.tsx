@@ -36,6 +36,8 @@ export function CustomModal(props: Props) {
           transform: 'translate(-50%, -50%)',
           width: '100%',
           position: 'absolute' as 'absolute',
+          overflow: 'auto',
+          maxHeight: '100vh',
         }}
       >
         {(!!title || withCloseIcon) && (
@@ -44,6 +46,7 @@ export function CustomModal(props: Props) {
             width={'100%'}
             justifyContent={title ? 'space-between' : 'flex-end'}
             alignItems={'center'}
+            // overflow={'auto'}
           >
             {!!title && <Typography variant="h6">{title}</Typography>}
             {withCloseIcon && (
