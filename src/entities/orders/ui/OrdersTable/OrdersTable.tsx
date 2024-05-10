@@ -25,7 +25,7 @@ export const OrdersTable = (props: OrderTableProps) => {
       spacing={'5px'}
       // overflow={'auto'}
       width={'100%'}
-      sx={{ maxWidth: 'calc(100vw - 400px)' }}
+      sx={{ maxWidth: 'calc(100vw - 310px)' }}
       border={`1px solid ${colors.borderGray}`}
     >
       <Typography>Заказы</Typography>

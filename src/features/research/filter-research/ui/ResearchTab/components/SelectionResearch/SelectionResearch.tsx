@@ -7,8 +7,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { DateInput, Icon, TextInput } from '@/shared/ui'
+import { DateInput, Icon, TextInput, Autocomplete } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
+import { AutocompleteTable } from './AutocompleteTable/AutocompleteTable'
 
 export const SelectionResearch = () => {
   return (
@@ -141,6 +142,7 @@ export const SelectionResearch = () => {
             </Stack>
           </RadioGroup>
         </Stack>
+        <Autocomplete item={AutocompleteTable} />
       </Stack>
     </Stack>
   )

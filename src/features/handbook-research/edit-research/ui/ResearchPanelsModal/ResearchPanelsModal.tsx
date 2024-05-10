@@ -22,7 +22,7 @@ export const ResearchPanelsModal = (props: ResearchPanelsModalProps) => {
         <ResearchPanels />
         <Stack
           direction="row"
-          justifyContent={'flex-end'}
+          justifyContent={'space-between'}
           py={'8px'}
           spacing={'10px'}
           width={'100%'}
@@ -37,6 +37,15 @@ export const ResearchPanelsModal = (props: ResearchPanelsModalProps) => {
             }}
           >
             Сохранить
+          </CustomBtn>
+          <CustomBtn
+            sx={{
+              width: 'max-content',
+              alignItems: 'center',
+              textTransform: 'uppercase',
+            }}
+          >
+            Выход
           </CustomBtn>
         </Stack>
       </>

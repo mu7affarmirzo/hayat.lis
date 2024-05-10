@@ -12,6 +12,7 @@ import { Button as CustomBtn, Icon, TextInput } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { useManageModals } from '../../model/useManageModals'
 import { AdditionalRequiredFieldsModal } from '../AdditionalFieldsModal'
+import { DeadlinesByRegionModal } from '../DeadlinesByRegionModal'
 import { PathologyFormulaModal } from '../PathologyFormulaModal'
 import { PlacementsModal } from '../PlacementsModal'
 import { QuestionnaireSetupModal } from '../QuestionnaireSetupModal'
@@ -51,6 +52,12 @@ export const Parameters = () => {
     handleOpenResultsTemplateModal,
     handleCloseResultsTemplateModal,
     isResultsTemplateModalOpen,
+    handleOpenResearchPanelsModal,
+    handleCloseResearchPanelsModal,
+    isResearchPanelsModalOpen,
+    handleOpenDeadlinesByRegionModal,
+    handleCloseDeadlinesByRegionModal,
+    isDeadlinesByRegionModalOpen,
   } = useManageModals()
 
   return (
@@ -486,8 +493,18 @@ export const Parameters = () => {
             Шаблон результатов
           </CustomBtn>
           <CustomBtn sx={{ width: '240px' }}>Параметры печати</CustomBtn>
-          <CustomBtn sx={{ width: '240px' }}>Панели</CustomBtn>
-          <CustomBtn sx={{ width: '240px' }}>Сроки по регионам</CustomBtn>
+          <CustomBtn
+            onClick={handleOpenResearchPanelsModal}
+            sx={{ width: '240px' }}
+          >
+            Панели
+          </CustomBtn>
+          <CustomBtn
+            onClick={handleOpenDeadlinesByRegionModal}
+            sx={{ width: '240px' }}
+          >
+            Сроки по регионам
+          </CustomBtn>
           <Stack spacing={'10px'} alignItems={'flex-end'} mt={'40px'}>
             <FormControl component="fieldset" variant="standard">
               <FormGroup sx={{ flexDirection: 'row', gap: '5px' }}>
@@ -602,9 +619,14 @@ export const Parameters = () => {
         handleSubmit={handleCloseResultsTemplateModal}
       />
       <ResearchPanelsModal
-        isOpen={isResultsTemplateModalOpen}
-        handleClose={handleCloseResultsTemplateModal}
-        handleSubmit={handleCloseResultsTemplateModal}
+        isOpen={isResearchPanelsModalOpen}
+        handleClose={handleCloseResearchPanelsModal}
+        handleSubmit={handleCloseResearchPanelsModal}
+      />
+      <DeadlinesByRegionModal
+        isOpen={isDeadlinesByRegionModalOpen}
+        handleClose={handleCloseDeadlinesByRegionModal}
+        handleSubmit={handleCloseDeadlinesByRegionModal}
       />
     </Stack>
   )

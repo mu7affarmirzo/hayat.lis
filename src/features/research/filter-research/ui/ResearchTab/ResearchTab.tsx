@@ -18,6 +18,7 @@ export const ResearchTab = () => {
           gap: '8px',
           border: `1px solid ${colors.borderLighterGray}`,
           boxShadow: 'none',
+          background: colors.backgroundGray,
         }}
       >
         <Icon type="refresh" />

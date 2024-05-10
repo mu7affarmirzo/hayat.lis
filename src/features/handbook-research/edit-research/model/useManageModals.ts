@@ -61,6 +61,12 @@ export const useManageModals = () => {
     handleCloseResearchPanelsModal,
   ] = useModal()
 
+  const [
+    isDeadlinesByRegionModalOpen,
+    handleOpenDeadlinesByRegionModal,
+    handleCloseDeadlinesByRegionModal,
+  ] = useModal()
+
   return {
     isPathologyModalOpen,
     handleClosePathologyModal,
@@ -92,5 +98,8 @@ export const useManageModals = () => {
     isResearchPanelsModalOpen,
     handleOpenResearchPanelsModal,
     handleCloseResearchPanelsModal,
+    isDeadlinesByRegionModalOpen,
+    handleOpenDeadlinesByRegionModal,
+    handleCloseDeadlinesByRegionModal,
   }
 }

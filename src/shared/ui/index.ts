@@ -1,3 +1,4 @@
+import { Autocomplete } from './Autocomplete/Autocomplete'
 import { Button } from './Button/Button'
 import { DateInput } from './DateInput/DateInput'
 import { CustomDialog } from './Dialog/Dialog'
@@ -24,4 +25,5 @@ export {
   BasicTabs,
   TextArea,
   CustomDialog,
+  Autocomplete,
 }

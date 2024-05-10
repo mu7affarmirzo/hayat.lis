@@ -1,11 +1,23 @@
 import { type ReactElement } from 'react'
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { selectIsAuthorized } from '@/entities/session'
-import { HandbookResearchPage } from '@/pages/handbook/ui/Services/Research/Page'
+import {
+  AntibioticGroupsPage,
+  AntibioticsPage,
+  BiomaterialPage,
+  ContainerTypesPage,
+  HandbookResearchPacksPage,
+  HandbookResearchPage,
+  ReagentTypesPage,
+  TemporaryRegulationsPage,
+  UnitsOfMeasurePage,
+} from '@/pages/handbook'
+import { TripodTypesPage } from '@/pages/handbook/ui/Others/TripodTypes/Page'
 import { LoginPage } from '@/pages/login'
 import { RegisterOrdersPage } from '@/pages/register-orders'
 import { ResearchPage } from '@/pages/research/ui/Page/Page'
 import { useAppSelector } from '@/shared/model'
+import { ColorPalette } from '@/widgets/ColorPalette'
 import { baseLayout } from './layouts/baseLayout'
 
 type GuestGuardProps = {
@@ -68,6 +80,45 @@ export const appRouter = () =>
               path: 'services',
               children: [
                 { path: 'research', element: <HandbookResearchPage /> },
+                {
+                  path: 'research-packs',
+                  element: <HandbookResearchPacksPage />,
+                },
+              ],
+            },
+            { path: 'container-types', element: <ContainerTypesPage /> },
+            {
+              path: 'biomaterial',
+              element: <BiomaterialPage />,
+            },
+            {
+              path: 'reagent-types',
+              element: <ReagentTypesPage />,
+            },
+            {
+              path: 'units-of-measure',
+              element: <UnitsOfMeasurePage />,
+            },
+            {
+              path: 'others',
+              children: [
+                { path: 'color-palette', element: <ColorPalette /> },
+                {
+                  path: 'temporary-regulations',
+                  element: <TemporaryRegulationsPage />,
+                },
+                {
+                  path: 'antibiotic-groups',
+                  element: <AntibioticGroupsPage />,
+                },
+                {
+                  path: 'antibiotics',
+                  element: <AntibioticsPage />,
+                },
+                {
+                  path: 'tripod-types',
+                  element: <TripodTypesPage />,
+                },
               ],
             },
           ],
