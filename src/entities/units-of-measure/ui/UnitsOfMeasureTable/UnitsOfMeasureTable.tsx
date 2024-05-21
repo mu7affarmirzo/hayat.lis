@@ -1,71 +1,48 @@
 import { Close } from '@mui/icons-material'
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { Checkbox, FormControlLabel, IconButton, Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import { type ReactNode } from 'react'
 import { colors } from '@/shared/ui/colors'
 import './../table.css'
 import { UnitsOfMeasureTableBody } from './TableBody'
 
-interface UnitsOfMeasureProps {
-  packagesTableActions: ReactNode
-}
-
-export const UnitsOfMeasureTable = (props: UnitsOfMeasureProps) => {
+export const UnitsOfMeasureTable = () => {
   return (
-    <Stack height={'calc(100vh - 132px)'} p={'5px'} width={'100%'}>
-      <Box
-        sx={{ backgroundColor: colors.mainBlue }}
-        width="100%"
-        height="30px"
-        p={'5px'}
-        border={`1px solid #5AA4DE`}
+    <>
+      <TableContainer
+        sx={{
+          borderRadius: 0,
+          minHeight: 'calc(100vh - 200px)',
+          maxHeight: 'calc(100vh - 200px)',
+          boxShadow: 'none',
+          border: `1px solid ${colors.borderLightGray}`,
+        }}
+        component={Paper}
       >
-        <Typography>Единицы измерений</Typography>
-      </Box>
-      <Box>
-        <TableContainer
-          sx={{
-            borderRadius: 0,
-            minHeight: 'calc(100vh - 200px)',
-            maxHeight: 'calc(100vh - 200px)',
-            boxShadow: 'none',
-            border: `1px solid ${colors.borderLightGray}`,
-          }}
-          component={Paper}
+        <Table
+          size="small"
+          stickyHeader
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
         >
-          <Table
-            size="small"
-            stickyHeader
-            sx={{ minWidth: 650 }}
-            aria-label="simple table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{ width: '26px' }}
-                  className="bg-bgHoverGray"
-                ></TableCell>
-                <TableCell className="bg-bgHoverGray">
-                  Наименование единицы измерения
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <UnitsOfMeasureTableBody />
-          </Table>
-        </TableContainer>
-      </Box>
+          <TableHead>
+            <TableRow>
+              <TableCell
+                sx={{ width: '26px' }}
+                className="bg-bgHoverGray"
+              ></TableCell>
+              <TableCell className="bg-bgHoverGray">
+                Наименование единицы измерения
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <UnitsOfMeasureTableBody />
+        </Table>
+      </TableContainer>
       <Stack
         direction={'row'}
         border={`1px solid ${colors.borderLightGray}`}
@@ -82,7 +59,6 @@ export const UnitsOfMeasureTable = (props: UnitsOfMeasureProps) => {
           label="[Вкл.] = 'Отмечено'"
         />
       </Stack>
-      <Box mt={'10px'}>{props.packagesTableActions}</Box>
-    </Stack>
+    </>
   )
 }

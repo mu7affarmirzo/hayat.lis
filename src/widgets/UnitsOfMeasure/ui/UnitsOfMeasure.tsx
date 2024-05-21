@@ -1,10 +1,16 @@
 import { Stack } from '@mui/material'
-import { UnitsOfMeasureTable } from '@/entities/units-of-measure'
+import {
+  UnitsOfMeasureContainer,
+  UnitsOfMeasureTable,
+} from '@/entities/units-of-measure'
+import { EditUnitsOfMeasure } from '@/features/units-of-measure/edit-units-of-measure'
 import { Button, Icon } from '@/shared/ui'
+import { useUnitsOfMeasure } from '../model/useUnitsOfMeasure'
 
 export const UnitsOfMeasure = () => {
+  const { isEditing, setIsEditing } = useUnitsOfMeasure()
   return (
-    <UnitsOfMeasureTable
+    <UnitsOfMeasureContainer
       packagesTableActions={
         <Stack direction={'row'} spacing={'10px'}>
           <Button
@@ -31,6 +37,7 @@ export const UnitsOfMeasure = () => {
           </Button>
           <Button
             startIcon={<Icon type="pen" />}
+            onClick={() => setIsEditing(true)}
             sx={{
               width: 'max-content',
               alignItems: 'center',
@@ -40,8 +47,38 @@ export const UnitsOfMeasure = () => {
           >
             Изменить
           </Button>
+          <Button
+            startIcon={<Icon type="check" />}
+            onClick={() => {
+              setIsEditing(false)
+            }}
+            sx={{
+              width: 'max-content',
+              alignItems: 'center',
+              textTransform: 'uppercase',
+              height: '32px',
+            }}
+          >
+            Сохранить
+          </Button>
+          <Button
+            startIcon={<Icon type="xmark" />}
+            onClick={() => {
+              setIsEditing(false)
+            }}
+            sx={{
+              width: 'max-content',
+              alignItems: 'center',
+              textTransform: 'uppercase',
+              height: '32px',
+            }}
+          >
+            Отмена
+          </Button>
         </Stack>
       }
-    />
+    >
+      {isEditing ? <EditUnitsOfMeasure /> : <UnitsOfMeasureTable />}
+    </UnitsOfMeasureContainer>
   )
 }

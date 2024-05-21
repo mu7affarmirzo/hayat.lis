@@ -28,7 +28,6 @@ export const DeadlinesByRegionModal = (props: DeadlinesByRegionModalProps) => {
           width={'100%'}
         >
           <Button
-            // disabled
             color="success"
             variant="contained"
             sx={{

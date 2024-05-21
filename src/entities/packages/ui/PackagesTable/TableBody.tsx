@@ -4,8 +4,9 @@ import TableBody from '@mui/material/TableBody'
 import { rows } from '@/shared/model/rows'
 import { colors } from '@/shared/ui/colors'
 import { usePackageTable } from '../../model/usePackageTable'
+import { type PackagesTableProps } from './PackagesTable'
 
-export const PackagesTableBody = () => {
+export const PackagesTableBody = (props: PackagesTableProps) => {
   const { activeRow, handleClickRow } = usePackageTable()
 
   return (
@@ -21,6 +22,7 @@ export const PackagesTableBody = () => {
               sx={{ cursor: 'pointer' }}
               key={row.id}
               selected={activeRow === row.id}
+              onDoubleClick={() => props.setIsEditing(true)}
             >
               <TableCell
                 onClick={() => handleClickRow(row.id)}

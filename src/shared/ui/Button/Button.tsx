@@ -10,8 +10,9 @@ export const Button = (props: Props) => {
       {...props}
       variant="outlined"
       color={props.color ?? 'inherit'}
+      size="small"
       sx={{
-        height: '36px',
+        height: '30px',
         background: colors.bgLightGray,
         border: `1px solid ${colors.borderLighterGray}`,
         textTransform: 'capitalize',

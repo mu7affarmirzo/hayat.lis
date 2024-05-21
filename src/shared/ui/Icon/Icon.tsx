@@ -21,6 +21,7 @@ export type IconType =
   | 'pen'
   | 'files'
   | 'dots-horizontal'
+  | 'book-open'
 
 export type Props = {
   className?: string

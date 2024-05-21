@@ -17,4 +17,5 @@ export const colors = {
   grayTableBorder: '#D9D9D9',
   white: '#ffffff',
   backgroundGray: '#EEEEEE',
+  darkerGray: '#BDBDBD',
 }

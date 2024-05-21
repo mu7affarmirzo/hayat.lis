@@ -1,10 +1,16 @@
 import { Stack } from '@mui/material'
-import { ContainerTypesTable } from '@/entities/container-types'
+import {
+  ContainerTypesContainer,
+  ContainerTypesTable,
+} from '@/entities/container-types'
+import { EditContainer } from '@/features/container-types/edit-container'
 import { Button, Icon } from '@/shared/ui'
+import { useContainerTypes } from '../../model/useContainerTypes'
 
 export const ContainerTypes = () => {
+  const { isEditing, setIsEditing } = useContainerTypes()
   return (
-    <ContainerTypesTable
+    <ContainerTypesContainer
       packagesTableActions={
         <Stack direction={'row'} spacing={'10px'}>
           <Button
@@ -31,6 +37,9 @@ export const ContainerTypes = () => {
           </Button>
           <Button
             startIcon={<Icon type="pen" />}
+            onClick={() => {
+              setIsEditing(true)
+            }}
             sx={{
               width: 'max-content',
               alignItems: 'center',
@@ -40,8 +49,38 @@ export const ContainerTypes = () => {
           >
             Изменить
           </Button>
+          <Button
+            startIcon={<Icon type="check" />}
+            onClick={() => {
+              setIsEditing(false)
+            }}
+            sx={{
+              width: 'max-content',
+              alignItems: 'center',
+              textTransform: 'uppercase',
+              height: '32px',
+            }}
+          >
+            Сохранить
+          </Button>
+          <Button
+            startIcon={<Icon type="xmark" />}
+            onClick={() => {
+              setIsEditing(false)
+            }}
+            sx={{
+              width: 'max-content',
+              alignItems: 'center',
+              textTransform: 'uppercase',
+              height: '32px',
+            }}
+          >
+            Отмена
+          </Button>
         </Stack>
       }
-    />
+    >
+      {isEditing ? <EditContainer /> : <ContainerTypesTable />}
+    </ContainerTypesContainer>
   )
 }

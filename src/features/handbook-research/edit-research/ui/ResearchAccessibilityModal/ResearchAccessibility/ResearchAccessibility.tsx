@@ -1,5 +1,7 @@
 import { Stack } from '@mui/material'
 import { BasicTabs } from '@/shared/ui'
+import { CollectionPointsTab } from '../CollectionPoints'
+import { CounterpartiesTab } from '../Counterparties'
 import { RegionsTab } from '../Regions'
 
 export const ResearchAccessibility = () => {
@@ -8,8 +10,8 @@ export const ResearchAccessibility = () => {
       <BasicTabs
         panels={[
           { item: <RegionsTab />, label: 'Регионы' },
-          { item: <>Пункты забора</>, label: 'Пункты забора' },
-          { item: <>Контрагенты</>, label: 'Контрагенты' },
+          { item: <CollectionPointsTab />, label: 'Пункты забора' },
+          { item: <CounterpartiesTab />, label: 'Контрагенты' },
         ]}
       />
     </Stack>
