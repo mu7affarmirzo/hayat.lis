@@ -7,21 +7,26 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import { useState } from 'react'
-import { CustomModal, TablePagination } from '@/shared/ui'
+import dayjs from 'dayjs'
+import { type Result, type IPatientsRoot } from '@/shared/types'
+import { TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './table.css'
 import { rows } from '../model/rows'
 import { useContainerTable } from '../model/useContainerTable'
 
 interface TableProps {
-  editQrSlot: (props: { containerId: number }) => JSX.Element
+  editQrSlot: (props: {
+    containerId: number
+    container_code: string
+  }) => JSX.Element
+  resultsList?: IPatientsRoot
 }
 
 export const ContainerInfoTable = (props: TableProps) => {
-  const { editQrSlot: EditQrSlot } = props
+  const { editQrSlot: EditQrSlot, resultsList } = props
   const { activeRow, handleClickRow } = useContainerTable(rows)
-  const [open, setOpen] = useState(false)
+
   return (
     <Stack spacing={'5px'} width={'100%'} sx={{ flex: 1 }}>
       <Box style={{ overflowX: 'auto', width: '100%' }}>
@@ -61,38 +66,45 @@ export const ContainerInfoTable = (props: TableProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  aria-checked={activeRow === row.id}
-                  tabIndex={-1}
-                  sx={{ cursor: 'pointer' }}
-                  key={row.id}
-                  selected={activeRow === row.id}
-                >
-                  <TableCell
-                    onClick={() => handleClickRow(row.id)}
-                    sx={{ background: colors.bgLightGray, maxWidth: '20px' }}
+              {resultsList?.map((row) => {
+                return row.results.map((result: Result) => (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    aria-checked={activeRow === result.id}
+                    tabIndex={-1}
+                    sx={{ cursor: 'pointer' }}
+                    key={result.id}
+                    selected={activeRow === result.id}
                   >
-                    <Box width={'20px'}>
-                      {activeRow === row.id && (
-                        <ArrowRight width={'10px'} color="action" />
-                      )}
-                    </Box>
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.date}
-                  </TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.birthday}</TableCell>
-                  <TableCell>{row.labNumber}</TableCell>
-                  <TableCell>{row.gender}</TableCell>
-                  <TableCell>
-                    <EditQrSlot containerId={row.id} />
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell
+                      onClick={() => handleClickRow(result.container)}
+                      sx={{ background: colors.bgLightGray, maxWidth: '20px' }}
+                    >
+                      <Box width={'20px'}>
+                        {activeRow === result.id && (
+                          <ArrowRight width={'10px'} color="action" />
+                        )}
+                      </Box>
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {result.result}
+                    </TableCell>
+                    <TableCell>{result.ordered_lab_research}</TableCell>
+                    <TableCell>{result.container_code}</TableCell>
+                    <TableCell>{result.lab_research_test}</TableCell>
+                    <TableCell>
+                      {dayjs(result.created_at).format('YYYY-MM-DD')}
+                    </TableCell>
+                    <TableCell>
+                      <EditQrSlot
+                        container_code={result.container_code}
+                        containerId={result.container}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))
+              })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -102,16 +114,6 @@ export const ContainerInfoTable = (props: TableProps) => {
           <TablePagination current={3} total={1022} />
         </Box>
       )}
-      <CustomModal
-        open={open}
-        onClose={() => {
-          setOpen(false)
-        }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <p>Modal</p>
-      </CustomModal>
     </Stack>
   )
 }

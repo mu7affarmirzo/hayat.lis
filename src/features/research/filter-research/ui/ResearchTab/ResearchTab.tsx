@@ -1,8 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import { Button, Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
-import { GroupResearch } from './components/GroupResearch/GroupResearch'
-import { SelectionResearch } from './components/SelectionResearch/SelectionResearch'
+import { SelectionResearch, GroupResearch } from './components'
 
 export const ResearchTab = () => {
   return (

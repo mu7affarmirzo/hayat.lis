@@ -1,6 +1,6 @@
 export type SessionDto = {
-  refreshToken: string
-  accessToken: string
+  refresh: string
+  access: string
   // user: {
   //   email: string
   //   id: number

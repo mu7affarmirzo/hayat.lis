@@ -7,10 +7,11 @@ interface ConfirmModalProps {
   containerId?: number | string
   isOpen: boolean
   handleClose: () => void
+  handleSubmit: () => void
 }
 
 export const ConfirmEditQrModal = (props: ConfirmModalProps) => {
-  const { handleClose, isOpen, containerId } = props
+  const { handleClose, isOpen, containerId, handleSubmit } = props
 
   if (containerId === undefined) {
     return (
@@ -44,7 +45,7 @@ export const ConfirmEditQrModal = (props: ConfirmModalProps) => {
           p={'20px 24px'}
           width="100%"
         >
-          <Button onClick={handleClose} variant="contained" color="success">
+          <Button onClick={handleSubmit} variant="contained" color="success">
             Да
           </Button>
           <Button onClick={handleClose} variant="contained" color="inherit">

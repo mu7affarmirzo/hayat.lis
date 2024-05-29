@@ -1,23 +1,18 @@
 import { useState } from 'react'
+import { type IPatientsRoot } from '@/shared/types'
 import { useResearchContainerModal } from './useResearchContainerModal'
 import { useResearchMenuModal } from './useResearchMenuModal'
 
-type Rows = Array<{
-  id: number
-  name: string
-  date: string
-  birthday: string
-  labNumber: string
-  gender: string
-  orderNumber: string
-  registrar: string
-  director: string
-  debt: string
-  payer: string
-  branch: string
-}>
+export type UseResearchTable = ReturnType<typeof useResearchTable>
 
-export const useResearchTable = (rows: Rows) => {
+interface ResearchTableProps {
+  activeRow: number | undefined
+  setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
+  data?: IPatientsRoot
+}
+
+export const useResearchTable = (props: ResearchTableProps) => {
+  const { activeRow, setActiveRow, data } = props
   const {
     handleOpenMenuModal,
     openMenuModal: isOpenMenuModal,
@@ -31,15 +26,14 @@ export const useResearchTable = (rows: Rows) => {
   } = useResearchContainerModal()
 
   const [selected, setSelected] = useState<readonly number[]>([])
-  const [activeRow, setActiveRow] = useState<number | undefined>()
   const [currentResearchId, setCurrentResearchId] = useState<
     number | undefined
   >()
   const isSelected = (id: number) => selected.includes(id)
 
   const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id)
+    if (event.target.checked && data) {
+      const newSelected = data?.map((n) => n.lab)
       setSelected(newSelected)
       return
     }
@@ -73,6 +67,8 @@ export const useResearchTable = (rows: Rows) => {
     setActiveRow(id)
   }
 
+  console.log({ activeRow })
+
   const handleDoubleClick = (id: number) => {
     setCurrentResearchId(id)
     handleOpenMenuModal()
@@ -80,7 +76,7 @@ export const useResearchTable = (rows: Rows) => {
 
   return {
     numSelected: selected.length,
-    rowCount: rows.length,
+    rowCount: data?.length ?? 0,
     onSelectAllClick,
     isSelected,
     handleClick,
@@ -93,5 +89,6 @@ export const useResearchTable = (rows: Rows) => {
     handleCloseContainerModal,
     handleOpenContainerModal,
     isOpenContainerModal,
-  }
+    researchList: data,
+  } as const
 }

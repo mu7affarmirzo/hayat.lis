@@ -33,10 +33,9 @@ export const sessionSlice = createSlice({
       sessionApi.endpoints.login.matchFulfilled,
       (state: SessionSliceState, { payload }) => {
         state.isAuthorized = true
-
         // say TypeScript that isAuthorized = true
         if (state.isAuthorized) {
-          state.userId = payload.userId
+          // state.userId = payload.userId
           state.accessToken = payload.accessToken
         }
       }

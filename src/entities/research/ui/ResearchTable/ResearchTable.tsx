@@ -6,19 +6,25 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { type ReactNode } from 'react'
+import { type IPatientsRoot } from '@/shared/types'
 import { Button, Icon, TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './../table.css'
-import { rows } from '../../model/rows'
 import { useResearchTable } from '../../model/useResearchTable'
 import { ResearchTableBody } from './TableBody'
 
 interface ResearchTableProps {
   containerInfoTable: ReactNode
   samplingConditionsSlot: ReactNode
+  activeRow: number | undefined
+  setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
+  data?: IPatientsRoot
 }
+
 export const ResearchTable = (props: ResearchTableProps) => {
-  const { numSelected, onSelectAllClick, rowCount } = useResearchTable(rows)
+  const { activeRow, setActiveRow, data } = props
+  const { numSelected, onSelectAllClick, rowCount, ...restProps } =
+    useResearchTable({ activeRow, setActiveRow, data })
 
   return (
     <Stack
@@ -88,7 +94,10 @@ export const ResearchTable = (props: ResearchTableProps) => {
                 <TableCell className="bg-mainBlue"></TableCell>
               </TableRow>
             </TableHead>
-            <ResearchTableBody containerInfoTable={props.containerInfoTable} />
+            <ResearchTableBody
+              containerInfoTable={props.containerInfoTable}
+              {...restProps}
+            />
           </Table>
         </TableContainer>
       </Box>

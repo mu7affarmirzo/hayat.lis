@@ -3,6 +3,7 @@ import { useState } from 'react'
 export const useEditQRModal = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+  const [newCode, setNewCode] = useState('')
 
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false)
@@ -20,6 +21,12 @@ export const useEditQRModal = () => {
     setIsConfirmModalOpen(true)
   }
 
+  const handleConfirm = () => {
+    // api request
+    console.log({ newCode })
+    setIsConfirmModalOpen(false)
+  }
+
   return {
     isEditModalOpen,
     isConfirmModalOpen,
@@ -27,5 +34,8 @@ export const useEditQRModal = () => {
     handleOpenEditModal,
     handleCloseConfirmModal,
     handleOpenConfirmModal,
+    setNewCode,
+    newCode,
+    handleConfirm,
   }
 }

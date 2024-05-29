@@ -1,6 +1,7 @@
 import { Box, Button, Modal, Stack, Typography } from '@mui/material'
 import { type ReactNode } from 'react'
 import ContainerImg from '@/shared/assets/images/container.svg'
+import { type IPatientsRoot } from '@/shared/types'
 import { CustomModal } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 
@@ -9,6 +10,7 @@ interface ModalProps {
   isOpenContainerModal: boolean
   handleCloseContainerModal: () => void
   containerInfoTable: ReactNode
+  researchList?: IPatientsRoot
 }
 
 export const ResearchContainerModal = (props: ModalProps) => {
@@ -17,8 +19,12 @@ export const ResearchContainerModal = (props: ModalProps) => {
     isOpenContainerModal,
     handleCloseContainerModal: handleClose,
     containerInfoTable,
+    researchList,
   } = props
 
+  const currentResearch = researchList?.find(
+    (rItem) => rItem.lab === currentResearchId
+  )
   if (currentResearchId === undefined) {
     return (
       <Modal
@@ -36,7 +42,10 @@ export const ResearchContainerModal = (props: ModalProps) => {
     <CustomModal
       open={!!isOpenContainerModal}
       onClose={handleClose}
-      title="Контейнеры заказа: Мусахонова Угилой Рустамовна"
+      title={
+        currentResearch &&
+        `Контейнеры заказа: ${currentResearch?.patient?.f_name} ${currentResearch?.patient?.l_name}`
+      }
     >
       <>
         <Stack

@@ -7,10 +7,21 @@ interface EditModalProps {
   isOpen: boolean
   handleClose: () => void
   handleSubmit: () => void
+  container_code?: string
+  newCode: string
+  setNewCode: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const EditQRCodeModal = (props: EditModalProps) => {
-  const { handleClose, isOpen, containerId, handleSubmit } = props
+  const {
+    handleClose,
+    isOpen,
+    containerId,
+    handleSubmit,
+    container_code: containerCode,
+    setNewCode,
+    newCode,
+  } = props
 
   if (containerId === undefined) {
     return (
@@ -29,13 +40,17 @@ export const EditQRCodeModal = (props: EditModalProps) => {
       <Stack width={'100%'} spacing={'10px'}>
         <TextInput
           label="Текущий штрих-код"
-          id="curQrCode"
+          id="container_code"
           disabled
-          type="number"
           sx={{ background: colors.bgLightGray }}
-          value={containerId}
+          value={containerCode}
         />
-        <TextInput type="number" label="Новый штрих-код" id="newQrCode" />
+        <TextInput
+          value={newCode}
+          onChange={(e) => setNewCode(e.target.value)}
+          label="Новый штрих-код"
+          id="newQrCode"
+        />
         <Select
           labelId="Причина"
           label="Причина"

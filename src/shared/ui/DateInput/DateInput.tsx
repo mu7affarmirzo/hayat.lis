@@ -7,7 +7,7 @@ export const DateInput = (props: Props) => {
   const { className, ...rest } = props
   return (
     <DatePicker
-      className={'border border-borderGray rounded ml-0' + className}
+      className={'border border-borderGray rounded ml-0 ' + className}
       enableTabLoop={false}
       {...rest}
     />

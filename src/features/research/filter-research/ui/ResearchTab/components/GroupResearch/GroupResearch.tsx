@@ -1,10 +1,12 @@
 import { ArrowRight } from '@mui/icons-material'
 import { Box, Paper, Stack, Typography } from '@mui/material'
-import { researchGroup } from '@/features/research/filter-research/model/researchGroup'
 import { Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
+import { useResearchGroups } from './../../../../model/useResearchGroups'
 
 export const GroupResearch = () => {
+  const { researchGroup } = useResearchGroups()
+
   return (
     <Stack width="100%">
       <Box
@@ -21,10 +23,11 @@ export const GroupResearch = () => {
           backgroundColor: 'white',
           boxShadow: 'none',
           maxHeight: '276px',
+          minHeight: '276px',
           overflowY: 'auto',
         }}
       >
-        {researchGroup.map((item) => (
+        {researchGroup?.map((item) => (
           <Stack sx={{ cursor: 'pointer' }} direction={'row'} key={item.id}>
             <Stack
               borderBottom={`1px solid ${colors.borderLightGray}`}
@@ -43,7 +46,7 @@ export const GroupResearch = () => {
               p={'3px 5px'}
               width={'100%'}
             >
-              <Typography variant="caption">{item.title}</Typography>
+              <Typography variant="caption">{item.name}</Typography>
             </Box>
           </Stack>
         ))}

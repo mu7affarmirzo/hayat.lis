@@ -1,1 +1,3 @@
-export { FilterTabs } from './FilterTabs/FilterTabs'
+import { FilterTabs } from './FilterTabs/FilterTabs'
+
+export { FilterTabs }

@@ -1,4 +1,5 @@
 import { Stack } from '@mui/material'
+import { useState } from 'react'
 import { ContainerInfoTable } from '@/entities/container-info'
 import {
   InfoResearchOrder,
@@ -10,8 +11,11 @@ import { EditQRCode } from '@/features/qr-container/edit-qr-code'
 import { FilterTabs } from '@/features/research/filter-research'
 import { FilterResearch } from '@/features/sampling-conditions/filter-research'
 import { colors } from '@/shared/ui/colors'
+import { useResearchListQuery } from '../api/researchListApi'
 
 export const ResearchTabs = () => {
+  const [activeRow, setActiveRow] = useState<number | undefined>()
+  const { data: researchList } = useResearchListQuery({ searchQuery: '' })
   return (
     <Stack direction={'row'} width={'100%'}>
       <FilterTabs />
@@ -23,11 +27,19 @@ export const ResearchTabs = () => {
         paddingLeft={'5px'}
       >
         <ResearchTable
+          data={researchList}
+          activeRow={activeRow}
+          setActiveRow={setActiveRow}
           samplingConditionsSlot={<FilterResearch />}
-          containerInfoTable={<ContainerInfoTable editQrSlot={EditQRCode} />}
+          containerInfoTable={
+            <ContainerInfoTable
+              resultsList={researchList}
+              editQrSlot={EditQRCode}
+            />
+          }
         />
         <Stack spacing={'5px'} direction={'row'}>
-          <ResearchStatusTable />
+          <ResearchStatusTable orderId={activeRow} />
           <Stack
             border={`1px solid ${colors.borderGray}`}
             width={'290px'}

@@ -4,7 +4,7 @@ import { useEditQRModal } from '../../model/useEditQRModal'
 import { ConfirmEditQrModal } from '../ConfirmEditQrModal/ConfirmEditQrModal'
 import { EditQRCodeModal } from '../EditQRCodeModal/EditQRCodeModal'
 
-export type EditQRCodeProps = { containerId: number }
+export type EditQRCodeProps = { containerId: number; container_code: string }
 
 export const EditQRCode = (props: EditQRCodeProps) => {
   const {
@@ -14,6 +14,9 @@ export const EditQRCode = (props: EditQRCodeProps) => {
     handleCloseConfirmModal,
     handleOpenConfirmModal,
     isConfirmModalOpen,
+    newCode,
+    setNewCode,
+    handleConfirm,
   } = useEditQRModal()
 
   return (
@@ -29,13 +32,17 @@ export const EditQRCode = (props: EditQRCodeProps) => {
       </Stack>
       <EditQRCodeModal
         containerId={props.containerId}
+        container_code={props.container_code}
         isOpen={isEditModalOpen}
         handleClose={handleCloseEditModal}
+        setNewCode={setNewCode}
+        newCode={newCode}
         handleSubmit={handleOpenConfirmModal}
       />
       <ConfirmEditQrModal
         isOpen={isConfirmModalOpen}
         containerId={23}
+        handleSubmit={handleConfirm}
         handleClose={handleCloseConfirmModal}
       />
     </>

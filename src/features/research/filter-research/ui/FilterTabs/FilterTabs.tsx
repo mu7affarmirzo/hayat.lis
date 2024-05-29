@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material'
+import { BasicTabs } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
-import { BasicTabs } from '@/shared/ui/Tabs/Tabs'
-import { ByWorkPlacesTab } from '../ByWorkPlacesTab/ByWorkPlacesTab'
-import { ResearchTab } from '../ResearchTab/ResearchTab'
+import { ByWorkPlacesTab } from '../ByWorkPlacesTab'
+import { ResearchTab } from '../ResearchTab'
 
 export const FilterTabs = () => {
   return (

@@ -21,7 +21,7 @@ export const FilterOrders = () => {
             onChange={() => {}}
           />
           <Typography>-</Typography>
-          <DateInput className="w-[123px]" onChange={() => {}} />
+          <DateInput className="max-w-[123px]" onChange={() => {}} />
         </Stack>
       </Stack>
       <Select
