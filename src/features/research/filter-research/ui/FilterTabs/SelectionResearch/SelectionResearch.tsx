@@ -7,11 +7,21 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
+import dayjs from 'dayjs'
+import { type UseFormRegister, type Control, Controller } from 'react-hook-form'
+import { type ResearchFilterParams } from '@/features/research/filter-research/model/types'
 import { DateInput, Icon, TextInput, Autocomplete } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { AutocompleteTable } from './AutocompleteTable/AutocompleteTable'
 
-export const SelectionResearch = () => {
+interface SelectionResearchProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<ResearchFilterParams, any>
+  register: UseFormRegister<ResearchFilterParams>
+}
+
+export const SelectionResearch = (props: SelectionResearchProps) => {
+  const { control } = props
   return (
     <Stack
       width="100%"
@@ -30,12 +40,43 @@ export const SelectionResearch = () => {
       <Stack p={'5px'} spacing={'10px'}>
         <Stack spacing={'5px'} direction={'row'} alignItems={'center'}>
           <Typography>С</Typography>
-          <DateInput className="w-[156px]" onChange={() => {}} />
+          <Controller
+            name="start"
+            control={control}
+            render={({ field }) => (
+              <DateInput
+                className="w-[156px]"
+                {...field}
+                isClearable
+                maxDate={
+                  control._getWatch('end')
+                    ? new Date(`${control._getWatch('end')}`)
+                    : null
+                }
+                onChange={(val) => {
+                  field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                }}
+              />
+            )}
+          />
           <Typography>по</Typography>
-          <DateInput
-            className="w-[156px]"
-            placeholderText=""
-            onChange={() => {}}
+          <Controller
+            name="end"
+            control={control}
+            render={({ field }) => (
+              <DateInput
+                className="w-[156px]"
+                minDate={
+                  control._getWatch('start')
+                    ? new Date(`${control._getWatch('start')}`)
+                    : null
+                }
+                {...field}
+                onChange={(val) => {
+                  field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                }}
+              />
+            )}
           />
         </Stack>
         <Stack spacing={'5px'}>
@@ -106,7 +147,13 @@ export const SelectionResearch = () => {
             direction={'row'}
             alignItems={'center'}
           >
-            <TextInput sx={{ width: '100%' }} id="Контейнер" />
+            <Controller
+              name="container"
+              control={control}
+              render={({ field }) => (
+                <TextInput {...field} sx={{ width: '100%' }} id="Контейнер" />
+              )}
+            />
             <FormControlLabel
               sx={{ whiteSpace: 'nowrap' }}
               control={<Checkbox sx={{ p: '0 5px 0 0' }} />}
@@ -119,7 +166,18 @@ export const SelectionResearch = () => {
           control={<Checkbox sx={{ p: '0 5px 0 0' }} />}
           label="Только с привязанными контейнерами"
         />
-        <TextInput id="Лабораторный №" label="Лабораторный №" />
+        <Controller
+          name="lab"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              type={'number'}
+              id="Лабораторный №"
+              label="Лабораторный №"
+            />
+          )}
+        />
         <Stack spacing={'5px'}>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"

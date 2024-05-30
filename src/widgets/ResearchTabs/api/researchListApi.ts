@@ -10,7 +10,7 @@ export const researchGroupApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     researchList: build.query<IPatientsRoot, { searchQuery: string }>({
       query: ({ searchQuery }) => ({
-        url: `/lis/orders/get-list-ordered-researches/${searchQuery ? `?${searchQuery}` : ''}`,
+        url: `/lis/orders/get-list-ordered-researches/${searchQuery || ''}`,
       }),
     }),
     researchItem: build.query<IPatientsRoot, { orderId: string }>({

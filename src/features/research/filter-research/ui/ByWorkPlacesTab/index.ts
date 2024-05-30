@@ -1,3 +1,1 @@
-import { ByWorkPlacesTab } from './ByWorkPlacesTab'
-
-export { ByWorkPlacesTab }
+export { ByWorkPlaces } from './ByWorkPlaces'

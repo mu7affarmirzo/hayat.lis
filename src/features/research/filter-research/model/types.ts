@@ -24,3 +24,13 @@ export interface LabResearch {
   main_working_station: unknown
   backup_working_station: unknown
 }
+
+export type ResearchFilterParams = {
+  start?: string
+  end?: string
+  branch?: string
+  barcode?: string
+  lab?: string
+  container?: string
+  category?: string
+}

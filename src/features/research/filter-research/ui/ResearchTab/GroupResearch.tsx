@@ -2,7 +2,7 @@ import { ArrowRight } from '@mui/icons-material'
 import { Box, Paper, Stack, Typography } from '@mui/material'
 import { Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
-import { useResearchGroups } from './../../../../model/useResearchGroups'
+import { useResearchGroups } from '../../model/useResearchGroups'
 
 export const GroupResearch = () => {
   const { researchGroup } = useResearchGroups()

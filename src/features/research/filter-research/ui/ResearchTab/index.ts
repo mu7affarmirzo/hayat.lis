@@ -1,3 +1,1 @@
-import { ResearchTab } from './ResearchTab'
-
-export { ResearchTab }
+export {GroupResearch} from "./GroupResearch"
