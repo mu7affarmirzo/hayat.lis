@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { sessionApi } from '../api/sessionApi'
 import { type SessionUserId } from './types'
 
@@ -7,11 +7,13 @@ type SessionSliceState =
       accessToken: string
       userId: SessionUserId
       isAuthorized: true
+      refreshToken: string
     }
   | {
       isAuthorized: false
       accessToken?: string
       userId?: SessionUserId
+      refreshToken?: string
     }
 
 const initialState: SessionSliceState = {
@@ -26,6 +28,10 @@ export const sessionSlice = createSlice({
       state.accessToken = undefined
       state.userId = undefined
       state.isAuthorized = false
+      state.refreshToken = undefined
+    },
+    resetToken: (state, action: PayloadAction<{ access: string }>) => {
+      state.accessToken = action.payload.access
     },
   },
   extraReducers: (builder) => {
@@ -37,6 +43,7 @@ export const sessionSlice = createSlice({
         if (state.isAuthorized) {
           // state.userId = payload.userId
           state.accessToken = payload.accessToken
+          state.refreshToken = payload.refreshToken
         }
       }
     )
@@ -48,4 +55,4 @@ export const selectIsAuthorized = (state: RootState) =>
 
 export const selectUserId = (state: RootState) => state.session.userId
 
-export const { clearSessionData } = sessionSlice.actions
+export const { clearSessionData, resetToken } = sessionSlice.actions

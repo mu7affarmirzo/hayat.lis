@@ -6,25 +6,21 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import { type IPatientRoot } from '@/shared/types'
 import { TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './table.css'
-import { useResearchItemQuery } from '../../api/researchListApi'
 import { rows } from '../../model/rows'
 import { useResearchStatusTable } from '../../model/useResearchStatusTable'
 
 interface ResearchStatusProps {
   orderId?: number
+  data?: IPatientRoot
 }
 
 export const ResearchStatusTable = (props: ResearchStatusProps) => {
-  const { orderId } = props
+  const { orderId, data } = props
   const { isSelected, activeRow } = useResearchStatusTable(rows)
-  const { data } = useResearchItemQuery(
-    { orderId: `${orderId}` },
-    { skip: !orderId }
-  )
-  console.log({ orderId, data })
 
   return (
     <Stack
@@ -47,7 +43,7 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
           <Stack flex={1} direction={'row'} spacing={'5px'}>
             <Typography variant={'body2'}>Статус исследования: </Typography>
             <Typography variant={'subtitle2'}>
-              {data?.[0]?.results[0].test_status}
+              {data?.results[0].test_status}
             </Typography>
           </Stack>
         )}
@@ -81,34 +77,32 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
               </TableHead>
               <TableBody>
                 {orderId &&
-                  data?.map((row, index) => {
-                    return row.results.map((result) => {
-                      const isItemSelected = isSelected(result.id)
+                  data?.results.map((result, index) => {
+                    const isItemSelected = isSelected(result.id)
 
-                      return (
-                        <TableRow
-                          hover
-                          role="checkbox"
-                          aria-checked={isItemSelected}
-                          tabIndex={-1}
-                          sx={{ cursor: 'pointer' }}
-                          key={result.id}
-                          selected={isItemSelected || activeRow === result.id}
-                        >
-                          <TableCell component="th" scope="result">
-                            {result.container_code}
-                          </TableCell>
-                          <TableCell>{result.lab_research_test}</TableCell>
-                          <TableCell>{result.test_status}</TableCell>
-                          <TableCell>{`{norma}`}</TableCell>
-                          <TableCell>{result.test_status}</TableCell>
-                          <TableCell>{'result.status'}</TableCell>
-                          <TableCell>{'row?.patient.patient_group'}</TableCell>
-                          <TableCell>{row?.patient.is_active}</TableCell>
-                          <TableCell></TableCell>
-                        </TableRow>
-                      )
-                    })
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        sx={{ cursor: 'pointer' }}
+                        key={result.id}
+                        selected={isItemSelected || activeRow === result.id}
+                      >
+                        <TableCell component="th" scope="result">
+                          {result.container_code}
+                        </TableCell>
+                        <TableCell>{result.lab_research_test}</TableCell>
+                        <TableCell>{result.test_status}</TableCell>
+                        <TableCell>{`{norma}`}</TableCell>
+                        <TableCell>{result.test_status}</TableCell>
+                        <TableCell>{'result.status'}</TableCell>
+                        <TableCell>{'row?.patient.patient_group'}</TableCell>
+                        <TableCell>{data.patient.is_active}</TableCell>
+                        <TableCell></TableCell>
+                      </TableRow>
+                    )
                   })}
               </TableBody>
             </Table>

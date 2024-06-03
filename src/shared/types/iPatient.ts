@@ -51,3 +51,9 @@ export interface Result {
   created_by: number
   modified_by: number
 }
+
+export interface IEditContainer {
+  id: number
+  container_id: number
+  container_code: string
+}

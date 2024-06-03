@@ -18,6 +18,7 @@ import { useContainerTable } from '../model/useContainerTable'
 interface TableProps {
   editQrSlot: (props: {
     containerId: number
+    id: number
     container_code: string
   }) => JSX.Element
   resultsList?: IPatientsRoot
@@ -98,6 +99,7 @@ export const ContainerInfoTable = (props: TableProps) => {
                     </TableCell>
                     <TableCell>
                       <EditQrSlot
+                        id={result.id}
                         container_code={result.container_code}
                         containerId={result.container}
                       />

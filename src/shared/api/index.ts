@@ -1,4 +1,5 @@
 export { baseApi } from './baseApi'
 export { SESSION_TAG, WISHLIST_TAG, CART_TAG } from './tags'
-// export { invalidateAccessToken } from './invalidateTokenEvent'
+export { invalidateAccessToken } from './invalidateTokenEvent'
+export { refreshToken } from './refreshTokenEvent'
 export { isFetchBaseQueryError } from './isFetchBaseQueryError'

@@ -23,8 +23,13 @@ interface ResearchTableProps {
 
 export const ResearchTable = (props: ResearchTableProps) => {
   const { activeRow, setActiveRow, data } = props
-  const { numSelected, onSelectAllClick, rowCount, ...restProps } =
-    useResearchTable({ activeRow, setActiveRow, data })
+  const {
+    numSelected,
+    onSelectAllClick,
+    rowCount,
+    isValidateBtnActive,
+    ...restProps
+  } = useResearchTable({ activeRow, setActiveRow, data })
 
   return (
     <Stack
@@ -46,7 +51,15 @@ export const ResearchTable = (props: ResearchTableProps) => {
           <Button sx={{ width: 'max-content' }}>
             <Icon type="circle-check" />
           </Button>
-          <Button sx={{ width: 'max-content' }}>
+          <Button
+            disabled={!isValidateBtnActive}
+            onClick={restProps.handleValidation}
+            color={isValidateBtnActive ? 'success' : undefined}
+            sx={{
+              width: 'max-content',
+              background: isValidateBtnActive ? '#9FD5A1' : colors.bgLightGray,
+            }}
+          >
             <Icon type="check" />
           </Button>
           {props.samplingConditionsSlot}
@@ -69,7 +82,7 @@ export const ResearchTable = (props: ResearchTableProps) => {
                 <TableCell className="bg-mainBlue" padding="checkbox">
                   <Checkbox
                     indeterminate={numSelected > 0 && numSelected < rowCount}
-                    checked={rowCount > 0 && numSelected === rowCount}
+                    // checked={rowCount > 0 && numSelected === rowCount}
                     onChange={onSelectAllClick}
                     inputProps={{
                       'aria-label': 'select all desserts',

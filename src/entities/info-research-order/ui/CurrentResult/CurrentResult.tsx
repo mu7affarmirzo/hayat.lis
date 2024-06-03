@@ -2,7 +2,12 @@ import { Box, Stack, Typography } from '@mui/material'
 import { TextInput } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 
-export const CurrentResult = () => {
+interface CurrentResultProps {
+  result?: number
+}
+
+export const CurrentResult = (props: CurrentResultProps) => {
+  const { result } = props
   return (
     <Stack
       p={'5px'}
@@ -19,7 +24,7 @@ export const CurrentResult = () => {
         <Typography variant={'subtitle2'}>Текущий результат</Typography>
       </Stack>
       <Box>
-        <TextInput type="number" />
+        <TextInput defaultValue={result} type="number" />
       </Box>
     </Stack>
   )

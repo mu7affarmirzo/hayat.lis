@@ -6,11 +6,18 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import dayjs from 'dayjs'
+import { type IPatientRoot } from '@/shared/types'
 import { colors } from '@/shared/ui/colors'
 import './../table.css'
-import { rows } from '../../model/rows'
 
-export const InfoResearchOrder = () => {
+interface InfoOrderProps {
+  order?: IPatientRoot
+}
+
+export const InfoResearchOrder = (props: InfoOrderProps) => {
+  const { order } = props
+
   return (
     <Stack
       p={'5px'}
@@ -48,16 +55,32 @@ export const InfoResearchOrder = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => {
-                return (
-                  <TableRow hover tabIndex={-1} key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.date}
-                    </TableCell>
-                    <TableCell>{row.name}</TableCell>
-                  </TableRow>
-                )
-              })}
+              <TableRow hover tabIndex={-1}>
+                <TableCell>ФИО</TableCell>
+                <TableCell component="th" scope="row">
+                  {order?.patient.f_name ?? ''} {order?.patient.mid_name ?? ''}{' '}
+                  {order?.patient.l_name ?? ''}
+                </TableCell>
+              </TableRow>
+              <TableRow hover tabIndex={-1}>
+                <TableCell>Дата рождения</TableCell>
+                <TableCell component="th" scope="row">
+                  {dayjs(order?.patient.date_of_birth).format('DD.MM.YYYY')}
+                </TableCell>
+              </TableRow>
+              <TableRow hover tabIndex={-1}>
+                <TableCell>Возраст</TableCell>
+                <TableCell component="th" scope="row">
+                  {new Date().getFullYear() -
+                    +dayjs(order?.patient.date_of_birth).format('YYYY')}
+                </TableCell>
+              </TableRow>
+              <TableRow hover tabIndex={-1}>
+                <TableCell>Пол</TableCell>
+                <TableCell component="th" scope="row">
+                  {order?.patient.gender}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>

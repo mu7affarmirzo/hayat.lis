@@ -13,7 +13,10 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { sessionSlice } from '@/entities/session'
 // import { themeSlice } from '@/entities/theme'
-// import { invalidateAccessTokenListener } from '@/features/authentication/invalidateAccessToken'
+import {
+  invalidateAccessTokenListener,
+  refreshTokenListener,
+} from '@/features/authentication/invalidateAccessToken'
 import { baseApi } from '@/shared/api'
 // import { debugModeSlice } from '@/widgets/DebugModeToggler'
 import { rootReducer } from './rootReducer'
@@ -34,7 +37,11 @@ export function makeStore() {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(baseApi.middleware),
+      }).concat(
+        baseApi.middleware,
+        invalidateAccessTokenListener.middleware,
+        refreshTokenListener.middleware
+      ),
   })
 
   setupListeners(store.dispatch)

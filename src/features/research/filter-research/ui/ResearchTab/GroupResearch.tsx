@@ -1,8 +1,7 @@
-import { ArrowRight } from '@mui/icons-material'
 import { Box, Paper, Stack, Typography } from '@mui/material'
-import { Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { useResearchGroups } from '../../model/useResearchGroups'
+import { ResearchItem } from './ResearchItem'
 
 export const GroupResearch = () => {
   const { researchGroup } = useResearchGroups()
@@ -28,27 +27,7 @@ export const GroupResearch = () => {
         }}
       >
         {researchGroup?.map((item) => (
-          <Stack sx={{ cursor: 'pointer' }} direction={'row'} key={item.id}>
-            <Stack
-              borderBottom={`1px solid ${colors.borderLightGray}`}
-              borderLeft={`1px solid ${colors.borderLightGray}`}
-              borderRight={`1px solid ${colors.bgHoverGray}`}
-              p={'3px'}
-              direction="row"
-            >
-              <ArrowRight width={'20px'} color="action" />
-              <Icon type="note-plus" />
-            </Stack>
-            <Box
-              borderBottom={`1px solid ${colors.bgHoverGray}`}
-              borderLeft={`1px solid ${colors.bgHoverGray}`}
-              borderRight={`1px solid ${colors.bgHoverGray}`}
-              p={'3px 5px'}
-              width={'100%'}
-            >
-              <Typography variant="caption">{item.name}</Typography>
-            </Box>
-          </Stack>
+          <ResearchItem item={item} key={item.id} />
         ))}
       </Paper>
     </Stack>
