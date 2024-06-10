@@ -1,9 +1,9 @@
 import { ArrowDropDown, ArrowRight } from '@mui/icons-material'
 import { Box, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
+import { type GroupResearch } from '@/shared/types'
 import { Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
-import { type GroupResearch } from '../../model/types'
 
 interface ItemInterface {
   item: GroupResearch

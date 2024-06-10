@@ -19,10 +19,11 @@ interface ResearchTableProps {
   activeRow: number | undefined
   setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
   data?: IPatientsRoot
+  isLoadingData?: boolean
 }
 
 export const ResearchTable = (props: ResearchTableProps) => {
-  const { activeRow, setActiveRow, data } = props
+  const { activeRow, setActiveRow, data, isLoadingData } = props
   const {
     numSelected,
     onSelectAllClick,
@@ -109,6 +110,7 @@ export const ResearchTable = (props: ResearchTableProps) => {
             </TableHead>
             <ResearchTableBody
               containerInfoTable={props.containerInfoTable}
+              isLoadingData={isLoadingData}
               {...restProps}
             />
           </Table>

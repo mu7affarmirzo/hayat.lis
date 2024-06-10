@@ -7,15 +7,21 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import { TablePagination } from '@/shared/ui'
+import dayjs from 'dayjs'
 import { colors } from '@/shared/ui/colors'
 import './table.css'
-import { rows } from '../model/rows'
-import { useInfoOrdersTable } from '../model/useInfoOrdersTable'
+import { useOrderInfo } from '../model/useOrderInfo'
 
-export const InfoOrdersTable = () => {
-  const { isSelected, handleClick, activeRow, handleClickRow } =
-    useInfoOrdersTable(rows)
+interface InfoTableProps {
+  orderId?: number
+}
+
+export const InfoOrdersTable = (props: InfoTableProps) => {
+  const { orderId } = props
+  const { data, isLoadingData, activeRow, isSelected, handleClickRow } =
+    useOrderInfo({
+      orderId,
+    })
 
   return (
     <Stack
@@ -33,12 +39,12 @@ export const InfoOrdersTable = () => {
       >
         <Typography variant={'subtitle2'}>Информация о заказе</Typography>
         <Typography variant={'subtitle2'} sx={{ color: colors.mainWarning }}>
-          9383
+          {orderId}
         </Typography>
       </Stack>
-      <Box style={{ overflowX: 'auto' }}>
+      <Box style={{ overflowX: 'auto', height: '100%' }}>
         <TableContainer
-          sx={{ borderRadius: 0, maxHeight: 200 }}
+          sx={{ borderRadius: 0, height: '100%' }}
           component={Paper}
         >
           <Table
@@ -51,86 +57,120 @@ export const InfoOrdersTable = () => {
               <TableRow>
                 <TableCell className="bg-mainBlue"></TableCell>
                 <TableCell className="bg-mainBlue">Печать</TableCell>
-                <TableCell className="bg-mainBlue">Дата</TableCell>
-                <TableCell className="bg-mainBlue">Ф И О</TableCell>
-                <TableCell className="bg-mainBlue">Дата рождения</TableCell>
-                <TableCell className="bg-mainBlue">Лаб. №</TableCell>
-                <TableCell className="bg-mainBlue">Пол</TableCell>
-                <TableCell className="bg-mainBlue">Заказ №</TableCell>
-                <TableCell className="bg-mainBlue">Регистратор</TableCell>
-                <TableCell className="bg-mainBlue">Направитель</TableCell>
-                <TableCell className="bg-mainBlue">Пункт</TableCell>
+                <TableCell className="bg-mainBlue">Код</TableCell>
+                <TableCell className="bg-mainBlue">Исследование</TableCell>
+                <TableCell className="bg-mainBlue">Биоматериал</TableCell>
+                <TableCell className="bg-mainBlue">Cito</TableCell>
+                <TableCell className="bg-mainBlue">Постановка</TableCell>
+                <TableCell className="bg-mainBlue">Дата постановки</TableCell>
+                <TableCell className="bg-mainBlue">Пакет</TableCell>
+                <TableCell className="bg-mainBlue">Готовность</TableCell>
+                <TableCell className="bg-mainBlue">Валидация</TableCell>
                 <TableCell className="bg-mainBlue">Долг</TableCell>
                 <TableCell className="bg-mainBlue">Плательщик</TableCell>
                 <TableCell className="bg-mainBlue">Отделение</TableCell>
-                <TableCell className="bg-mainBlue">Патология</TableCell>
-                <TableCell className="bg-mainBlue">Арх.Штат.AutoMate</TableCell>
-                <TableCell className="bg-mainBlue">Дата принятия</TableCell>
                 <TableCell className="bg-mainBlue"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => {
-                const isItemSelected = isSelected(row.id)
-                const labelId = `enhanced-table-checkbox-${index}`
+              {isLoadingData && (
+                <TableRow>
+                  <TableCell sx={{ textAlign: 'center' }} colSpan={100}>
+                    Загрузка...
+                  </TableCell>
+                </TableRow>
+              )}
+              {orderId &&
+                data?.[0]?.results.map((result, index) => {
+                  const isItemSelected = isSelected(result.id)
 
-                return (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    sx={{ cursor: 'pointer' }}
-                    key={row.id}
-                    selected={isItemSelected || activeRow === row.id}
-                  >
-                    <TableCell
-                      onClick={() => handleClickRow(row.id)}
-                      sx={{ background: colors.bgLightGray }}
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      sx={{ cursor: 'pointer' }}
+                      key={result.id}
+                      selected={isItemSelected || activeRow === result.id}
                     >
-                      <Box width={'20px'}>
-                        {activeRow === row.id && (
-                          <ArrowRight width={'10px'} color="action" />
-                        )}
-                      </Box>
-                    </TableCell>
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        onClick={(event) => handleClick(event, row.id)}
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
+                      <TableCell
+                        onClick={() => handleClickRow(result.id)}
+                        sx={{
+                          background: colors.bgLightGray,
+                          width: '25px',
                         }}
-                      />
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {row.date}
-                    </TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.birthday}</TableCell>
-                    <TableCell>{row.labNumber}</TableCell>
-                    <TableCell>{row.gender}</TableCell>
-                    <TableCell>{row.orderNumber}</TableCell>
-                    <TableCell>{row.registrar}</TableCell>
-                    <TableCell>{row.director}</TableCell>
-                    <TableCell>{row.debt}</TableCell>
-                    <TableCell>{row.payer}</TableCell>
-                    <TableCell>{row.branch}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                )
-              })}
+                      >
+                        <Box width={'20px'}>
+                          {activeRow === result.id && (
+                            <ArrowRight width={'10px'} color="action" />
+                          )}
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Stack alignItems={'center'} justifyContent={'center'}>
+                          <Checkbox sx={{ padding: 0 }} color="primary" />
+                        </Stack>
+                      </TableCell>
+                      <TableCell component="th" scope="result">
+                        {result.container_code}
+                      </TableCell>
+                      <TableCell>{result.ordered_lab_research}</TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        <Stack
+                          width={'70px'}
+                          alignItems={'center'}
+                          justifyContent={'center'}
+                        >
+                          <Checkbox sx={{ padding: 0 }} color="primary" />
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
+                        <Stack
+                          width={'100px'}
+                          alignItems={'center'}
+                          justifyContent={'center'}
+                        >
+                          <Checkbox sx={{ padding: 0 }} color="primary" />
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
+                        {dayjs(result.created_at).format('DD-MM-YYYY')}
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        <Stack
+                          width={'120px'}
+                          alignItems={'center'}
+                          justifyContent={'center'}
+                        >
+                          <Checkbox sx={{ padding: 0 }} color="primary" />
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
+                        <Stack
+                          width={'110px'}
+                          alignItems={'center'}
+                          justifyContent={'center'}
+                        >
+                          <Checkbox sx={{ padding: 0 }} color="primary" />
+                        </Stack>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        {data?.[0]?.patient.f_name ?? ''}{' '}
+                        {data?.[0]?.patient.mid_name ?? ''}{' '}
+                        {data?.[0]?.patient.l_name ?? ''}
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  )
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-      </Box>
-      <Box border="1px solid #0000001A">
-        <TablePagination current={3} total={1022} />
       </Box>
     </Stack>
   )

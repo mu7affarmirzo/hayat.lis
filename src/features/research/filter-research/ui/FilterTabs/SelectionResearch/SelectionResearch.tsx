@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import dayjs from 'dayjs'
 import { type UseFormRegister, type Control, Controller } from 'react-hook-form'
-import { type ResearchFilterParams } from '@/features/research/filter-research/model/types'
+import { type ResearchFilterParams } from '@/shared/types'
 import { DateInput, Icon, TextInput, Autocomplete } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { AutocompleteTable } from './AutocompleteTable/AutocompleteTable'
@@ -48,13 +48,18 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
                 className="w-[156px]"
                 {...field}
                 isClearable
+                selected={field.value ? new Date(field.value) : null}
                 maxDate={
                   control._getWatch('end')
                     ? new Date(`${control._getWatch('end')}`)
                     : null
                 }
                 onChange={(val) => {
-                  field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                  if (val) {
+                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                  } else {
+                    field.onChange(null)
+                  }
                 }}
               />
             )}
@@ -65,6 +70,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             control={control}
             render={({ field }) => (
               <DateInput
+                isClearable
                 className="w-[156px]"
                 minDate={
                   control._getWatch('start')
@@ -72,8 +78,13 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
                     : null
                 }
                 {...field}
+                selected={field.value ? new Date(field.value) : null}
                 onChange={(val) => {
-                  field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                  if (val) {
+                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                  } else {
+                    field.onChange(null)
+                  }
                 }}
               />
             )}

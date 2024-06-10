@@ -5,6 +5,7 @@ import {
   type SxProps,
   type TextFieldProps,
 } from '@mui/material'
+import { forwardRef } from 'react'
 import { colors } from '../colors'
 
 type Props = TextFieldProps & {
@@ -14,7 +15,7 @@ type Props = TextFieldProps & {
   direction?: GridDirection
 }
 
-export const TextInput = (props: Props) => {
+export const TextInput = forwardRef(function TextInput(props: Props, ref) {
   const {
     labelStyle,
     containerSx,
@@ -58,8 +59,11 @@ export const TextInput = (props: Props) => {
           },
           ...sx,
         }}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        ref={ref}
         {...rest}
       />
     </Stack>
   )
-}
+})

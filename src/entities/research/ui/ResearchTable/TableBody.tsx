@@ -14,6 +14,7 @@ interface ResearchTableProps
     'numSelected' | 'onSelectAllClick' | 'rowCount' | 'isValidateBtnActive'
   > {
   containerInfoTable: ReactNode
+  isLoadingData?: boolean
 }
 
 export const ResearchTableBody = (props: ResearchTableProps) => {
@@ -30,11 +31,19 @@ export const ResearchTableBody = (props: ResearchTableProps) => {
     isOpenContainerModal,
     handleOpenContainerModal,
     researchList,
+    isLoadingData,
   } = props
 
   return (
     <>
       <TableBody>
+        {isLoadingData && (
+          <TableRow>
+            <TableCell sx={{ textAlign: 'center' }} colSpan={100}>
+              Загрузка...
+            </TableCell>
+          </TableRow>
+        )}
         {researchList?.map((row) => {
           return row.results.map((result, index) => {
             const isItemSelected = isSelected(result.id)

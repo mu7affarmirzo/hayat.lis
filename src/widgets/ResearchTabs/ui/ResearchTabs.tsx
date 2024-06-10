@@ -8,7 +8,9 @@ import { useResearchTabs } from '../model/useResearchTabs'
 import { ResearchInfo } from './ResearchInfo'
 
 export const ResearchTabs = () => {
-  const { activeRow, researchList, setActiveRow } = useResearchTabs()
+  const { activeRow, researchList, setActiveRow, isLoadingData } =
+    useResearchTabs()
+
   return (
     <Stack direction={'row'} width={'100%'}>
       <FilterTabs />
@@ -17,11 +19,13 @@ export const ResearchTabs = () => {
         spacing={'5px'}
         marginRight={'5px'}
         width={'100%'}
+        maxWidth={'calc(100vw - 400px)'}
         paddingLeft={'5px'}
       >
         <ResearchTable
           data={researchList}
           activeRow={activeRow}
+          isLoadingData={isLoadingData}
           setActiveRow={setActiveRow}
           samplingConditionsSlot={<FilterResearch />}
           containerInfoTable={

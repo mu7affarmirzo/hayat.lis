@@ -6,10 +6,10 @@ type ResearchInfoHookProps = {
 
 export const useResearchInfo = (props: ResearchInfoHookProps) => {
   const { orderId } = props
-  const { data } = useResearchItemQuery(
+  const { data, isLoading: isLoadingInfo } = useResearchItemQuery(
     { orderId: `${orderId}` },
     { skip: !orderId }
   )
 
-  return { data }
+  return { data, isLoadingInfo }
 }

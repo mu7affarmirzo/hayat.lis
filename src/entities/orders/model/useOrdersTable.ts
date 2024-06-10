@@ -1,23 +1,18 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { type IPatientsRoot } from '@/shared/types'
 import { useOrderContainerModal } from './useOrderContainerModal'
 import { useOrderMenuModal } from './useOrderMenuModal'
 
-type Rows = Array<{
-  id: number
-  name: string
-  date: string
-  birthday: string
-  labNumber: string
-  gender: string
-  orderNumber: string
-  registrar: string
-  director: string
-  debt: string
-  payer: string
-  branch: string
-}>
+export type UseOrdersTable = ReturnType<typeof useOrdersTable>
 
-export const useOrdersTable = (rows: Rows) => {
+interface OrdersTableProps {
+  activeRow: number | undefined
+  setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
+  data?: IPatientsRoot
+}
+
+export const useOrdersTable = (props: OrdersTableProps) => {
+  const { activeRow, setActiveRow, data } = props
   const {
     handleOpenMenuModal,
     openMenuModal: isOpenMenuModal,
@@ -30,37 +25,67 @@ export const useOrdersTable = (rows: Rows) => {
     isOpenContainerModal,
   } = useOrderContainerModal()
 
-  const [selected, setSelected] = useState<readonly number[]>([])
-  const [activeRow, setActiveRow] = useState<number | undefined>()
-  const [currentOrderId, setCurrentOrderId] = useState<number | undefined>()
-  const isSelected = (id: number) => selected.includes(id)
+  const [selected, setSelected] = useState<number | undefined>()
+  // const [selected, setSelected] = useState<readonly number[]>([])
+  const [currentOrdersId, setCurrentOrdersId] = useState<number | undefined>()
+  // const isSelected = useCallback(
+  //   (id: number) => selected.includes(id),
+  //   [selected]
+  // )
+  const isSelected = useCallback((id: number) => selected === id, [selected])
 
-  const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id)
-      setSelected(newSelected)
-      return
-    }
-    setSelected([])
-  }
+  // const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.checked && data) {
+  //     const newSelected = data?.map((n) => n.lab)
+  //     setSelected(newSelected)
+  //     return
+  //   }
+  //   setSelected([])
+  // }
+  const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {}
+
+  // const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+  //   const selectedIndex = selected.indexOf(id)
+  //   let newSelected: readonly number[] = []
+
+  //   if (selectedIndex === -1) {
+  //     newSelected = newSelected.concat(selected, id)
+  //   } else if (selectedIndex =const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+  //     const selectedIndex = selected.indexOf(id)
+  //     let newSelected: readonly number[] = []
+
+  //     if (selectedIndex === -1) {
+  //       newSelected = newSelected.concat(selected, id)
+  //     } else if (selectedIndex === 0) {
+  //       newSelected = newSelected.concat(selected.slice(1))
+  //     } else if (selectedIndex === selected.length - 1) {
+  //       newSelected = newSelected.concat(selected.slice(0, -1))
+  //     } else if (selectedIndex > 0) {
+  //       newSelected = newSelected.concat(
+  //         selected.slice(0, selectedIndex),
+  //         selected.slice(selectedIndex + 1)
+  //       )
+  //     }
+  //     setSelected(newSelected)
+  //   }== 0) {
+  //     newSelected = newSelected.concat(selected.slice(1))
+  //   } else if (selectedIndex === selected.length - 1) {
+  //     newSelected = newSelected.concat(selected.slice(0, -1))
+  //   } else if (selectedIndex > 0) {
+  //     newSelected = newSelected.concat(
+  //       selected.slice(0, selectedIndex),
+  //       selected.slice(selectedIndex + 1)
+  //     )
+  //   }
+  //   setSelected(newSelected)
+  // }
 
   const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
-    const selectedIndex = selected.indexOf(id)
-    let newSelected: readonly number[] = []
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id)
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      )
+    if (id === selected) {
+      setSelected(undefined)
+    } else {
+      setSelected(id)
     }
-    setSelected(newSelected)
   }
 
   const handleClickRow = (id: number) => {
@@ -71,25 +96,29 @@ export const useOrdersTable = (rows: Rows) => {
     setActiveRow(id)
   }
 
+  console.log({ activeRow })
+
   const handleDoubleClick = (id: number) => {
-    setCurrentOrderId(id)
+    setCurrentOrdersId(id)
     handleOpenMenuModal()
   }
 
   return {
-    numSelected: selected.length,
-    rowCount: rows.length,
+    numSelected: selected ? 1 : 0,
+    rowCount: data?.length ?? 0,
     onSelectAllClick,
     isSelected,
     handleClick,
     handleClickRow,
     activeRow,
     handleDoubleClick,
-    currentOrderId,
+    currentOrdersId,
     openMenuModal: isOpenMenuModal,
     handleCloseMenuModal,
     handleCloseContainerModal,
     handleOpenContainerModal,
     isOpenContainerModal,
-  }
+    ordersList: data,
+    isValidateBtnActive: !!selected,
+  } as const
 }

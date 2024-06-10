@@ -1,21 +1,7 @@
 import { useState } from 'react'
+import { type IPatientRoot } from '@/shared/types'
 
-type Rows = Array<{
-  id: number
-  name: string
-  date: string
-  birthday: string
-  labNumber: string
-  gender: string
-  orderNumber: string
-  registrar: string
-  director: string
-  debt: string
-  payer: string
-  branch: string
-}>
-
-export const useInfoOrdersTable = (rows: Rows) => {
+export const useInfoOrdersTable = ({ data }: { data?: IPatientRoot }) => {
   const [selected, setSelected] = useState<readonly number[]>([])
   const [activeRow, setActiveRow] = useState<number | undefined>()
 
@@ -23,8 +9,10 @@ export const useInfoOrdersTable = (rows: Rows) => {
 
   const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id)
-      setSelected(newSelected)
+      const newSelected = data?.results.map((n) => n.id)
+      if (newSelected) {
+        setSelected(newSelected)
+      }
       return
     }
     setSelected([])
@@ -59,7 +47,7 @@ export const useInfoOrdersTable = (rows: Rows) => {
 
   return {
     numSelected: selected.length,
-    rowCount: rows.length,
+    rowCount: data?.results.length,
     onSelectAllClick,
     isSelected,
     handleClick,

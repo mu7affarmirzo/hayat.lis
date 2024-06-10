@@ -1,5 +1,6 @@
 import { Stack } from '@mui/material'
 import { type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import { LogoutButton } from '@/features/authentication/logout'
 import { Navigation } from '@/features/navigation/navigate'
 import { Icon } from '@/shared/ui'
@@ -22,7 +23,9 @@ export function LayoutHeader(props: Props) {
       px={'30px'}
     >
       <Stack direction={'row'} alignItems={'center'} spacing={'50px'}>
-        <Icon className="w-[112px] h-10" type="logo" />
+        <Link to={'/'}>
+          <Icon className="w-[112px] h-10" type="logo" />
+        </Link>
         <Navigation />
       </Stack>
       <LogoutButton />

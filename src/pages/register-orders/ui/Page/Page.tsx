@@ -9,7 +9,7 @@ export function RegisterOrdersPage() {
       // justifyContent={'space-between'}
       // flexWrap={'nowrap'}
       width="100%"
-      sx={{ height: 'calc(100vh - 76px)' }}
+      sx={{ minHeight: 'calc(100vh - 76px)', height: '100%' }}
     >
       <FilterOrders />
       <AnalysisOrders />

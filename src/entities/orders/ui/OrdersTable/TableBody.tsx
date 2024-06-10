@@ -1,15 +1,20 @@
 import { ArrowRight } from '@mui/icons-material'
 import { Box, Checkbox, TableCell, TableRow } from '@mui/material'
 import TableBody from '@mui/material/TableBody'
+import dayjs from 'dayjs'
 import { type ReactNode } from 'react'
 import { colors } from '@/shared/ui/colors'
-import { rows } from '../../model/rows'
-import { useOrdersTable } from '../../model/useOrdersTable'
+import { type UseOrdersTable } from '../../model/useOrdersTable'
 import { OrderContainerModal } from '../OrderContainerModal/OrderContainerModal'
 import { OrderMenuModal } from '../OrderMenuModal/OrderMenuModal'
 
-interface OrderTableProps {
+interface OrderTableProps
+  extends Omit<
+    UseOrdersTable,
+    'numSelected' | 'onSelectAllClick' | 'rowCount' | 'isValidateBtnActive'
+  > {
   containerInfoTable: ReactNode
+  isLoading?: boolean
 }
 
 export const OrdersTableBody = (props: OrderTableProps) => {
@@ -18,80 +23,97 @@ export const OrdersTableBody = (props: OrderTableProps) => {
     activeRow,
     handleClickRow,
     handleClick,
-    currentOrderId,
+    currentOrdersId,
     handleDoubleClick,
     openMenuModal,
     handleCloseMenuModal,
     handleCloseContainerModal,
     isOpenContainerModal,
     handleOpenContainerModal,
-  } = useOrdersTable(rows)
+    ordersList,
+    isLoading,
+  } = props
 
   return (
     <>
       <TableBody>
-        {rows.map((row, index) => {
-          const isItemSelected = isSelected(row.id)
-          const labelId = `enhanced-table-checkbox-${index}`
-
-          return (
-            <TableRow
-              hover
-              onDoubleClick={() => {
-                handleDoubleClick(row.id)
-              }}
-              role="checkbox"
-              aria-checked={isItemSelected}
-              tabIndex={-1}
-              sx={{ cursor: 'pointer' }}
-              key={row.id}
-              selected={isItemSelected || activeRow === row.id}
-            >
-              <TableCell
-                onClick={() => handleClickRow(row.id)}
-                sx={{ background: colors.bgLightGray }}
-              >
-                <Box width={'20px'}>
-                  {activeRow === row.id && (
-                    <ArrowRight width={'10px'} color="action" />
-                  )}
-                </Box>
-              </TableCell>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  onClick={(event) => handleClick(event, row.id)}
-                  color="primary"
-                  checked={isItemSelected}
-                  inputProps={{
-                    'aria-labelledby': labelId,
+        {isLoading ? (
+          <TableRow>
+            <TableCell sx={{ textAlign: 'center' }} colSpan={100}>
+              Загрузка...
+            </TableCell>
+          </TableRow>
+        ) : (
+          ordersList?.map((row, index) => {
+            return row.results.map((result, index) => {
+              const isItemSelected = isSelected(result.id)
+              const labelId = `enhanced-table-checkbox-${index}`
+              return (
+                <TableRow
+                  hover
+                  onDoubleClick={() => {
+                    handleDoubleClick(row.lab)
                   }}
-                />
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {row.date}
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.birthday}</TableCell>
-              <TableCell>{row.labNumber}</TableCell>
-              <TableCell>{row.gender}</TableCell>
-              <TableCell>{row.orderNumber}</TableCell>
-              <TableCell>{row.registrar}</TableCell>
-              <TableCell>{row.director}</TableCell>
-              <TableCell>{row.debt}</TableCell>
-              <TableCell>{row.payer}</TableCell>
-              <TableCell>{row.branch}</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          )
-        })}
+                  role="checkbox"
+                  aria-checked={isItemSelected}
+                  tabIndex={-1}
+                  sx={{ cursor: 'pointer' }}
+                  key={result.id}
+                  selected={isItemSelected || activeRow === result.id}
+                >
+                  <TableCell
+                    onClick={() => handleClickRow(result.id)}
+                    sx={{ background: colors.bgLightGray }}
+                  >
+                    <Box width={'20px'}>
+                      {activeRow === result.id && (
+                        <ArrowRight width={'10px'} color="action" />
+                      )}
+                    </Box>
+                  </TableCell>
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      onClick={(event) => handleClick(event, result.id)}
+                      color="primary"
+                      checked={isItemSelected}
+                      inputProps={{
+                        'aria-labelledby': labelId,
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {dayjs(new Date(row.created_at)).format('YYYY-MM-DD')}
+                  </TableCell>
+                  <TableCell>{row.branch_name}</TableCell>
+                  <TableCell>
+                    {dayjs(new Date(row.patient.date_of_birth)).format(
+                      'YYYY-MM-DD'
+                    )}
+                  </TableCell>
+                  <TableCell>{result.id}</TableCell>
+                  <TableCell>{row.patient.gender}</TableCell>
+                  <TableCell>{row.order_number}</TableCell>
+                  <TableCell>{row.patient.organization}</TableCell>
+                  <TableCell>{row.patient.doc_number}</TableCell>
+                  <TableCell>{0}</TableCell>
+                  <TableCell>{row.patient.organization}</TableCell>
+                  <TableCell>
+                    {row.patient.f_name + ' ' + row.patient.l_name}
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              )
+            })
+          })
+        )}
       </TableBody>
       <OrderMenuModal
         openMenuModal={openMenuModal}
-        currentOrderId={currentOrderId}
+        currentOrderId={currentOrdersId}
         handleCloseMenuModal={handleCloseMenuModal}
         openContainer={handleOpenContainerModal}
         openOrderLogs={() => {}}
@@ -99,7 +121,7 @@ export const OrdersTableBody = (props: OrderTableProps) => {
       <OrderContainerModal
         containerInfoTable={props.containerInfoTable}
         isOpenContainerModal={isOpenContainerModal}
-        currentOrderId={currentOrderId}
+        currentOrderId={currentOrdersId}
         handleCloseContainerModal={handleCloseContainerModal}
       />
     </>

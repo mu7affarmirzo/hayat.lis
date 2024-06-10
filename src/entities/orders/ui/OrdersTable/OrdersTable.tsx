@@ -6,18 +6,30 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React, { type ReactNode } from 'react'
+import { type IPatientsRoot } from '@/shared/types'
 import { TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './../table.css'
-import { rows } from '../../model/rows'
 import { useOrdersTable } from '../../model/useOrdersTable'
 import { OrdersTableBody } from './TableBody'
 
 interface OrderTableProps {
   containerInfoTable: ReactNode
+  activeRow: number | undefined
+  setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
+  data?: IPatientsRoot
+  isLoading?: boolean
 }
 export const OrdersTable = (props: OrderTableProps) => {
-  const { numSelected, onSelectAllClick, rowCount } = useOrdersTable(rows)
+  const { activeRow, setActiveRow, data, isLoading } = props
+
+  const {
+    numSelected,
+    onSelectAllClick,
+    rowCount,
+    isValidateBtnActive,
+    ...restProps
+  } = useOrdersTable({ activeRow, setActiveRow, data })
 
   return (
     <Stack
@@ -71,7 +83,11 @@ export const OrdersTable = (props: OrderTableProps) => {
                 <TableCell className="bg-mainBlue"></TableCell>
               </TableRow>
             </TableHead>
-            <OrdersTableBody containerInfoTable={props.containerInfoTable} />
+            <OrdersTableBody
+              containerInfoTable={props.containerInfoTable}
+              isLoading={isLoading}
+              {...restProps}
+            />
           </Table>
         </TableContainer>
       </Box>

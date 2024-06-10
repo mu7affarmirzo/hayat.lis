@@ -106,8 +106,6 @@ export const useResearchTable = (props: ResearchTableProps) => {
     setActiveRow(id)
   }
 
-  console.log({ activeRow })
-
   const handleDoubleClick = (id: number) => {
     setCurrentResearchId(id)
     handleOpenMenuModal()

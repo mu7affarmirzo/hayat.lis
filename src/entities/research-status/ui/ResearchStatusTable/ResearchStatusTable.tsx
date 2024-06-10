@@ -16,18 +16,19 @@ import { useResearchStatusTable } from '../../model/useResearchStatusTable'
 interface ResearchStatusProps {
   orderId?: number
   data?: IPatientRoot
+  isLoadingInfo?: boolean
 }
 
 export const ResearchStatusTable = (props: ResearchStatusProps) => {
-  const { orderId, data } = props
+  const { orderId, data, isLoadingInfo } = props
   const { isSelected, activeRow } = useResearchStatusTable(rows)
 
   return (
     <Stack
       p={'5px'}
       spacing={'5px'}
-      width={'100%'}
-      sx={{ maxWidth: 'calc(100vw - 310px)', flex: 1 }}
+      width={''}
+      sx={{ flex: 1 }}
       border={`1px solid ${colors.borderGray}`}
     >
       <Stack
@@ -76,7 +77,14 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orderId &&
+                {isLoadingInfo ? (
+                  <TableRow>
+                    <TableCell sx={{ textAlign: 'center' }} colSpan={100}>
+                      Загрузка...
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  orderId &&
                   data?.results.map((result, index) => {
                     const isItemSelected = isSelected(result.id)
 
@@ -103,14 +111,17 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
                         <TableCell></TableCell>
                       </TableRow>
                     )
-                  })}
+                  })
+                )}
               </TableBody>
             </Table>
           </TableContainer>
         </Box>
-        <Box justifySelf={'flex-end'} border="1px solid #0000001A">
-          <TablePagination current={3} total={1022} />
-        </Box>
+        {!isLoadingInfo && !!orderId && (
+          <Box justifySelf={'flex-end'} border="1px solid #0000001A">
+            <TablePagination current={3} total={1022} />
+          </Box>
+        )}
       </Stack>
     </Stack>
   )
