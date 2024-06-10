@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api'
-import { type GroupsResearch } from '../model/types'
+import { type GroupsResearch } from '@/shared/types'
 // import { mapSession } from '../lib/mapSession'
 // import { mapUser } from '../lib/mapUser'
 // import { type User, type Session } from '../model/types'

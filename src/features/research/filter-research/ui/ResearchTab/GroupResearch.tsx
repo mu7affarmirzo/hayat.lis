@@ -1,4 +1,5 @@
 import { Box, Paper, Stack, Typography } from '@mui/material'
+import { type GroupResearch as ResearchType } from '@/shared/types'
 import { colors } from '@/shared/ui/colors'
 import { useResearchGroups } from '../../model/useResearchGroups'
 import { ResearchItem } from './ResearchItem'
@@ -26,7 +27,7 @@ export const GroupResearch = () => {
           overflowY: 'auto',
         }}
       >
-        {researchGroup?.map((item) => (
+        {researchGroup?.map((item: ResearchType) => (
           <ResearchItem item={item} key={item.id} />
         ))}
       </Paper>
