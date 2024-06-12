@@ -5,7 +5,8 @@ import { useResearchGroups } from '../../model/useResearchGroups'
 import { ResearchItem } from './ResearchItem'
 
 export const GroupResearch = () => {
-  const { researchGroup } = useResearchGroups()
+  const { researchGroup, categoryId, labId, setCategoryId, setLabId } =
+    useResearchGroups()
 
   return (
     <Stack width="100%">
@@ -28,7 +29,14 @@ export const GroupResearch = () => {
         }}
       >
         {researchGroup?.map((item: ResearchType) => (
-          <ResearchItem item={item} key={item.id} />
+          <ResearchItem
+            setCategoryId={setCategoryId}
+            setLabId={setLabId}
+            labId={labId}
+            categoryId={categoryId}
+            item={item}
+            key={item.id}
+          />
         ))}
       </Paper>
     </Stack>

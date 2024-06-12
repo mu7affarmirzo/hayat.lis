@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { validateObject } from '@/shared/lib'
+import { paramsToObject } from '@/shared/lib/paramsToObject'
 import { type ResearchFilterParams } from '@/shared/types'
 
 export const useResearchTab = () => {
@@ -11,11 +13,17 @@ export const useResearchTab = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const [params, setParams] = useSearchParams()
+
   const onSubmit = (data: ResearchFilterParams) => {
-    const validData = validateObject(data)
-    const searchParams = new URLSearchParams(validData)
-    navigate(`${location.pathname}?${searchParams.toString()}`)
+    const oldParams = paramsToObject(params.entries())
+    const validData = validateObject({ ...oldParams, ...data })
+    setParams(validData)
   }
+
+  useEffect(() => {
+    navigate(`${location.pathname}?${params.toString()}`)
+  }, [location.pathname, params.toString()])
 
   return { register, control, handleSubmit, onSubmit }
 }

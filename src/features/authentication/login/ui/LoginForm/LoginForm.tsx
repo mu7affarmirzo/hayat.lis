@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LoadingButton } from '@mui/lab'
 import {
   TextField,
   Stack,
@@ -7,9 +8,8 @@ import {
   Checkbox,
   Link,
   FormControlLabel,
-  Button,
 } from '@mui/material'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch } from '@/shared/model'
 // import { Button } from '@/shared/ui'
@@ -25,7 +25,7 @@ type Props = {
 
 export function LoginForm(props: Props) {
   const dispatch = useAppDispatch()
-
+  const [isLoading, setIsLoading] = useState(false)
   const {
     setError,
     formState: { errors },
@@ -39,12 +39,16 @@ export function LoginForm(props: Props) {
 
   const onSubmitHandler = useCallback(
     ({ email, password }: LoginFormSchema) => {
+      setIsLoading(true)
       dispatch(loginThunk({ email, password }))
         .unwrap()
         .then(() => props.onComplete?.())
         .catch((error) => {
           console.error({ error })
           setError('email', { type: 'server', message: error.message })
+        })
+        .finally(() => {
+          setIsLoading(false)
         })
     },
     []
@@ -130,9 +134,15 @@ export function LoginForm(props: Props) {
             Забыли пароль ?
           </Link>
         </Stack>
-        <Button type="submit" variant="contained" size="large" fullWidth>
+        <LoadingButton
+          type="submit"
+          loading={isLoading}
+          variant="contained"
+          size="large"
+          fullWidth
+        >
           Вход в систему
-        </Button>
+        </LoadingButton>
       </form>
     </Stack>
   )

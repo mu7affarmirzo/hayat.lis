@@ -7,10 +7,14 @@ import { colors } from '@/shared/ui/colors'
 
 interface ItemInterface {
   item: GroupResearch
+  setCategoryId: React.Dispatch<React.SetStateAction<number | undefined>>
+  setLabId: React.Dispatch<React.SetStateAction<number | undefined>>
+  labId?: number
+  categoryId?: number
 }
 
 export const ResearchItem = (props: ItemInterface) => {
-  const { item } = props
+  const { item, setLabId, labId, setCategoryId, categoryId } = props
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -19,6 +23,10 @@ export const ResearchItem = (props: ItemInterface) => {
         borderTop={`1px solid ${colors.borderLightGray}`}
         onClick={() => {
           setIsExpanded((prev) => !prev)
+          if (!isExpanded) {
+            setCategoryId(item.id)
+            setLabId(undefined)
+          }
         }}
         sx={{ cursor: 'pointer' }}
         direction={'row'}
@@ -46,13 +54,27 @@ export const ResearchItem = (props: ItemInterface) => {
           p={'3px 5px'}
           width={'100%'}
         >
-          <Typography variant="caption">{item.name}</Typography>
+          <Typography
+            variant="caption"
+            fontWeight={item.id === categoryId ? 500 : 400}
+          >
+            {item.name}
+          </Typography>
         </Box>
       </Stack>
       {/* {isExpanded && } */}
       {isExpanded &&
         item.lab_research.map((research) => (
           <Stack
+            onClick={() => {
+              if (labId === research.id) {
+                setLabId(undefined)
+              } else {
+                setCategoryId(item.id)
+                setLabId(research.id)
+              }
+            }}
+            sx={{ cursor: 'pointer' }}
             key={research.id}
             width={'calc(100% - 52.24px)'}
             alignSelf={'flex-end'}
@@ -60,6 +82,7 @@ export const ResearchItem = (props: ItemInterface) => {
             borderLeft={`1px solid ${colors.borderLightGray}`}
             borderRight={`1px solid ${colors.bgHoverGray}`}
             p={'3px'}
+            fontWeight={labId === research.id ? 500 : 400}
           >
             {research.name}
           </Stack>
