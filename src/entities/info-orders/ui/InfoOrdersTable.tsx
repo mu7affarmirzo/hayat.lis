@@ -81,7 +81,7 @@ export const InfoOrdersTable = (props: InfoTableProps) => {
                 </TableRow>
               )}
               {orderId &&
-                data?.[0]?.results.map((result, index) => {
+                data?.[0]?.results?.map((result, index) => {
                   const isItemSelected = isSelected(result.id)
 
                   return (

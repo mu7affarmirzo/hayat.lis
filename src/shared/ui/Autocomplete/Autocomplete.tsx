@@ -1,58 +1,76 @@
-import { Menu, Stack } from '@mui/material'
-import { useAutocomplete } from '@/shared/model/useAutocomplete'
-import { TextInput } from '../TextInput/TextInput'
+import {
+  type GridDirection,
+  Autocomplete as Input,
+  Stack,
+  type SxProps,
+  type AutocompleteProps,
+} from '@mui/material'
+import { forwardRef } from 'react'
+import { colors } from '../colors'
 
-type AutocompleteItemType = {
-  setSelectedItem: React.Dispatch<React.SetStateAction<number | undefined>>
-  selectedItem?: number
-}
-interface AutocompleteProps {
-  item: (props: AutocompleteItemType) => JSX.Element
+type Props<T> = AutocompleteProps<
+  T,
+  boolean | undefined,
+  boolean | undefined,
+  boolean | undefined
+> & {
+  containerSx?: SxProps
+  labelStyle?: React.CSSProperties
+  spacing?: string
+  direction?: GridDirection
+  label?: string
 }
 
-export const Autocomplete = (props: AutocompleteProps) => {
-  const { item: Item } = props
+export const Autocomplete = forwardRef(function Autocomplete<T>(
+  props: Props<T>,
+  ref?: React.Ref<unknown>
+) {
   const {
-    open,
-    handleClick,
-    handleClose,
-    anchorEl,
-    selectedItem,
-    setSelectedItem,
-  } = useAutocomplete()
+    labelStyle,
+    containerSx,
+    sx,
+    label,
+    direction,
+    spacing = '5px',
+    ...rest
+  } = props
 
   return (
-    <Stack sx={{ borderRadius: '4px' }}>
-      <TextInput
-        type="number"
-        onChange={(e) => {
-          setSelectedItem(+e.target.value)
-        }}
-        value={selectedItem}
-        onClick={(e) => handleClick(e)}
-      />
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
+    <Stack
+      sx={{ width: '100%', ...containerSx }}
+      direction={direction}
+      spacing={spacing}
+    >
+      {label && (
+        <label
+          htmlFor={rest.id}
+          style={labelStyle ?? { color: colors.regDarkText }}
+        >
+          {label}
+        </label>
+      )}
+      <Input
+        size="small"
         sx={{
-          '& .MuiList-root': {
-            width: '352px',
+          backgroundColor: 'white',
+          textTransform: 'initial',
+          '& .MuiOutlinedInput-input': {
+            height: '20px',
+            padding: '0 !important',
           },
+          '& .MuiOutlinedInput-root': {
+            paddingY: 0,
+            height: 30,
+          },
+          '& .Mui-focused': {
+            outline: 'none',
+            border: 'none',
+          },
+          ...sx,
         }}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <Item
-          setSelectedItem={(value) => {
-            setSelectedItem(value)
-            handleClose()
-          }}
-          selectedItem={selectedItem}
-        />
-      </Menu>
+        ref={ref}
+        {...rest}
+      />
     </Stack>
   )
-}
+})

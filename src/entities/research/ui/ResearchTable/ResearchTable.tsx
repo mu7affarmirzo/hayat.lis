@@ -20,17 +20,18 @@ interface ResearchTableProps {
   setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
   data?: IPatientsRoot
   isLoadingData?: boolean
+  choice?: string
 }
 
 export const ResearchTable = (props: ResearchTableProps) => {
-  const { activeRow, setActiveRow, data, isLoadingData } = props
+  const { activeRow, setActiveRow, data, isLoadingData, choice } = props
   const {
     numSelected,
     onSelectAllClick,
     rowCount,
     isValidateBtnActive,
     ...restProps
-  } = useResearchTable({ activeRow, setActiveRow, data })
+  } = useResearchTable({ activeRow, setActiveRow, data, choice })
 
   return (
     <Stack

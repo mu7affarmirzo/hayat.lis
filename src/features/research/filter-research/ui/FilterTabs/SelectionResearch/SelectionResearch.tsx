@@ -1,27 +1,60 @@
 import {
   Box,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
-  Radio,
-  RadioGroup,
+  // Radio,
+  // RadioGroup,
   Stack,
   Typography,
 } from '@mui/material'
 import dayjs from 'dayjs'
+import React from 'react'
 import { type UseFormRegister, type Control, Controller } from 'react-hook-form'
 import { type ResearchFilterParams } from '@/shared/types'
-import { DateInput, Icon, TextInput, Autocomplete } from '@/shared/ui'
+import {
+  DateInput,
+  Icon,
+  TextInput,
+  Autocomplete,
+  // AutocompleteX,
+} from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
-import { AutocompleteTable } from './AutocompleteTable/AutocompleteTable'
+// import { AutocompleteTable } from './AutocompleteTable/AutocompleteTable'
+
+type AutocompletePatient = { label: string; value: number }
 
 interface SelectionResearchProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<ResearchFilterParams, any>
   register: UseFormRegister<ResearchFilterParams>
+  handleChange: (
+    event: React.SyntheticEvent<Element, Event>,
+    value: AutocompletePatient
+  ) => void
+  handleChangeInput: (
+    event: React.SyntheticEvent<Element, Event>,
+    value: string
+  ) => void
+  handleClickSearch: () => void
+  users?: AutocompletePatient[]
+  selectedUser: {
+    name: string
+    id: number
+  }
+  isLoadingUsers?: boolean
 }
-
 export const SelectionResearch = (props: SelectionResearchProps) => {
-  const { control } = props
+  const {
+    control,
+    handleChange,
+    handleChangeInput,
+    users,
+    handleClickSearch,
+    selectedUser,
+    isLoadingUsers,
+  } = props
+
   return (
     <Stack
       width="100%"
@@ -90,7 +123,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             )}
           />
         </Stack>
-        <Stack spacing={'5px'}>
+        {/* <Stack spacing={'5px'}>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
@@ -118,7 +151,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             />
           </RadioGroup>
           <TextInput />
-        </Stack>
+        </Stack> */}
         <TextInput id="№ Заказа" label="№ Заказа" />
         <Stack
           width={'100%'}
@@ -126,8 +159,38 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
           gap={'8px'}
           alignItems={'flex-end'}
         >
-          <TextInput sx={{ flex: 1 }} id="ФИО" label="ФИО" />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={selectedUser.name}
+            onInputChange={(e, val) => handleChangeInput(e, val)}
+            options={users ?? []}
+            loading={isLoadingUsers}
+            sx={{ flex: 1, background: colors.bgLightGray }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            onChange={(e, val) => handleChange(e, val)}
+            renderInput={(params) => (
+              <TextInput
+                {...params}
+                id="ФИО"
+                label="ФИО"
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <React.Fragment>
+                      {isLoadingUsers ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </React.Fragment>
+                  ),
+                }}
+              />
+            )}
+          />
           <button
+            onClick={handleClickSearch}
             style={{
               height: 30,
               background: 'white',
@@ -165,11 +228,11 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
                 <TextInput {...field} sx={{ width: '100%' }} id="Контейнер" />
               )}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               sx={{ whiteSpace: 'nowrap' }}
               control={<Checkbox sx={{ p: '0 5px 0 0' }} />}
               label="По Заказу"
-            />
+            /> */}
           </Stack>
         </Stack>
         <FormControlLabel
@@ -177,7 +240,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
           control={<Checkbox sx={{ p: '0 5px 0 0' }} />}
           label="Только с привязанными контейнерами"
         />
-        <Controller
+        {/* <Controller
           name="lab"
           control={control}
           render={({ field }) => (
@@ -188,8 +251,8 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
               label="Лабораторный №"
             />
           )}
-        />
-        <Stack spacing={'5px'}>
+        /> */}
+        {/* <Stack spacing={'5px'}>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
@@ -210,8 +273,8 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
               />
             </Stack>
           </RadioGroup>
-        </Stack>
-        <Autocomplete item={AutocompleteTable} />
+        </Stack> */}
+        {/* <AutocompleteX item={AutocompleteTable} /> */}
       </Stack>
     </Stack>
   )

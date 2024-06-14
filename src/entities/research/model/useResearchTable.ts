@@ -10,10 +10,11 @@ interface ResearchTableProps {
   activeRow: number | undefined
   setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
   data?: IPatientsRoot
+  choice?: string
 }
 
 export const useResearchTable = (props: ResearchTableProps) => {
-  const { activeRow, setActiveRow, data } = props
+  const { activeRow, setActiveRow, data, choice } = props
   const {
     handleOpenMenuModal,
     openMenuModal: isOpenMenuModal,
@@ -28,8 +29,8 @@ export const useResearchTable = (props: ResearchTableProps) => {
   } = useResearchContainerModal()
 
   const handleValidation = () => {
-    if (selected) {
-      validateResearch({ id: selected })
+    if (!!selected && !!choice) {
+      validateResearch({ id: selected, choice })
     }
   }
 
@@ -113,7 +114,7 @@ export const useResearchTable = (props: ResearchTableProps) => {
 
   return {
     numSelected: selected ? 1 : 0,
-    rowCount: data?.length ?? 0,
+    rowCount: data?.results?.length ?? 0,
     onSelectAllClick,
     isSelected,
     handleClick,

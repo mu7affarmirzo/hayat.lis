@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api'
-import { type IPatientsRoot } from '@/shared/types'
+import { type IPatientRoot, type IPatientsRoot } from '@/shared/types'
 
 // import { mapSession } from '../lib/mapSession'
 // import { mapUser } from '../lib/mapUser'
@@ -13,7 +13,7 @@ export const researchGroupApi = baseApi.injectEndpoints({
         url: `/lis/orders/get-list-ordered-researches/${searchQuery || ''}`,
       }),
     }),
-    researchItem: build.query<IPatientsRoot, { orderId: string }>({
+    researchItem: build.query<IPatientRoot[], { orderId: string }>({
       query: ({ orderId }) => ({
         url: `/lis/orders/get-list-ordered-researches/${orderId}`,
       }),

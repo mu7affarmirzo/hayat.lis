@@ -6,7 +6,16 @@ import { colors } from '@/shared/ui/colors'
 import { useFilterOrders } from '../../model/useFilterOrders'
 
 export const FilterOrders = () => {
-  const { handleSubmit, onSubmit, register, control } = useFilterOrders()
+  const {
+    handleSubmit,
+    onSubmit,
+    register,
+    control,
+    branches,
+    handleChangeBranch,
+    selectedBranch,
+  } = useFilterOrders()
+
   return (
     <Stack
       component={'form'}
@@ -74,14 +83,11 @@ export const FilterOrders = () => {
         </Stack>
       </Stack>
       <Select
-        labelId="112"
+        onChange={(e) => handleChangeBranch(e)}
+        labelId="branch"
         label={'Пункт'}
-        data={[
-          { label: 'Центральный', value: 'central' },
-          { label: 'HOSPITAL', value: 'hospital' },
-          { label: 'HOSPITAL2', value: 'hospital2' },
-          { label: 'HOSPITAL3', value: 'hospital3' },
-        ]}
+        value={selectedBranch}
+        data={branches}
       />
       <TextInput
         label="Номер заказа"

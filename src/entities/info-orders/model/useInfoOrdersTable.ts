@@ -9,7 +9,7 @@ export const useInfoOrdersTable = ({ data }: { data?: IPatientRoot }) => {
 
   const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = data?.results.map((n) => n.id)
+      const newSelected = data?.results?.map((n) => n.id)
       if (newSelected) {
         setSelected(newSelected)
       }
@@ -47,7 +47,7 @@ export const useInfoOrdersTable = ({ data }: { data?: IPatientRoot }) => {
 
   return {
     numSelected: selected.length,
-    rowCount: data?.results.length,
+    rowCount: data?.results?.length,
     onSelectAllClick,
     isSelected,
     handleClick,

@@ -9,7 +9,7 @@ interface ModalProps {
   currentResearchId?: number
   isOpenContainerModal: boolean
   handleCloseContainerModal: () => void
-  containerInfoTable: ReactNode
+  containerInfoTable?: ReactNode
   researchList?: IPatientsRoot
 }
 
@@ -22,7 +22,7 @@ export const ResearchContainerModal = (props: ModalProps) => {
     researchList,
   } = props
 
-  const currentResearch = researchList?.find(
+  const currentResearch = researchList?.results?.find(
     (rItem) => rItem.lab === currentResearchId
   )
   if (currentResearchId === undefined) {

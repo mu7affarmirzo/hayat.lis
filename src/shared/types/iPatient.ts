@@ -1,12 +1,19 @@
-export type IPatientsRoot = IPatientRoot[]
+export type IPatientsRoot = IPatientWithPagination
+// export type IPatientsRoot = IPatientRoot[]
 
+export type IPatientWithPagination = {
+  next: null | number
+  previous: null | number
+  count: number
+  results: IPatientRoot[]
+}
 export interface IPatientRoot {
   patient: Patient
   created_at: string
   order_number: string
   lab: number
   branch_name: number
-  results: Result[]
+  results?: Result[]
 }
 
 export interface Patient {

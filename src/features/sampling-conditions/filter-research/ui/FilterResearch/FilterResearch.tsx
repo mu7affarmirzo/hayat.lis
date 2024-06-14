@@ -1,23 +1,35 @@
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   FormControl,
   FormControlLabel,
-  FormGroup,
+  // FormGroup,
   Radio,
   RadioGroup,
   Stack,
+  Typography,
 } from '@mui/material'
+import { type Dispatch, type SetStateAction } from 'react'
 import { Button as CustomButton, CustomModal, Icon } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { useFilterResearch } from '../../model/useFilterResearch'
 
-export const FilterResearch = () => {
+interface FilterResearchProps {
+  choice: string
+  setChoice: Dispatch<SetStateAction<string>>
+}
+
+export const FilterResearch = (props: FilterResearchProps) => {
+  const { choice, setChoice } = props
   const {
     handleCloseSamplingModal,
     handleOpenSamplingModal,
     isOpenSamplingModal: isOpen,
-  } = useFilterResearch()
+    choices,
+    isLoading,
+    handleChange,
+  } = useFilterResearch({ setChoice, choice })
+
   return (
     <>
       <CustomButton
@@ -37,64 +49,36 @@ export const FilterResearch = () => {
       >
         <>
           <Stack width={'100%'} spacing={'10px'}>
-            <FormControl
-              sx={{
-                p: '10px',
-                borderRadius: '4px',
-                border: `1px solid ${colors.borderGray}`,
-                background: colors.bgHoverGray,
-              }}
-            >
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
+            {isLoading ? (
+              <Typography>Загрузка...</Typography>
+            ) : (
+              <FormControl
+                sx={{
+                  p: '10px',
+                  borderRadius: '4px',
+                  border: `1px solid ${colors.borderGray}`,
+                  background: colors.bgHoverGray,
+                }}
               >
-                <FormControlLabel
-                  value="green"
-                  control={<Radio />}
-                  label="Невалидированные (Зеленые)"
-                />
-                <FormControlLabel
-                  value="blue"
-                  control={<Radio />}
-                  label="Валидированные(Синие)"
-                />
-                <FormControlLabel value="all" control={<Radio />} label="Все" />
-                <FormControlLabel
-                  value="not-ready"
-                  control={<Radio />}
-                  label="Неготовые + Невалидированные"
-                />
-                <FormControlLabel
-                  value="all-norms"
-                  control={<Radio />}
-                  label="Вне нормы"
-                />
-                <FormControlLabel
-                  value="Просроченные по постановке"
-                  control={<Radio />}
-                  label="Просроченные по постановке"
-                />
-                <FormControlLabel
-                  value="Просроченные по готовности"
-                  control={<Radio />}
-                  label="Просроченные по готовности"
-                />
-                <FormControlLabel
-                  value="Просроченные по валидации"
-                  control={<Radio />}
-                  label="Просроченные по валидации"
-                />
-                <FormControlLabel
-                  value="Не готовые, но с результатами"
-                  control={<Radio />}
-                  label="Не готовые, но с результатами"
-                />
-              </RadioGroup>
-            </FormControl>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="controlled-radio-buttons-group"
+                  value={choice}
+                  onChange={handleChange}
+                >
+                  {choices?.map((ch) => (
+                    <FormControlLabel
+                      key={ch}
+                      value={ch}
+                      control={<Radio />}
+                      label={ch}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            )}
           </Stack>
-          <FormGroup
+          {/* <FormGroup
             sx={{ width: '100%', display: 'flex', flexDirection: 'row' }}
           >
             <FormControlLabel
@@ -107,7 +91,7 @@ export const FilterResearch = () => {
               control={<Checkbox />}
               label="Скрыть выбракованные"
             />
-          </FormGroup>
+          </FormGroup> */}
           <Stack
             sx={{ background: colors.bgLightGray }}
             direction="row"

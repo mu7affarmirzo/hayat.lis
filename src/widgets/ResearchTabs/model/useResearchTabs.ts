@@ -4,6 +4,8 @@ import { useResearchListQuery } from '../api/researchListApi'
 
 export const useResearchTabs = () => {
   const [activeRow, setActiveRow] = useState<number | undefined>()
+  const [choice, setChoice] = useState('')
+
   const location = useLocation()
   const { data: researchList, isLoading: isLoadingData } = useResearchListQuery(
     {
@@ -19,5 +21,7 @@ export const useResearchTabs = () => {
     researchList,
     setActiveRow,
     isLoadingData,
+    choice,
+    setChoice,
   }
 }

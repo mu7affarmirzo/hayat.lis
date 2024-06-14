@@ -7,7 +7,19 @@ import { GroupResearch } from '../ResearchTab'
 import { SelectionResearch } from './SelectionResearch'
 
 export const FilterTabs = () => {
-  const { register, control, handleSubmit, onSubmit } = useResearchTab()
+  const {
+    register,
+    control,
+    handleSubmit,
+    onSubmit,
+    handleChange,
+    handleChangeInput,
+    users,
+    handleClickSearch,
+    selectedUser,
+    isLoadingUsers,
+    researchGroupProps,
+  } = useResearchTab()
 
   return (
     <Stack
@@ -23,22 +35,36 @@ export const FilterTabs = () => {
       >
         <BasicTabs
           panels={[
-            { item: <GroupResearch />, label: 'Исследования' },
-            { item: <ByWorkPlaces />, label: 'По раб. местам' },
+            {
+              item: <GroupResearch {...researchGroupProps} />,
+              label: 'Исследования',
+            },
+            {
+              item: <ByWorkPlaces {...researchGroupProps} />,
+              label: 'По раб. местам',
+            },
           ]}
         />
-        <SelectionResearch register={register} control={control} />
+        <SelectionResearch
+          isLoadingUsers={isLoadingUsers}
+          selectedUser={selectedUser}
+          handleChange={handleChange}
+          handleChangeInput={handleChangeInput}
+          users={users}
+          register={register}
+          control={control}
+          handleClickSearch={handleClickSearch}
+        />
         <Button
           type="submit"
           variant="contained"
-          color="inherit"
+          color={'primary'}
           fullWidth
           sx={{
             display: 'flex',
             gap: '8px',
-            border: `1px solid ${colors.borderLighterGray}`,
             boxShadow: 'none',
-            background: colors.backgroundGray,
+            background: colors.mainBlue,
           }}
         >
           <Icon type="refresh" />

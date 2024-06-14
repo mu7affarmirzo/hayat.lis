@@ -8,8 +8,14 @@ import { useResearchTabs } from '../model/useResearchTabs'
 import { ResearchInfo } from './ResearchInfo'
 
 export const ResearchTabs = () => {
-  const { activeRow, researchList, setActiveRow, isLoadingData } =
-    useResearchTabs()
+  const {
+    activeRow,
+    researchList,
+    setActiveRow,
+    isLoadingData,
+    choice,
+    setChoice,
+  } = useResearchTabs()
 
   return (
     <Stack direction={'row'} width={'100%'}>
@@ -24,10 +30,13 @@ export const ResearchTabs = () => {
       >
         <ResearchTable
           data={researchList}
+          choice={choice}
           activeRow={activeRow}
           isLoadingData={isLoadingData}
           setActiveRow={setActiveRow}
-          samplingConditionsSlot={<FilterResearch />}
+          samplingConditionsSlot={
+            <FilterResearch choice={choice} setChoice={setChoice} />
+          }
           containerInfoTable={
             <ContainerInfoTable
               resultsList={researchList}

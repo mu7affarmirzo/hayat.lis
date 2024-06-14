@@ -44,7 +44,7 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
           <Stack flex={1} direction={'row'} spacing={'5px'}>
             <Typography variant={'body2'}>Статус исследования: </Typography>
             <Typography variant={'subtitle2'}>
-              {data?.results[0].test_status}
+              {data?.results?.[0].test_status}
             </Typography>
           </Stack>
         )}
@@ -85,7 +85,7 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
                   </TableRow>
                 ) : (
                   orderId &&
-                  data?.results.map((result, index) => {
+                  data?.results?.map((result, index) => {
                     const isItemSelected = isSelected(result.id)
 
                     return (

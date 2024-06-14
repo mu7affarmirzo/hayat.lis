@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { type IPatientsRoot } from '@/shared/types'
+import { type IPatientWithPagination } from '@/shared/types'
 import { useOrderContainerModal } from './useOrderContainerModal'
 import { useOrderMenuModal } from './useOrderMenuModal'
 
@@ -8,7 +8,7 @@ export type UseOrdersTable = ReturnType<typeof useOrdersTable>
 interface OrdersTableProps {
   activeRow: number | undefined
   setActiveRow: React.Dispatch<React.SetStateAction<number | undefined>>
-  data?: IPatientsRoot
+  data?: IPatientWithPagination
 }
 
 export const useOrdersTable = (props: OrdersTableProps) => {
@@ -105,7 +105,7 @@ export const useOrdersTable = (props: OrdersTableProps) => {
 
   return {
     numSelected: selected ? 1 : 0,
-    rowCount: data?.length ?? 0,
+    rowCount: data?.results?.length ?? 0,
     onSelectAllClick,
     isSelected,
     handleClick,

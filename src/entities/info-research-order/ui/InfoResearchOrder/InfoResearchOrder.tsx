@@ -13,10 +13,11 @@ import './../table.css'
 
 interface InfoOrderProps {
   order?: IPatientRoot
+  orderId?: number
 }
 
 export const InfoResearchOrder = (props: InfoOrderProps) => {
-  const { order } = props
+  const { order, orderId } = props
 
   return (
     <Stack
@@ -33,7 +34,7 @@ export const InfoResearchOrder = (props: InfoOrderProps) => {
       >
         <Typography variant={'subtitle2'}>Инфо о заказе</Typography>
       </Stack>
-      {order && (
+      {orderId && (
         <Box
           style={{ overflowX: 'auto', height: '100%' }}
           borderBottom={`1px solid ${colors.borderGray}`}

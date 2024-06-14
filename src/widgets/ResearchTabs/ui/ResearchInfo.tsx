@@ -27,8 +27,8 @@ export const ResearchInfo = (props: ResearchInfoProps) => {
         height={'100%'}
         spacing={'15px'}
       >
-        <InfoResearchOrder order={data?.[0]} />
-        <CurrentResult result={data?.[0].results[0].lab_research_test} />
+        <InfoResearchOrder orderId={orderId} order={data?.[0]} />
+        <CurrentResult result={data?.[0]?.results?.[0].lab_research_test} />
       </Stack>
     </Stack>
   )

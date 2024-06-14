@@ -67,8 +67,8 @@ export const ContainerInfoTable = (props: TableProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {resultsList?.map((row) => {
-                return row.results.map((result: Result) => (
+              {resultsList?.results?.map((row) => {
+                return row?.results?.map((result: Result) => (
                   <TableRow
                     hover
                     role="checkbox"

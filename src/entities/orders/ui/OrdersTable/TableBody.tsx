@@ -33,7 +33,7 @@ export const OrdersTableBody = (props: OrderTableProps) => {
     ordersList,
     isLoading,
   } = props
-
+  console.log({ ordersList })
   return (
     <>
       <TableBody>
@@ -44,8 +44,8 @@ export const OrdersTableBody = (props: OrderTableProps) => {
             </TableCell>
           </TableRow>
         ) : (
-          ordersList?.map((row, index) => {
-            return row.results.map((result, index) => {
+          ordersList?.results?.map((row, index) => {
+            return row.results?.map((result, index) => {
               const isItemSelected = isSelected(result.id)
               const labelId = `enhanced-table-checkbox-${index}`
               return (

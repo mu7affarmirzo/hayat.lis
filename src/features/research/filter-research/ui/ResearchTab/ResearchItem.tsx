@@ -9,12 +9,14 @@ interface ItemInterface {
   item: GroupResearch
   setCategoryId: React.Dispatch<React.SetStateAction<number | undefined>>
   setLabId: React.Dispatch<React.SetStateAction<number | undefined>>
+  setBranchId: React.Dispatch<React.SetStateAction<number | undefined>>
   labId?: number
   categoryId?: number
 }
 
 export const ResearchItem = (props: ItemInterface) => {
-  const { item, setLabId, labId, setCategoryId, categoryId } = props
+  const { item, setLabId, labId, setCategoryId, categoryId, setBranchId } =
+    props
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -25,7 +27,15 @@ export const ResearchItem = (props: ItemInterface) => {
           setIsExpanded((prev) => !prev)
           if (!isExpanded) {
             setCategoryId(item.id)
+            setBranchId(undefined)
             setLabId(undefined)
+          } else {
+            if (categoryId === item.id) {
+              setCategoryId(undefined)
+            }
+            if (item.lab_research.findIndex((lab) => lab.id === labId) > -1) {
+              setLabId(undefined)
+            }
           }
         }}
         sx={{ cursor: 'pointer' }}
@@ -72,6 +82,7 @@ export const ResearchItem = (props: ItemInterface) => {
               } else {
                 setCategoryId(item.id)
                 setLabId(research.id)
+                setBranchId(undefined)
               }
             }}
             sx={{ cursor: 'pointer' }}

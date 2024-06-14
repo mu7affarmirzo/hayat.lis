@@ -13,7 +13,7 @@ interface ResearchTableProps
     UseResearchTable,
     'numSelected' | 'onSelectAllClick' | 'rowCount' | 'isValidateBtnActive'
   > {
-  containerInfoTable: ReactNode
+  containerInfoTable?: ReactNode
   isLoadingData?: boolean
 }
 
@@ -44,8 +44,8 @@ export const ResearchTableBody = (props: ResearchTableProps) => {
             </TableCell>
           </TableRow>
         )}
-        {researchList?.map((row) => {
-          return row.results.map((result, index) => {
+        {researchList?.results?.map((row) => {
+          return row?.results?.map((result, index) => {
             const isItemSelected = isSelected(result.id)
             const labelId = `enhanced-table-checkbox-${index}`
             return (
@@ -118,7 +118,7 @@ export const ResearchTableBody = (props: ResearchTableProps) => {
         openResearchLogs={() => {}}
       />
       <ResearchContainerModal
-        containerInfoTable={props.containerInfoTable}
+        containerInfoTable={props?.containerInfoTable}
         isOpenContainerModal={isOpenContainerModal}
         currentResearchId={currentResearchId}
         handleCloseContainerModal={handleCloseContainerModal}
