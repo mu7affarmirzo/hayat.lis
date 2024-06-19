@@ -59,6 +59,7 @@ export const useResearchTab = () => {
       setSelectedUser({ name: selected.label, id: selected.value })
     } else {
       setSelectedUser({ name: '', id: 0 })
+      params.delete('patient')
     }
   }
 
@@ -71,15 +72,32 @@ export const useResearchTab = () => {
     }
   }
 
-  const handleClickSearch = async () => {
+  const handleClickSearch = () => {
     if (selectedUser.name && selectedUser.id) {
       params.set('patient', `${selectedUser.id}`)
     }
   }
 
+  const handleClearSearch = () => {
+    params.delete('patient')
+  }
+
   const onSubmit = (data: ResearchFilterParams) => {
     const oldParams = paramsToObject(params.entries())
-    const validData = validateObject({ ...oldParams, ...data })
+    let validData = validateObject({ ...oldParams, ...data })
+
+    if (selectedUser.id) {
+      validData = validateObject({
+        ...oldParams,
+        ...data,
+        patient: selectedUser.id,
+      })
+    }
+
+    if (data.lab && !Number.isNaN(data.lab)) {
+      researchGroupProps.setLabId(Number(data.lab))
+    }
+
     setParams(validData)
   }
 
@@ -99,5 +117,6 @@ export const useResearchTab = () => {
     selectedUser,
     isLoadingUsers: users.isLoading,
     researchGroupProps,
+    handleClearSearch,
   }
 }

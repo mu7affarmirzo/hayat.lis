@@ -53,6 +53,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
     handleClickSearch,
     selectedUser,
     isLoadingUsers,
+    register,
   } = props
 
   return (
@@ -152,7 +153,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
           </RadioGroup>
           <TextInput />
         </Stack> */}
-        <TextInput id="№ Заказа" label="№ Заказа" />
+        <TextInput id="№ Заказа" label="№ Заказа" {...register('lab')} />
         <Stack
           width={'100%'}
           direction={'row'}

@@ -14,6 +14,11 @@ export const FilterOrders = () => {
     branches,
     handleChangeBranch,
     selectedBranch,
+    isBranchesLoading,
+    choices,
+    isChoicesLoading,
+    handleChangeChoice,
+    selectedChoice,
   } = useFilterOrders()
 
   return (
@@ -86,6 +91,7 @@ export const FilterOrders = () => {
         onChange={(e) => handleChangeBranch(e)}
         labelId="branch"
         label={'Пункт'}
+        isLoading={isBranchesLoading}
         value={selectedBranch}
         data={branches}
       />
@@ -94,7 +100,7 @@ export const FilterOrders = () => {
         type="number"
         placeholder="0000"
         id={'order-number'}
-        {...register('container')}
+        {...register('lab')}
       />
       <Stack spacing={'5px'}>
         <label htmlFor="input-day">Дата рождения</label>
@@ -105,14 +111,12 @@ export const FilterOrders = () => {
         </Stack>
       </Stack>
       <Select
-        labelId="filter-orders"
+        onChange={(e) => handleChangeChoice(e)}
+        labelId="choice"
         label={'Фильтр заказов'}
-        data={[
-          { label: 'Все заказы', value: 'all' },
-          { label: 'Только готовые', value: 'ready' },
-          { label: 'Только неготовые', value: 'not-ready' },
-          { label: 'Готовые, но не распечатанные(COVID)', value: 'covidJLIJ' },
-        ]}
+        isLoading={isChoicesLoading}
+        value={selectedChoice}
+        data={choices}
       />
       <TextInput
         label="Баркод контейнера"

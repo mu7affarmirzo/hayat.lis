@@ -128,7 +128,7 @@ export const useResearchTable = (props: ResearchTableProps) => {
     handleOpenContainerModal,
     isOpenContainerModal,
     researchList: data,
-    isValidateBtnActive: !!selected,
+    isValidateBtnActive: !!selected && !!choice,
     handleValidation,
   } as const
 }

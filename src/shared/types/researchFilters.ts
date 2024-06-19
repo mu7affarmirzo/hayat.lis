@@ -33,4 +33,5 @@ export type ResearchFilterParams = {
   lab?: string
   container?: string
   category?: string
+  order_status?: string
 }

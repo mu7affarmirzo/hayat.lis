@@ -5,6 +5,7 @@ import {
   Stack,
   type SxProps,
   type SelectProps,
+  CircularProgress,
 } from '@mui/material'
 import { colors } from '../colors'
 
@@ -12,10 +13,11 @@ type Props = SelectProps & {
   data: Array<{ value: string; label: string }>
   containerSx?: SxProps
   labelSx?: SxProps
+  isLoading?: boolean
 }
 
 export const Select = (props: Props) => {
-  const { containerSx, labelSx, sx, data, label, ...rest } = props
+  const { containerSx, labelSx, sx, data, label, isLoading, ...rest } = props
   return (
     <Stack sx={containerSx} spacing={'5px'}>
       {label && (
@@ -47,13 +49,24 @@ export const Select = (props: Props) => {
         }}
         {...rest}
       >
-        {data.map((el) => {
-          return (
-            <MenuItem key={el.value} value={el.value}>
-              {el.label}
-            </MenuItem>
-          )
-        })}
+        {isLoading ? (
+          <Stack
+            width={'100%'}
+            height={'100%'}
+            alignItems={'center'}
+            justifyContent={'center'}
+          >
+            <CircularProgress size={20} />
+          </Stack>
+        ) : (
+          data.map((el) => {
+            return (
+              <MenuItem key={el.value} value={el.value}>
+                {el.label}
+              </MenuItem>
+            )
+          })
+        )}
       </SelectInput>
     </Stack>
   )

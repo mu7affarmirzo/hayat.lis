@@ -35,7 +35,7 @@ export async function baseQueryWithReauth(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const refreshTokenData = api.getState()?.session?.refreshToken
-    console.log({ refreshTokenData })
+    // console.log({ refreshTokenData })
 
     if (refreshTokenData) {
       const refreshResult = await baseQuery(
@@ -49,7 +49,7 @@ export async function baseQueryWithReauth(
       )
 
       if (refreshResult.data) {
-        console.log({ result: refreshResult.data })
+        // console.log({ result: refreshResult.data })
         // store the new token in the store or wherever you keep it
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error

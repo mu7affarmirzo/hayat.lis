@@ -1,4 +1,4 @@
-import { ArrowRight } from '@mui/icons-material'
+// import { ArrowRight } from '@mui/icons-material'
 import { Box, Checkbox, Stack, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -18,10 +18,15 @@ interface InfoTableProps {
 
 export const InfoOrdersTable = (props: InfoTableProps) => {
   const { orderId } = props
-  const { data, isLoadingData, activeRow, isSelected, handleClickRow } =
-    useOrderInfo({
-      orderId,
-    })
+  const {
+    data,
+    isLoadingData,
+    activeRow,
+    isSelected,
+    // handleClickRow
+  } = useOrderInfo({
+    orderId,
+  })
 
   return (
     <Stack
@@ -55,7 +60,7 @@ export const InfoOrdersTable = (props: InfoTableProps) => {
           >
             <TableHead>
               <TableRow>
-                <TableCell className="bg-mainBlue"></TableCell>
+                {/* <TableCell className="bg-mainBlue"></TableCell> */}
                 <TableCell className="bg-mainBlue">Печать</TableCell>
                 <TableCell className="bg-mainBlue">Код</TableCell>
                 <TableCell className="bg-mainBlue">Исследование</TableCell>
@@ -94,7 +99,7 @@ export const InfoOrdersTable = (props: InfoTableProps) => {
                       key={result.id}
                       selected={isItemSelected || activeRow === result.id}
                     >
-                      <TableCell
+                      {/* <TableCell
                         onClick={() => handleClickRow(result.id)}
                         sx={{
                           background: colors.bgLightGray,
@@ -106,7 +111,7 @@ export const InfoOrdersTable = (props: InfoTableProps) => {
                             <ArrowRight width={'10px'} color="action" />
                           )}
                         </Box>
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell>
                         <Stack alignItems={'center'} justifyContent={'center'}>
                           <Checkbox sx={{ padding: 0 }} color="primary" />

@@ -8,7 +8,12 @@ export const ordersApi = baseApi.injectEndpoints({
         url: `organizations/branches/`,
       }),
     }),
+    orderChoices: build.query<{ choices: string[] }, void>({
+      query: () => ({
+        url: `lis/orders/order-filter-validate-research-choices`,
+      }),
+    }),
   }),
 })
 
-export const { useBranchListQuery } = ordersApi
+export const { useBranchListQuery, useOrderChoicesQuery } = ordersApi
