@@ -31,7 +31,7 @@ export const useEditQRModal = (props: EditQRHookProps) => {
 
   const handleConfirm = () => {
     // api request
-    console.log({ newCode })
+    // console.log({ newCode })
     setIsConfirmModalOpen(false)
     if (newCode.length > 0) {
       editContainerRequest({

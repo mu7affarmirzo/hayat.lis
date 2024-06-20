@@ -1,4 +1,6 @@
 import { useCallback, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { usePagination } from '@/shared/model'
 import { type IPatientWithPagination } from '@/shared/types'
 import { useOrderContainerModal } from './useOrderContainerModal'
 import { useOrderMenuModal } from './useOrderMenuModal'
@@ -13,6 +15,8 @@ interface OrdersTableProps {
 
 export const useOrdersTable = (props: OrdersTableProps) => {
   const { activeRow, setActiveRow, data } = props
+  const [params, setParams] = useSearchParams()
+
   const {
     handleOpenMenuModal,
     openMenuModal: isOpenMenuModal,
@@ -96,12 +100,27 @@ export const useOrdersTable = (props: OrdersTableProps) => {
     setActiveRow(id)
   }
 
-  console.log({ activeRow })
+  // console.log({ activeRow })
 
   const handleDoubleClick = (id: number) => {
     setCurrentOrdersId(id)
     handleOpenMenuModal()
   }
+
+  const changePage = (page: number) => {
+    if (page === 0) {
+      params.delete('page')
+    } else {
+      params.set('page', `${page}`)
+    }
+    setParams(params)
+  }
+
+  const paginationProps = usePagination({
+    pageSize: 10,
+    total: data?.count ?? 0,
+    changePage,
+  })
 
   return {
     numSelected: selected ? 1 : 0,
@@ -120,5 +139,6 @@ export const useOrdersTable = (props: OrdersTableProps) => {
     isOpenContainerModal,
     ordersList: data,
     isValidateBtnActive: !!selected,
+    paginationProps,
   } as const
 }

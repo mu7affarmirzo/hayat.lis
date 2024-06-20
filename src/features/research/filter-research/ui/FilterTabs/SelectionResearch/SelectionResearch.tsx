@@ -37,12 +37,14 @@ interface SelectionResearchProps {
     value: string
   ) => void
   handleClickSearch: () => void
+  handleClearSearch: () => void
   users?: AutocompletePatient[]
   selectedUser: {
     name: string
     id: number
   }
   isLoadingUsers?: boolean
+  isContainerChecked?: boolean
 }
 export const SelectionResearch = (props: SelectionResearchProps) => {
   const {
@@ -54,6 +56,8 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
     selectedUser,
     isLoadingUsers,
     register,
+    handleClearSearch,
+    isContainerChecked,
   } = props
 
   return (
@@ -203,6 +207,7 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             <Icon type="search-normal" />
           </button>
           <button
+            onClick={handleClearSearch}
             style={{
               height: 30,
               background: 'white',
@@ -236,11 +241,20 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             /> */}
           </Stack>
         </Stack>
+
         <FormControlLabel
           sx={{ whiteSpace: 'nowrap' }}
-          control={<Checkbox sx={{ p: '0 5px 0 0' }} />}
+          control={
+            <Checkbox
+              {...register('container_connected')}
+              checked={!!isContainerChecked}
+              value={!!isContainerChecked}
+              sx={{ p: '0 5px 0 0' }}
+            />
+          }
           label="Только с привязанными контейнерами"
         />
+
         {/* <Controller
           name="lab"
           control={control}

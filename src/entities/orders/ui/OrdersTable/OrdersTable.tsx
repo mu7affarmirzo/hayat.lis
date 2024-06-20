@@ -28,6 +28,7 @@ export const OrdersTable = (props: OrderTableProps) => {
     onSelectAllClick,
     rowCount,
     isValidateBtnActive,
+    paginationProps,
     ...restProps
   } = useOrdersTable({ activeRow, setActiveRow, data })
 
@@ -92,7 +93,7 @@ export const OrdersTable = (props: OrderTableProps) => {
         </TableContainer>
       </Box>
       <Box border="1px solid #0000001A">
-        <TablePagination current={3} total={1022} />
+        <TablePagination {...paginationProps} />
       </Box>
     </Stack>
   )

@@ -113,7 +113,7 @@ export const ContainerInfoTable = (props: TableProps) => {
       </Box>
       {false && (
         <Box border="1px solid #0000001A">
-          <TablePagination current={3} total={1022} />
+          <TablePagination current={3} totalPages={1022} />
         </Box>
       )}
     </Stack>

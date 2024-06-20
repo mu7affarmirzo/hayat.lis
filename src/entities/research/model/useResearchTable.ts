@@ -1,4 +1,7 @@
 import { useCallback, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useSearchParams } from 'react-router-dom'
+import { usePagination } from '@/shared/model'
 import { type IPatientsRoot } from '@/shared/types'
 import { useValidateResearchMutation } from '../api/researchApi'
 import { useResearchContainerModal } from './useResearchContainerModal'
@@ -20,8 +23,9 @@ export const useResearchTable = (props: ResearchTableProps) => {
     openMenuModal: isOpenMenuModal,
     handleCloseMenuModal,
   } = useResearchMenuModal()
+  const [params, setParams] = useSearchParams()
 
-  const [validateResearch] = useValidateResearchMutation()
+  const [validateResearch, validationStatus] = useValidateResearchMutation()
   const {
     handleCloseContainerModal,
     handleOpenContainerModal,
@@ -30,9 +34,26 @@ export const useResearchTable = (props: ResearchTableProps) => {
 
   const handleValidation = () => {
     if (!!selected && !!choice) {
-      validateResearch({ id: selected, choice })
+      validateResearch({ id: selected, choice }).then(() => {
+        toast.success('Успешно проверено', { position: 'top-right' })
+      })
     }
   }
+
+  const changePage = (page: number) => {
+    if (page === 0) {
+      params.delete('page')
+    } else {
+      params.set('page', `${page}`)
+    }
+    setParams(params)
+  }
+
+  const paginationProps = usePagination({
+    pageSize: 10,
+    total: data?.count ?? 0,
+    changePage,
+  })
 
   const [selected, setSelected] = useState<number | undefined>()
   // const [selected, setSelected] = useState<readonly number[]>([])
@@ -130,5 +151,7 @@ export const useResearchTable = (props: ResearchTableProps) => {
     researchList: data,
     isValidateBtnActive: !!selected && !!choice,
     handleValidation,
+    paginationProps,
+    isValidating: validationStatus.isLoading,
   } as const
 }

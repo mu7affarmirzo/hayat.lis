@@ -19,6 +19,8 @@ export const FilterTabs = () => {
     selectedUser,
     isLoadingUsers,
     researchGroupProps,
+    handleClearSearch,
+    isContainerChecked,
   } = useResearchTab()
 
   return (
@@ -54,6 +56,8 @@ export const FilterTabs = () => {
           register={register}
           control={control}
           handleClickSearch={handleClickSearch}
+          isContainerChecked={isContainerChecked}
+          handleClearSearch={handleClearSearch}
         />
         <Button
           type="submit"

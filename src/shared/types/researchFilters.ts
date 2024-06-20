@@ -34,4 +34,7 @@ export type ResearchFilterParams = {
   container?: string
   category?: string
   order_status?: string
+  date_birth?: string
+  patient?: string
+  container_connected?: boolean
 }

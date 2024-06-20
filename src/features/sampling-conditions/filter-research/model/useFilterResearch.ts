@@ -21,7 +21,7 @@ export const useFilterResearch = ({ setChoice, choice }: FilterHookProps) => {
     setIsOpenSamplingModal(false)
   }
 
-  console.log({ choice })
+  // console.log({ choice })
 
   return {
     isOpenSamplingModal,

@@ -26,8 +26,17 @@ export const researchGroupApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getUserById: build.query<Patient, { id: string }>({
+      query: (body) => ({
+        url: `organizations/patients/${body.id}`,
+      }),
+    }),
   }),
 })
 
-export const { useGroupListQuery, useFindUserMutation, useBranchListQuery } =
-  researchGroupApi
+export const {
+  useGroupListQuery,
+  useFindUserMutation,
+  useBranchListQuery,
+  useGetUserByIdQuery,
+} = researchGroupApi

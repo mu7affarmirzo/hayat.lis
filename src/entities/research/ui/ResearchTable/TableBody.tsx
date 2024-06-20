@@ -11,7 +11,11 @@ import { ResearchMenuModal } from '../ResearchMenuModal/ResearchMenuModal'
 interface ResearchTableProps
   extends Omit<
     UseResearchTable,
-    'numSelected' | 'onSelectAllClick' | 'rowCount' | 'isValidateBtnActive'
+    | 'numSelected'
+    | 'onSelectAllClick'
+    | 'rowCount'
+    | 'isValidateBtnActive'
+    | 'paginationProps'
   > {
   containerInfoTable?: ReactNode
   isLoadingData?: boolean

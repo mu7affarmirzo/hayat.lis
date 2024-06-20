@@ -7,27 +7,39 @@ import {
 import { IconButton, Stack, Typography } from '@mui/material'
 
 interface PaginationProps {
-  total: number
   current: number
+  totalPages?: number
+  handleNext?: () => void
+  handlePrev?: () => void
+  handleStart?: () => void
+  handleEnd?: () => void
 }
 
 export const TablePagination = (props: PaginationProps) => {
-  const { current, total } = props
+  const {
+    current,
+    totalPages,
+    handleEnd,
+    handleNext,
+    handlePrev,
+    handleStart,
+  } = props
+
   return (
     <Stack direction={'row'}>
-      <IconButton sx={{ padding: 0 }}>
-        <ChevronLeft color="action" />
-      </IconButton>
-      <IconButton sx={{ padding: 0 }}>
+      <IconButton onClick={handleStart} sx={{ padding: 0 }}>
         <KeyboardDoubleArrowLeft color="action" />
       </IconButton>
+      <IconButton onClick={handlePrev} sx={{ padding: 0 }}>
+        <ChevronLeft color="action" />
+      </IconButton>
       <Typography textAlign={'center'} minWidth={'130px'}>
-        Запись {current} из {total}
+        Запись {current} из {totalPages}
       </Typography>
-      <IconButton sx={{ padding: 0 }}>
+      <IconButton onClick={handleNext} sx={{ padding: 0 }}>
         <ChevronRight color="action" />
       </IconButton>
-      <IconButton sx={{ padding: 0 }}>
+      <IconButton onClick={handleEnd} sx={{ padding: 0 }}>
         <KeyboardDoubleArrowRight color="action" />
       </IconButton>
     </Stack>

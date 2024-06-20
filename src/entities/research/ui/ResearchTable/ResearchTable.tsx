@@ -1,3 +1,4 @@
+import { LoadingButton } from '@mui/lab'
 import { Box, Checkbox, Stack, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -6,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { type ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { type IPatientsRoot } from '@/shared/types'
 import { Button, Icon, TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
@@ -30,6 +32,7 @@ export const ResearchTable = (props: ResearchTableProps) => {
     onSelectAllClick,
     rowCount,
     isValidateBtnActive,
+    paginationProps,
     ...restProps
   } = useResearchTable({ activeRow, setActiveRow, data, choice })
 
@@ -53,17 +56,20 @@ export const ResearchTable = (props: ResearchTableProps) => {
           <Button sx={{ width: 'max-content' }}>
             <Icon type="circle-check" />
           </Button>
-          <Button
+          <LoadingButton
+            loading={restProps.isValidating}
             disabled={!isValidateBtnActive}
             onClick={restProps.handleValidation}
             color={isValidateBtnActive ? 'success' : undefined}
             sx={{
               width: 'max-content',
+              height: '30px',
               background: isValidateBtnActive ? '#9FD5A1' : colors.bgLightGray,
+              border: `1px solid ${colors.borderLightGray}`,
             }}
           >
             <Icon type="check" />
-          </Button>
+          </LoadingButton>
           {props.samplingConditionsSlot}
         </Stack>
       </Stack>
@@ -118,8 +124,9 @@ export const ResearchTable = (props: ResearchTableProps) => {
         </TableContainer>
       </Box>
       <Box border="1px solid #0000001A">
-        <TablePagination current={3} total={1022} />
+        <TablePagination {...paginationProps} />
       </Box>
+      <Toaster />
     </Stack>
   )
 }

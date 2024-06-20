@@ -4,13 +4,24 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { validateObject } from '@/shared/lib'
 import { paramsToObject } from '@/shared/lib/paramsToObject'
 import { type ResearchFilterParams } from '@/shared/types'
-import { useFindUserMutation } from '../api/researchGroupApi'
+import {
+  useFindUserMutation,
+  useGetUserByIdQuery,
+} from '../api/researchGroupApi'
 import { useResearchGroups } from './useResearchGroups'
 
 export const useResearchTab = () => {
   const [findUser, users] = useFindUserMutation()
   const [selectedUser, setSelectedUser] = useState({ name: '', id: 0 })
   const researchGroupProps = useResearchGroups()
+  const [params, setParams] = useSearchParams()
+  const patient = params.get('patient') ?? ''
+  const { refetch: getUserById } = useGetUserByIdQuery(
+    {
+      id: patient.toString(),
+    },
+    { skip: !patient.toString() }
+  )
 
   const defaultValues = async () => {
     const end = params.get('end') ?? ''
@@ -19,9 +30,22 @@ export const useResearchTab = () => {
     const container = params.get('container') ?? ''
     const branch = params.get('branch') ?? ''
     const patient = params.get('patient') ?? ''
+    const containerConnected =
+      params.get('container_connected') === 'true' ? true : undefined
+    console.log({ containerConnected })
 
     if (patient && !Number.isNaN(patient)) {
-      // await findUser({ id: Number(patient) })
+      // console.log({ patient, is: !Number.isNaN(patient) })
+      await getUserById().then((res) => {
+        const user = res.data
+        // console.log({ res })
+        if (user) {
+          setSelectedUser({
+            name: `${user.f_name}${user.mid_name ? ' ' + user.mid_name : ''}${user.l_name ? ' ' + user.l_name : ''}`,
+            id: user.id,
+          })
+        }
+      })
     }
 
     return {
@@ -30,8 +54,11 @@ export const useResearchTab = () => {
       barcode,
       container,
       branch,
+      container_connected: containerConnected,
     }
   }
+
+  // console.log({ selectedUser })
 
   const mappedUsers = useMemo(
     () =>
@@ -42,14 +69,13 @@ export const useResearchTab = () => {
     [JSON.stringify(users.data)]
   )
 
-  const { register, control, handleSubmit } = useForm<ResearchFilterParams>({
-    defaultValues,
-  })
+  const { register, control, handleSubmit, watch } =
+    useForm<ResearchFilterParams>({
+      defaultValues,
+    })
 
   const navigate = useNavigate()
   const location = useLocation()
-
-  const [params, setParams] = useSearchParams()
 
   const handleChange = (
     event: React.SyntheticEvent<Element, Event>,
@@ -63,12 +89,12 @@ export const useResearchTab = () => {
     }
   }
 
-  const handleChangeInput = (
+  const handleChangeInput = async (
     event: React.SyntheticEvent<Element, Event>,
     value: string
   ) => {
     if (value.length > 0) {
-      findUser({ word: value })
+      await findUser({ word: value })
     }
   }
 
@@ -80,6 +106,7 @@ export const useResearchTab = () => {
 
   const handleClearSearch = () => {
     params.delete('patient')
+    setSelectedUser({ name: '', id: 0 })
   }
 
   const onSubmit = (data: ResearchFilterParams) => {
@@ -101,6 +128,10 @@ export const useResearchTab = () => {
     setParams(validData)
   }
 
+  const isContainerChecked = useMemo(() => {
+    return watch('container_connected')
+  }, [watch('container_connected')])
+
   useEffect(() => {
     navigate(`${location.pathname}?${params.toString()}`)
   }, [location.pathname, params.toString()])
@@ -118,5 +149,6 @@ export const useResearchTab = () => {
     isLoadingUsers: users.isLoading,
     researchGroupProps,
     handleClearSearch,
+    isContainerChecked,
   }
 }

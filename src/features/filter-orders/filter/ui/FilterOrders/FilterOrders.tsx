@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import { Controller } from 'react-hook-form'
@@ -20,6 +21,11 @@ export const FilterOrders = () => {
     handleChangeChoice,
     selectedChoice,
   } = useFilterOrders()
+
+  function isValidDate(dateString: string) {
+    const regEx = /^\d{4}-\d{2}-\d{2}$/
+    return dateString.match(regEx) != null
+  }
 
   return (
     <Stack
@@ -104,11 +110,41 @@ export const FilterOrders = () => {
       />
       <Stack spacing={'5px'}>
         <label htmlFor="input-day">Дата рождения</label>
-        <Stack direction={'row'} spacing={'5px'}>
-          <TextInput id={'input-day'} placeholder="DD" />
-          <TextInput placeholder="MM" />
-          <TextInput placeholder="YYYY" />
-        </Stack>
+        <Controller
+          name="date_birth"
+          control={control}
+          render={({ field }) => (
+            <DateInput
+              // calendarClassName="left-[42px]"
+              // className="w-full h-[30px] pl-2"
+              {...field}
+              isClearable
+              showYearDropdown
+              dateFormat={'yyyy-MM-dd'}
+              dropdownMode="select"
+              customInput={<TextInput />}
+              selected={field.value ? new Date(field.value) : null}
+              onChange={(val, e) => {
+                // @ts-expect-error
+                if (!e?.target.value) {
+                  if (val) {
+                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                  } else {
+                    field.onChange(null)
+                  }
+                } else {
+                  // @ts-expect-error
+                  if (isValidDate(e.target.value as string)) {
+                    field.onChange(
+                      // @ts-expect-error
+                      dayjs(e.target.value as string).format('YYYY-MM-DD')
+                    )
+                  }
+                }
+              }}
+            />
+          )}
+        />
       </Stack>
       <Select
         onChange={(e) => handleChangeChoice(e)}

@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { type IPatientRoot } from '@/shared/types'
-import { TablePagination } from '@/shared/ui'
+// import { TablePagination } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import './table.css'
 import { rows } from '../../model/rows'
@@ -117,11 +117,11 @@ export const ResearchStatusTable = (props: ResearchStatusProps) => {
             </Table>
           </TableContainer>
         </Box>
-        {!isLoadingInfo && !!orderId && (
+        {/* {!isLoadingInfo && !!orderId && (
           <Box justifySelf={'flex-end'} border="1px solid #0000001A">
-            <TablePagination current={3} total={1022} />
+            <TablePagination current={3} totalPages={1022} />
           </Box>
-        )}
+        )} */}
       </Stack>
     </Stack>
   )

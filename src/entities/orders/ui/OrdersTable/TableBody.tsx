@@ -11,7 +11,11 @@ import { OrderMenuModal } from '../OrderMenuModal/OrderMenuModal'
 interface OrderTableProps
   extends Omit<
     UseOrdersTable,
-    'numSelected' | 'onSelectAllClick' | 'rowCount' | 'isValidateBtnActive'
+    | 'numSelected'
+    | 'onSelectAllClick'
+    | 'rowCount'
+    | 'isValidateBtnActive'
+    | 'paginationProps'
   > {
   containerInfoTable: ReactNode
   isLoading?: boolean
@@ -33,7 +37,7 @@ export const OrdersTableBody = (props: OrderTableProps) => {
     ordersList,
     isLoading,
   } = props
-  console.log({ ordersList })
+  // console.log({ ordersList })
   return (
     <>
       <TableBody>
