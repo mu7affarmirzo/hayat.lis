@@ -24,7 +24,7 @@ import { rootReducer } from './rootReducer'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [sessionSlice.name],
+  whitelist: [sessionSlice.name, baseApi.reducerPath],
 }
 
 export function makeStore() {

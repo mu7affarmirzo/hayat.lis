@@ -34,9 +34,13 @@ export const useResearchTable = (props: ResearchTableProps) => {
 
   const handleValidation = () => {
     if (!!selected && !!choice) {
-      validateResearch({ id: selected, choice }).then(() => {
-        toast.success('Успешно проверено', { position: 'top-right' })
-      })
+      validateResearch({ id: selected, choice })
+        .then(() => {
+          toast.success('Успешно проверено', { position: 'top-right' })
+        })
+        .catch(() => {
+          toast.error('Что-то пошло не так', { position: 'top-right' })
+        })
     }
   }
 

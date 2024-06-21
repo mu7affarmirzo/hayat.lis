@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react'
-import { useEditContainerMutation } from '../api/researchApi'
+import { useDispatch } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
+import { useEditContainerMutation, researchGroupApi } from '../api/researchApi'
 
 interface EditQRHookProps {
   id: number
@@ -12,6 +15,8 @@ export const useEditQRModal = (props: EditQRHookProps) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
   const [newCode, setNewCode] = useState('')
   const [editContainerRequest] = useEditContainerMutation()
+  const dispatch = useDispatch()
+  const [params] = useSearchParams()
 
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false)
@@ -24,9 +29,19 @@ export const useEditQRModal = (props: EditQRHookProps) => {
   const handleCloseConfirmModal = () => {
     setIsConfirmModalOpen(false)
   }
-
   const handleOpenConfirmModal = () => {
     setIsConfirmModalOpen(true)
+  }
+
+  function handleRefetch() {
+    // has the same effect as `refetch` for the associated query
+    dispatch(
+      // @ts-expect-error
+      researchGroupApi.endpoints.researchList.initiate(
+        { searchQuery: '?' + params.toString() },
+        { subscribe: false, forceRefetch: true }
+      )
+    )
   }
 
   const handleConfirm = () => {
@@ -38,9 +53,13 @@ export const useEditQRModal = (props: EditQRHookProps) => {
         container_code: newCode,
         container_id: containerId,
         id,
-      }).finally(() => {
-        setNewCode('')
       })
+        .then(() => {
+          handleRefetch()
+        })
+        .finally(() => {
+          setNewCode('')
+        })
     }
   }
 
