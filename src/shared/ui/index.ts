@@ -2,6 +2,7 @@ import { Autocomplete } from './Autocomplete/Autocomplete'
 import { AutocompleteX } from './AutocompleteX/AutocompleteX'
 import { Button } from './Button/Button'
 import { DateInput } from './DateInput/DateInput'
+import { DatePicker } from './DatePicker/DatePicker'
 import { CustomDialog } from './Dialog/Dialog'
 import { Icon } from './Icon/Icon'
 import { Input } from './Input/Input'
@@ -28,4 +29,5 @@ export {
   CustomDialog,
   AutocompleteX,
   Autocomplete,
+  DatePicker,
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   Box,
   Checkbox,
@@ -13,10 +14,10 @@ import React from 'react'
 import { type UseFormRegister, type Control, Controller } from 'react-hook-form'
 import { type ResearchFilterParams } from '@/shared/types'
 import {
-  DateInput,
   Icon,
   TextInput,
   Autocomplete,
+  DatePicker,
   // AutocompleteX,
 } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
@@ -82,19 +83,17 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             name="start"
             control={control}
             render={({ field }) => (
-              <DateInput
+              <DatePicker
                 className="w-[156px]"
-                {...field}
-                isClearable
-                selected={field.value ? new Date(field.value) : null}
-                maxDate={
+                max={
                   control._getWatch('end')
-                    ? new Date(`${control._getWatch('end')}`)
-                    : null
+                    ? dayjs(`${control._getWatch('end')}`).format('YYYY-MM-DD')
+                    : undefined
                 }
-                onChange={(val) => {
-                  if (val) {
-                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                {...field}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    field.onChange(dayjs(e.target.value).format('YYYY-MM-DD'))
                   } else {
                     field.onChange(null)
                   }
@@ -107,19 +106,19 @@ export const SelectionResearch = (props: SelectionResearchProps) => {
             name="end"
             control={control}
             render={({ field }) => (
-              <DateInput
-                isClearable
+              <DatePicker
                 className="w-[156px]"
-                minDate={
+                min={
                   control._getWatch('start')
-                    ? new Date(`${control._getWatch('start')}`)
-                    : null
+                    ? dayjs(`${control._getWatch('start')}`).format(
+                        'YYYY-MM-DD'
+                      )
+                    : undefined
                 }
                 {...field}
-                selected={field.value ? new Date(field.value) : null}
-                onChange={(val) => {
-                  if (val) {
-                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                onChange={(e) => {
+                  if (e.target.value) {
+                    field.onChange(dayjs(e.target.value).format('YYYY-MM-DD'))
                   } else {
                     field.onChange(null)
                   }

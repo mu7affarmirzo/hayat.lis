@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Stack, Typography } from '@mui/material'
+import { CircularProgress, Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
+import React from 'react'
 import { Controller } from 'react-hook-form'
-import { Select, DateInput, TextInput } from '@/shared/ui'
+import { DatePicker, TextInput, Autocomplete } from '@/shared/ui'
 import { colors } from '@/shared/ui/colors'
 import { useFilterOrders } from '../../model/useFilterOrders'
 
@@ -22,11 +23,6 @@ export const FilterOrders = () => {
     selectedChoice,
   } = useFilterOrders()
 
-  function isValidDate(dateString: string) {
-    const regEx = /^\d{4}-\d{2}-\d{2}$/
-    return dateString.match(regEx) != null
-  }
-
   return (
     <Stack
       component={'form'}
@@ -44,20 +40,16 @@ export const FilterOrders = () => {
             name="start"
             control={control}
             render={({ field }) => (
-              <DateInput
-                calendarClassName="left-[42px]"
-                className="w-[115px]"
-                {...field}
-                isClearable
-                selected={field.value ? new Date(field.value) : null}
-                maxDate={
+              <DatePicker
+                max={
                   control._getWatch('end')
-                    ? new Date(`${control._getWatch('end')}`)
-                    : null
+                    ? dayjs(`${control._getWatch('end')}`).format('YYYY-MM-DD')
+                    : undefined
                 }
-                onChange={(val) => {
-                  if (val) {
-                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                {...field}
+                onChange={(e) => {
+                  if (e.target.value) {
+                    field.onChange(dayjs(e.target.value).format('YYYY-MM-DD'))
                   } else {
                     field.onChange(null)
                   }
@@ -70,20 +62,18 @@ export const FilterOrders = () => {
             name="end"
             control={control}
             render={({ field }) => (
-              <DateInput
-                isClearable
-                className="w-[115px]"
-                selected={field.value ? new Date(field.value) : null}
-                minDate={
+              <DatePicker
+                min={
                   control._getWatch('start')
-                    ? new Date(`${control._getWatch('start')}`)
-                    : null
+                    ? dayjs(`${control._getWatch('start')}`).format(
+                        'YYYY-MM-DD'
+                      )
+                    : undefined
                 }
                 {...field}
-                onChange={(val) => {
-                  console.log({ val })
-                  if (val) {
-                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
+                onChange={(e) => {
+                  if (e.target.value) {
+                    field.onChange(dayjs(e.target.value).format('YYYY-MM-DD'))
                   } else {
                     field.onChange(null)
                   }
@@ -93,13 +83,43 @@ export const FilterOrders = () => {
           />
         </Stack>
       </Stack>
-      <Select
+      {/* <Select
         onChange={(e) => handleChangeBranch(e)}
         labelId="branch"
         label={'Пункт'}
         isLoading={isBranchesLoading}
         value={selectedBranch}
         data={branches}
+      /> */}
+      <Autocomplete
+        disablePortal
+        id="branch"
+        value={selectedBranch}
+        onInputChange={(e, val) => handleChangeBranch(e, val)}
+        options={branches ?? []}
+        loading={isBranchesLoading}
+        sx={{ flex: 1, background: colors.bgLightGray }}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        onChange={(e, val) => handleChange(e, val)}
+        renderInput={(params) => (
+          <TextInput
+            {...params}
+            id="Пункт"
+            label="Пункт"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {isBranchesLoading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }}
+          />
+        )}
       />
       <TextInput
         label="Номер заказа"
@@ -114,45 +134,48 @@ export const FilterOrders = () => {
           name="date_birth"
           control={control}
           render={({ field }) => (
-            <DateInput
-              // calendarClassName="left-[42px]"
-              // className="w-full h-[30px] pl-2"
+            <DatePicker
               {...field}
-              isClearable
-              showYearDropdown
-              dateFormat={'yyyy-MM-dd'}
-              dropdownMode="select"
-              customInput={<TextInput />}
-              selected={field.value ? new Date(field.value) : null}
-              onChange={(val, e) => {
-                // @ts-expect-error
-                if (!e?.target.value) {
-                  if (val) {
-                    field.onChange(dayjs(val).format('YYYY-MM-DD'))
-                  } else {
-                    field.onChange(null)
-                  }
+              onChange={(e) => {
+                if (e.target.value) {
+                  field.onChange(dayjs(e.target.value).format('YYYY-MM-DD'))
                 } else {
-                  // @ts-expect-error
-                  if (isValidDate(e.target.value as string)) {
-                    field.onChange(
-                      // @ts-expect-error
-                      dayjs(e.target.value as string).format('YYYY-MM-DD')
-                    )
-                  }
+                  field.onChange(null)
                 }
               }}
             />
           )}
         />
       </Stack>
-      <Select
-        onChange={(e) => handleChangeChoice(e)}
-        labelId="choice"
-        label={'Фильтр заказов'}
-        isLoading={isChoicesLoading}
+      <Autocomplete
+        disablePortal
+        id="choice"
         value={selectedChoice}
-        data={choices}
+        onInputChange={(e, val) => handleChangeChoice(e, val)}
+        options={choices ?? []}
+        loading={isChoicesLoading}
+        sx={{ flex: 1, background: colors.bgLightGray }}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        onChange={(e, val) => handleChange(e, val)}
+        renderInput={(params) => (
+          <TextInput
+            {...params}
+            id="Фильтр заказов"
+            label="Фильтр заказов"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {isChoicesLoading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }}
+          />
+        )}
       />
       <TextInput
         label="Баркод контейнера"

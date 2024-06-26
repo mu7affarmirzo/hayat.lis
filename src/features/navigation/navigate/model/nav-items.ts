@@ -2,7 +2,7 @@ const navItems = [
   { name: 'Реестр заказов', id: 1, slug: '/register-orders', type: 'link' },
   { name: 'Сортировка', id: 92939292, slug: '/sorting', type: 'link' },
   // { name: 'Постановка', id: 2232, slug: '/staging', type: 'link' },
-  { name: 'Результаты', id: 38838, slug: '/results', type: 'link' },
+  // { name: 'Результаты', id: 38838, slug: '/results', type: 'link' },
   // {
   //   name: 'Справочники',
   //   id: 2,

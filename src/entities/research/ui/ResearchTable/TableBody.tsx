@@ -99,8 +99,8 @@ export const ResearchTableBody = (props: ResearchTableProps) => {
                 <TableCell>{row.order_number}</TableCell>
                 <TableCell>{row.patient.organization}</TableCell>
                 <TableCell>{row.patient.doc_number}</TableCell>
-                <TableCell>{0}</TableCell>
-                <TableCell>{row.patient.organization}</TableCell>
+                <TableCell>{}</TableCell>
+                <TableCell>{}</TableCell>
                 <TableCell>
                   {row.patient.f_name + ' ' + row.patient.l_name}
                 </TableCell>

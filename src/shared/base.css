@@ -81,3 +81,8 @@ a:hover {
 [data-theme="dark"] img {
   filter: brightness(.8) contrast(1.2);
 }
+
+input {
+  font-family: Roboto, Helvetica, Inter, Avenir, Helvetica, Arial, sans-serif;
+  ;
+}

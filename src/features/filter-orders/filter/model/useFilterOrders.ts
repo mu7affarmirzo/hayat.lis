@@ -1,4 +1,3 @@
-import { type SelectChangeEvent } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
@@ -80,8 +79,11 @@ export const useFilterOrders = () => {
 
   const data = watch()
 
-  const handleChangeBranch = (e: SelectChangeEvent<unknown>) => {
-    const value = e.target.value as string
+  const handleChangeBranch = (
+    e: React.SyntheticEvent<Element, Event>,
+    val: string
+  ) => {
+    const value = val
     setSelectedBranch(value)
     const branch = branchList?.find((b) => b.name === value)
 
@@ -92,8 +94,11 @@ export const useFilterOrders = () => {
     }
   }
 
-  const handleChangeChoice = (e: SelectChangeEvent<unknown>) => {
-    const value = e.target.value as string
+  const handleChangeChoice = (
+    e: React.SyntheticEvent<Element, Event>,
+    val: string
+  ) => {
+    const value = val
     setSelectedChoice(value)
     const orderChoice = choicesList?.choices.find((b) => b === value)
 
